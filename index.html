@@ -808,7 +808,7 @@
             const sticks = unique.map(u => u.orig);
             const hbody = document.querySelector('#report-horario tbody');
             hbody.innerHTML = '';
-            const horas = ["8:10 – 9:00", "9:00 - 9:50", "9:50 - 10:40", "10:40 - 11:30", "RECREO", "12:00 - 12:50", "12:50 - 13:40", "13:40 - 14:30", "16:00 - 16:50", "16:50 – 17:40"];
+            const horas = ["8:10 - 9:00", "9:00 - 9:50", "9:50 - 10:40", "10:40 - 11:30", "RECREO", "12:00 - 12:50", "12:50 - 13:40", "13:40 - 14:30", "16:00 - 16:50", "16:50 - 17:40"];
             horas.forEach(h => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `<td><strong>${h}</strong></td>`;
