@@ -1074,12 +1074,14 @@
             modal.style.display = "block";
         }
 
+        const closeReportBtn = document.getElementById("close-report");
+
         if (helpBtn) helpBtn.onclick = () => helpModal.style.display = "block";
         if (guideBtn) guideBtn.onclick = () => guideModal.style.display = "block";
 
         if (closeHelp) closeHelp.onclick = () => helpModal.style.display = "none";
         if (closeGuide) closeGuide.onclick = () => guideModal.style.display = "none";
-        if (closeReport) closeReport.onclick = () => reportModal.style.display = "none";
+        if (closeReportBtn) closeReportBtn.onclick = () => reportModal.style.display = "none";
 
         window.onclick = (event) => {
             if (event.target == helpModal) helpModal.style.display = "none";
