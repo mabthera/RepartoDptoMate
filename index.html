@@ -608,7 +608,10 @@
                 }
             });
         }
+
+        initItems();
         initReportButtons();
+        updateAllCounts();
 
         function selectItem(item) {
             // Limpiar selección previa
@@ -727,8 +730,6 @@
                 });
             });
         }
-
-        initItems();
 
         slots.forEach(slot => {
             slot.addEventListener('dragover', e => e.preventDefault());
@@ -1086,7 +1087,7 @@
             if (event.target == reportModal) reportModal.style.display = "none";
         };
 
-        updateAllCounts();
+        // No llamar a updateAllCounts aquí porque ya se llamó arriba.
     </script>
     <div id="report-modal" class="modal">
         <div class="modal-content">
