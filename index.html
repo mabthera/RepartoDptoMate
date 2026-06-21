@@ -448,84 +448,88 @@
             slots.forEach(s => s.classList.remove('ready-to-receive'));
         }
 
-        data.forEach(([text, value, type, valL, valC, initialOwner], idx) => {
-            const item = document.createElement('div');
-            item.className = 'item';
-            item.id = `item-${idx}`;
-            item.dataset.value = value;
-            item.dataset.type = type;
-            if (valL !== undefined) item.dataset.valL = valL;
-            if (valC !== undefined) item.dataset.valC = valC;
-            item.draggable = true;
+        function initItems() {
+            data.forEach(([text, value, type, valL, valC, initialOwner], idx) => {
+                const item = document.createElement('div');
+                item.className = 'item';
+                item.id = `item-${idx}`;
+                item.dataset.value = value;
+                item.dataset.type = type;
+                if (valL !== undefined) item.dataset.valL = valL;
+                if (valC !== undefined) item.dataset.valC = valC;
+                item.draggable = true;
 
-            if (text === "Gardas") {
-                item.innerHTML = `<span style="margin-right:5px;">Gardas:</span><input type="number" value="${valC || value}" style="width: 35px; padding: 2px;" class="garda-input">h`;
-                const input = item.querySelector('.garda-input');
-                input.addEventListener('change', (e) => {
-                    const newVal = parseInt(e.target.value, 10) || 0;
-                    item.dataset.value = newVal;
-                    item.dataset.valC = newVal;
-                    updateAllCounts();
-                });
-                input.addEventListener('mousedown', e => e.stopPropagation()); // Evitar inicio de drag al clicar input
-            } else {
-                item.textContent = text;
-            }
+                if (text === "Gardas") {
+                    item.innerHTML = `<span style="margin-right:5px;">Gardas:</span><input type="number" value="${valC || value}" style="width: 35px; padding: 2px;" class="garda-input">h`;
+                    const input = item.querySelector('.garda-input');
+                    input.addEventListener('change', (e) => {
+                        const newVal = parseInt(e.target.value, 10) || 0;
+                        item.dataset.value = newVal;
+                        item.dataset.valC = newVal;
+                        updateAllCounts();
+                    });
+                    input.addEventListener('mousedown', e => e.stopPropagation()); // Evitar inicio de drag al clicar input
+                } else {
+                    item.textContent = text;
+                }
 
-            // Asignar color según categoría
-            const textLC = text.toLowerCase();
-            let bgColor;
-            if (textLC.includes('eso') || textLC.includes('franc')) {
-                bgColor = 'hsl(120, 70%, 90%)'; // verde pastel
-            } else if (textLC.includes('bach')) {
-                bgColor = 'hsl(210, 70%, 90%)'; // azul pastel
-            } else if (
-                textLC.includes('fpb') ||
-                textLC.includes('e.s.a.') ||
-                textLC.includes('esa') ||
-                textLC.includes('pdc')
-            ) {
-                bgColor = 'hsl(30, 70%, 90%)'; // naranja pastel
-            } else if (
-                textLC.includes('tutor') ||
-                textLC.includes('dpto') ||
-                textLC.includes('consello') ||
-                textLC.includes('Dpto') ||
-                textLC.includes('Ref') ||
-                textLC.includes('convivencia') ||
-                textLC.includes('xefat') ||
-                textLC.includes('gardas') ||
-                textLC.includes('atención')
-            ) {
-                bgColor = 'hsl(0, 0%, 85%)'; // gris pastel
-            } else {
-                const hue = Math.random() * 360;
-                bgColor = `hsl(${hue},70%,90%)`;
-            }
-            item.style.backgroundColor = bgColor;
+                // Asignar color según categoría
+                const textLC = text.toLowerCase();
+                let bgColor;
+                if (textLC.includes('eso') || textLC.includes('franc')) {
+                    bgColor = 'hsl(120, 70%, 90%)'; // verde pastel
+                } else if (textLC.includes('bach')) {
+                    bgColor = 'hsl(210, 70%, 90%)'; // azul pastel
+                } else if (
+                    textLC.includes('fpb') ||
+                    textLC.includes('e.s.a.') ||
+                    textLC.includes('esa') ||
+                    textLC.includes('pdc')
+                ) {
+                    bgColor = 'hsl(30, 70%, 90%)'; // naranja pastel
+                } else if (
+                    textLC.includes('tutor') ||
+                    textLC.includes('dpto') ||
+                    textLC.includes('consello') ||
+                    textLC.includes('Dpto') ||
+                    textLC.includes('Ref') ||
+                    textLC.includes('convivencia') ||
+                    textLC.includes('xefat') ||
+                    textLC.includes('gardas') ||
+                    textLC.includes('atención')
+                ) {
+                    bgColor = 'hsl(0, 0%, 85%)'; // gris pastel
+                } else {
+                    const hue = Math.random() * 360;
+                    bgColor = `hsl(${hue},70%,90%)`;
+                }
+                item.style.backgroundColor = bgColor;
 
-            if (initialOwner) {
-                const slot = Array.from(slots).find(s => s.dataset.name === initialOwner);
-                if (slot) {
-                    slot.querySelector('.slot-content').appendChild(item);
+                if (initialOwner) {
+                    const slot = Array.from(slots).find(s => s.dataset.name === initialOwner);
+                    if (slot) {
+                        slot.querySelector('.slot-content').appendChild(item);
+                    } else {
+                        if (type === 'L') itemsContainerL.appendChild(item);
+                        else itemsContainerC.appendChild(item);
+                    }
                 } else {
                     if (type === 'L') itemsContainerL.appendChild(item);
                     else itemsContainerC.appendChild(item);
                 }
-            } else {
-                if (type === 'L') itemsContainerL.appendChild(item);
-                else itemsContainerC.appendChild(item);
-            }
 
-            item.addEventListener('dragstart', e => {
-                e.dataTransfer.setData('text/plain', e.target.id);
-            });
+                item.addEventListener('dragstart', e => {
+                    e.dataTransfer.setData('text/plain', e.target.id);
+                });
 
-            item.addEventListener('click', e => {
-                e.stopPropagation();
-                selectItem(item);
+                item.addEventListener('click', e => {
+                    e.stopPropagation();
+                    selectItem(item);
+                });
             });
-        });
+        }
+
+        initItems();
 
         slots.forEach(slot => {
             slot.addEventListener('dragover', e => e.preventDefault());
@@ -726,10 +730,10 @@
                 if (!response.ok) throw new Error('No se pudo cargar el archivo base.');
                 const config = await response.json();
                 // Mover todos los items de vuelta al pool sin asignar
-                document.querySelectorAll('#items-container-L .item, #items-container-C .item').forEach(i => i.remove());
-                document.querySelectorAll('.slot-content .item, .garda-input').forEach(el => {
-                    if (el.classList.contains('item')) el.remove();
-                });
+                itemsContainerL.innerHTML = '';
+                itemsContainerC.innerHTML = '';
+                document.querySelectorAll('.slot-content').forEach(sc => sc.innerHTML = '');
+
                 // Reinicializar cards al pool
                 initItems();
                 // Aplicar configuración del JSON
