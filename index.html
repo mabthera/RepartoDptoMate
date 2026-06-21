@@ -299,7 +299,7 @@
 
         .document-container .row {
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             gap: 15px;
             margin-bottom: 8px;
         }
@@ -314,6 +314,8 @@
             font-weight: bold;
             white-space: nowrap;
             font-size: 14px;
+            flex-shrink: 0;
+            display: inline-block;
         }
 
         .document-container .form-group input[type="text"],
@@ -325,6 +327,7 @@
             border-radius: 4px;
             box-sizing: border-box;
             background-color: #fff;
+            min-width: 0;
         }
 
         .document-container .checkbox-group {
