@@ -598,23 +598,15 @@
                 padding: 0;
             }
 
-            body * {
-                visibility: hidden;
-            }
-
-            #report-modal,
-            #report-modal * {
-                visibility: visible;
+            body>*:not(#report-modal) {
+                display: none !important;
             }
 
             #report-modal {
-                position: absolute;
-                left: 0;
-                top: 0;
+                position: static;
                 width: 100%;
-                display: block;
+                display: block !important;
                 background: white;
-                z-index: 9999;
             }
 
             #report-modal .modal-content {
