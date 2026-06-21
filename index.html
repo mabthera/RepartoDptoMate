@@ -225,61 +225,112 @@
         #report-modal .modal-content {
             width: 210mm;
             max-width: 210mm;
-            padding: 10mm;
+            padding: 15mm;
             background: white;
             color: black;
-            font-family: "Times New Roman", serif;
+            font-family: Arial, sans-serif;
+            font-size: 9pt;
         }
 
-        .report-container {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .report-header {
-            text-align: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid black;
+        .report-header-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid black;
             padding-bottom: 10px;
+        }
+
+        .header-logo-text {
+            font-size: 7pt;
+            line-height: 1.1;
+        }
+
+        .report-title {
+            text-align: center;
+            font-weight: bold;
+            font-size: 11pt;
+            margin: 10px 0;
+            background-color: #eee;
+            padding: 5px;
+            border: 1px solid black;
+        }
+
+        .report-section-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 15px;
+            margin-bottom: 5px;
+            font-size: 9pt;
+        }
+
+        .report-grid-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            border: 1px solid black;
+            padding: 5px;
+            min-height: 25px;
+            display: flex;
+            align-items: center;
         }
 
         .report-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 10pt;
+            margin-bottom: 10px;
         }
 
         .report-table th,
         .report-table td {
-            border: 1px solid black;
-            padding: 4px;
+            border: 1px solid black !important;
+            padding: 3px 5px;
+            text-align: left;
+        }
+
+        .report-table th {
+            background-color: #eee;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .report-table td.center {
             text-align: center;
         }
 
-        .report-table td.editable:hover {
-            background-color: #f0f0f0;
+        .quenda-box {
+            display: flex;
+            gap: 20px;
+            border: 1px solid black;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .fake-checkbox {
+            width: 12px;
+            height: 12px;
+            border: 1px solid black;
+            display: inline-block;
+            text-align: center;
+            line-height: 10px;
+            font-size: 10pt;
+            font-family: monospace;
             cursor: pointer;
         }
 
-        .subject-tag {
-            display: inline-block;
-            background: #eee;
-            border: 1px solid #ccc;
-            padding: 1px 4px;
-            margin: 1px;
-            border-radius: 3px;
-            font-size: 9pt;
-        }
-
         @media print {
-            body * {
-                visibility: hidden;
-            }
-
-            #report-modal,
-            #report-modal .modal-content,
-            #report-modal .modal-content * {
-                visibility: visible;
+            body>*:not(#report-modal) {
+                display: none !important;
             }
 
             #report-modal {
@@ -290,13 +341,15 @@
                 height: 297mm;
                 background: white !important;
                 display: block !important;
+                margin: 0;
+                padding: 0;
             }
 
             #report-modal .modal-content {
-                margin: 0;
-                padding: 10mm;
                 box-shadow: none;
                 border: none;
+                margin: 0;
+                padding: 15mm;
             }
 
             .no-print {
@@ -935,28 +988,47 @@
         // Funciones de Informe
         function openReport(profesorName) {
             const modal = document.getElementById("report-modal");
-            if (!modal) {
-                console.error("Modal de informe no encontrado");
-                return;
-            }
+            if (!modal) return;
+
             document.getElementById('report-profesor-name').textContent = profesorName.toUpperCase();
             const slot = [...slots].find(s => s.dataset.name === profesorName);
-            const subjectsList = document.getElementById('report-subjects-list');
-            subjectsList.innerHTML = '';
+            const subjectsTableBody = document.querySelector('#report-subjects-table tbody');
+            subjectsTableBody.innerHTML = '';
 
             const items = slot.querySelectorAll('.item');
-            const uniqueSubjects = new Set();
+            const uniqueSubjects = [];
+
             items.forEach(it => {
-                const name = SUBJECT_NAMES[it.textContent.trim()] || it.textContent.trim();
-                uniqueSubjects.add(name);
+                const fullText = it.textContent.trim();
+                const sessions = it.dataset.value || 0;
+                // Intentar extraer el grupo del texto (ej: "1º A ESO")
+                const groupMatch = fullText.match(/^([0º-9º]+\s+[A-Z]+\s+[A-Z]+|[0º-9º]+[A-Z\s]+)/);
+                const group = groupMatch ? groupMatch[0].trim() : "-";
+                const materia = SUBJECT_NAMES[fullText] || fullText;
+
+                uniqueSubjects.push({ group, materia, sessions, original: fullText });
+
+                // Añadir fila a la tabla de materias
+                if (fullText !== "Gardas") {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td class="center">${group}</td>
+                        <td style="color: blue;">${materia}</td>
+                        <td class="center">${sessions}</td>
+                        <td contenteditable="true"></td>
+                    `;
+                    subjectsTableBody.appendChild(tr);
+                }
             });
 
-            uniqueSubjects.forEach(s => {
-                const tag = document.createElement('span');
-                tag.className = 'subject-tag';
-                tag.textContent = s;
-                subjectsList.appendChild(tag);
-            });
+            // Si no hay suficientes filas, añadir vacías para estética
+            for (let i = uniqueSubjects.length; i < 6; i++) {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>&nbsp;</td><td></td><td></td><td></td>`;
+                subjectsTableBody.appendChild(tr);
+            }
+
+            const subjectStickers = uniqueSubjects.map(s => s.original);
 
             // Generar tabla de horario vacía
             const tbody = document.querySelector('#report-horario tbody');
@@ -965,7 +1037,6 @@
                 "8:10 – 9:00", "9:00 - 9:50", "9:50 - 10:40", "10:40 - 11:30",
                 "RECREO",
                 "12:00 - 12:50", "12:50 - 13:40", "13:40 - 14:30",
-                "COMIDA / TARDE",
                 "16:00 - 16:50", "16:50 – 17:40", "17:40 – 18:30", "18:30 – 19:20", "19:20 – 20:10", "20:10 – 21:00"
             ];
 
@@ -973,7 +1044,7 @@
                 const tr = document.createElement('tr');
                 const tdHora = document.createElement('td');
                 tdHora.innerHTML = `<strong>${h}</strong>`;
-                if (h === "RECREO" || h === "COMIDA / TARDE") {
+                if (h === "RECREO") {
                     tdHora.style.backgroundColor = "#eee";
                     tr.appendChild(tdHora);
                     const tdRest = document.createElement('td');
@@ -984,12 +1055,14 @@
                     tr.appendChild(tdHora);
                     for (let i = 0; i < 5; i++) {
                         const td = document.createElement('td');
-                        td.className = 'editable';
+                        td.style.height = "18px";
+                        td.style.cursor = "pointer";
                         td.onclick = () => {
                             const current = td.textContent;
-                            const options = ["", ...uniqueSubjects];
+                            const options = ["", ...subjectStickers];
                             let nextIdx = (options.indexOf(current) + 1) % options.length;
                             td.textContent = options[nextIdx];
+                            td.style.color = td.textContent ? "blue" : "black";
                         };
                         tr.appendChild(td);
                     }
@@ -1024,19 +1097,100 @@
                     Imprimir / Guardar PDF</button>
                 <span class="close-btn" id="close-report">&times;</span>
             </div>
+
             <div id="report-body">
-                <div class="report-header">
-                    <h3>XORNADA SEMANAL DE TRABALLO - CURSO 2026/2027</h3>
-                    <p><strong id="report-profesor-name">NOMBRE DEL PROFESOR</strong> - Departamento de Matemáticas</p>
+                <!-- Cabecera Triple -->
+                <div class="report-header-grid">
+                    <div class="header-logo-text">
+                        <strong style="color: blue;">GOBIERNO</strong><br>XUNTA DE GALICIA<br>
+                        <span style="font-size: 6pt;">CONSELLERÍA DE CULTURA, EDUCACIÓN, FORMACIÓN PROFESIONAL E
+                            UNIVERSIDADES</span>
+                    </div>
+                    <div style="text-align: center;">
+                        <div
+                            style="font-weight: bold; border-bottom: 2px solid green; padding-bottom: 2px; margin-bottom: 2px;">
+                            IES DE TEIS</div>
+                        <div style="font-size: 7pt;">Avda. de Galicia, 101. 36216 - VIGO<br>CURSO 2026/2027</div>
+                    </div>
+                    <div style="text-align: right; font-size: 6pt;">
+                        <strong>FONDO SOCIAL EUROPEO</strong><br>
+                        Tlf: 886 120 464 | Fax: 886 120 488<br>
+                        ies.teis@edu.xunta.es | www.iesteis.gal
+                    </div>
                 </div>
 
-                <p><strong>Materias e cargos asignados:</strong></p>
-                <div id="report-subjects-list" style="margin-bottom: 20px;"></div>
+                <div class="report-title">ELECCIÓN DE HORARIO E REPARTO DE MATERIAS</div>
 
-                <table class="report-table" id="report-horario">
+                <div class="report-grid-info">
+                    <div>
+                        <span class="report-section-title">Profesor/a:</span>
+                        <div class="info-box" id="report-profesor-name" contenteditable="true"></div>
+                    </div>
+                    <div>
+                        <span class="report-section-title">Departamento:</span>
+                        <div class="info-box">MATEMÁTICAS</div>
+                    </div>
+                </div>
+
+                <div class="report-grid-info">
+                    <div>
+                        <span class="report-section-title">Cargo ou tarefa:</span>
+                        <div class="info-box" contenteditable="true"></div>
+                    </div>
+                    <div>
+                        <span class="report-section-title">Correo-e:</span>
+                        <div class="info-box" contenteditable="true"></div>
+                    </div>
+                </div>
+
+                <div class="report-section-title">Marca cun X quenda</div>
+                <div class="quenda-box">
+                    <div class="checkbox-container"><span class="fake-checkbox"
+                            onclick="this.textContent = this.textContent === 'X' ? '' : 'X'">X</span> Diurno</div>
+                    <div class="checkbox-container"><span class="fake-checkbox"
+                            onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Vespertino</div>
+                    <div class="checkbox-container"><span class="fake-checkbox"
+                            onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Mixto</div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 200px 1fr; gap: 15px;">
+                    <div>
+                        <div class="report-section-title">Indica voluntario/a para:</div>
+                        <div style="border: 1px solid black; padding: 10px;">
+                            <div class="checkbox-container" style="margin-bottom: 10px;"><span class="fake-checkbox"
+                                    onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Gardas de
+                                biblioteca</div>
+                            <div class="checkbox-container" style="margin-bottom: 10px;"><span class="fake-checkbox"
+                                    onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Gardas de
+                                transporte</div>
+                            <div class="checkbox-container"><span class="fake-checkbox"
+                                    onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Gardas de
+                                recreo</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="report-section-title">Reparto de materias / grupos:</div>
+                        <table class="report-table" id="report-subjects-table">
+                            <thead>
+                                <tr>
+                                    <th width="80">GRUPO</th>
+                                    <th>MATERIA / MÓDULO</th>
+                                    <th width="40">Nº Ses</th>
+                                    <th width="80">Distribución</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rellenado por JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="report-section-title">Horario Semanal (Pintar mediante clics):</div>
+                <table class="report-table" id="report-horario" style="font-size: 7pt;">
                     <thead>
                         <tr>
-                            <th width="80">Hora</th>
+                            <th width="65">Hora</th>
                             <th>Lunes</th>
                             <th>Martes</th>
                             <th>Mércores</th>
@@ -1044,17 +1198,38 @@
                             <th>Venres</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- Generado por JS -->
-                    </tbody>
+                    <tbody></tbody>
                 </table>
 
-                <div style="margin-top: 20px;">
-                    <p><strong>Observacións / Outros cargos:</strong></p>
-                    <div contenteditable="true" style="border: 1px solid #ccc; padding: 10px; min-height: 60px;">
-                        Preme aquí para engadir observacións adicionais...
+                <div class="report-section-title">Outras observacións:</div>
+                <div contenteditable="true"
+                    style="border: 1px solid black; padding: 5px; min-height: 40px; font-size: 8pt;"></div>
+
+                <div
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; font-size: 7.5pt;">
+                    <div style="border: 1px solid black; padding: 5px;">
+                        <strong>Solicitude de dúas horas para pechar no horario:</strong>
+                        <table width="100%" style="margin-top: 5px; border-collapse: collapse;">
+                            <tr>
+                                <td style="border: 1px solid black; height: 15px;">Hora</td>
+                                <td style="border: 1px solid black;">Día</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid black; height: 15px;"></td>
+                                <td style="border: 1px solid black;"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="border: 1px solid black; padding: 5px;">
+                        <div class="checkbox-container" style="margin-bottom: 5px;"><span class="fake-checkbox"
+                                onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Non desexo
+                            docencia de 14:30 a 15:20</div>
+                        <div class="checkbox-container"><span class="fake-checkbox"
+                                onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Non desexo
+                            docencia o luns pola tarde</div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
