@@ -366,7 +366,8 @@
         .document-container th,
         .document-container td {
             border: 1px solid #aaa;
-            padding: 4px;
+            padding: 2px 4px;
+            /* Reducido para ahorrar espacio vertical */
             text-align: center;
         }
 
@@ -378,7 +379,8 @@
         .document-container td input[type="text"],
         .document-container td input[type="number"] {
             width: 100%;
-            padding: 4px;
+            padding: 2px 4px;
+            /* Reducido para ahorrar espacio vertical */
             border: 1px solid transparent;
             box-sizing: border-box;
             background-color: #fdfdfd;
@@ -666,11 +668,17 @@
             .document-container select,
             .document-container textarea {
                 border: 1px solid #ddd !important;
-                padding: 4px !important;
+                padding: 1px 2px !important;
+            }
+
+            .document-container th,
+            .document-container td {
+                padding: 1px 2px !important;
             }
 
             .document-container textarea {
-                height: 60px !important;
+                height: 50px !important;
+                /* Ligeramente más pequeño también */
             }
 
             /* Ocultar elementos interactivos al imprimir */
