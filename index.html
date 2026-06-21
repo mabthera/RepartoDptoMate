@@ -631,12 +631,18 @@
             slots.forEach(slot => {
                 const slotContent = [];
                 slot.querySelectorAll('.item').forEach(item => {
+                    let finalValue = item.dataset.value;
+                    const isGarda = item.textContent.includes("Gardas");
+                    if (isGarda) {
+                        const input = item.querySelector('.garda-input');
+                        if (input) finalValue = input.value;
+                    }
                     slotContent.push({
                         id: item.id,
-                        text: item.textContent.includes("Gardas") ? "Gardas" : item.textContent,
+                        text: isGarda ? "Gardas" : item.textContent,
                         valL: item.dataset.valL,
-                        valC: item.dataset.valC,
-                        value: item.dataset.value,
+                        valC: isGarda ? finalValue : item.dataset.valC,
+                        value: finalValue,
                         type: item.dataset.type
                     });
                 });
@@ -741,14 +747,18 @@
                     const slot = [...slots].find(s => s.dataset.name === slotData.name);
                     if (!slot) return;
                     slotData.items.forEach(itemData => {
-                        const item = [...document.querySelectorAll('.item')]
-                            .find(el => el.textContent.trim() === itemData.text);
+                        // Intentar buscar por ID primero (más fiable), si no por texto
+                        let item = document.getElementById(itemData.id);
+                        if (!item || (item.textContent.trim() !== itemData.text && itemData.text !== "Gardas")) {
+                            item = [...document.querySelectorAll('.item')]
+                                .find(el => el.textContent.trim() === itemData.text && !el.closest('.slot:not(#unassigned-slot)'));
+                        }
+
                         if (item) {
                             if (itemData.text === "Gardas") {
                                 const gardaInput = slot.querySelector('.garda-input');
                                 if (gardaInput) {
-                                    gardaInput.value = itemData.valC || 0;
-                                    // Disparar evento change para actualizar dataset y conteos
+                                    gardaInput.value = itemData.valC || itemData.value || 0;
                                     gardaInput.dispatchEvent(new Event('change'));
                                 }
                             } else {
