@@ -1373,8 +1373,18 @@
                 }
             });
 
-            // Ordenar: primero Lectivas, luego Complementarias
+            // Ordenar: primero normales, luego CP. Dentro de CP, Tutorías primero.
             unique.sort((a, b) => {
+                if (a.vis === 'normal' && b.vis !== 'normal') return -1;
+                if (a.vis !== 'normal' && b.vis === 'normal') return 1;
+
+                if (a.vis === 'CP' && b.vis === 'CP') {
+                    const aTut = a.mat.includes("Titoría") || a.mat.includes("Tutoría");
+                    const bTut = b.mat.includes("Titoría") || b.mat.includes("Tutoría");
+                    if (aTut && !bTut) return -1;
+                    if (!aTut && bTut) return 1;
+                }
+
                 if (a.tipo === 'Lectiva' && b.tipo !== 'Lectiva') return -1;
                 if (a.tipo !== 'Lectiva' && b.tipo === 'Lectiva') return 1;
                 return 0;
@@ -1382,12 +1392,12 @@
 
             unique.forEach(u => {
                 const isCP = u.vis === "CP";
-                const rowStyle = isCP ? "font-style: italic; font-size: 10px; font-weight: 400;" : "font-size: 16px; font-weight: 800;";
+                const rowStyle = isCP ? "font-style: italic; font-size: 10px; font-weight: 400; color: #003399;" : "font-size: 16px; font-weight: 800; color: #003399;";
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = `<td><input type="text" value="${u.g}" style="${rowStyle}"></td>
                                 <td><input type="text" value="${u.mat}" style="${rowStyle}"></td>
-                                <td><input type="text" value="${u.tipo}" style="font-size: 11px; font-weight: 800; color: ${u.tipo === 'Lectiva' ? '#003399' : '#00796b'};" readonly></td>
+                                <td><input type="text" value="${u.tipo}" style="font-size: 11px; font-weight: 800; color: #003399;" readonly></td>
                                 <td><input type="number" value="${u.ses}" min="0" style="${rowStyle}"></td>
                                 <td><input type="text" placeholder="..." style="${rowStyle}"></td>
                                 <td><input type="text" style="${rowStyle}"></td>`;
