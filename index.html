@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reparto carga horaria Dpto. Matemáticas 26/27 - IES de TEIS</title>
+    <!-- Importación de fuente para efecto manuscrito -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -218,114 +220,377 @@
             background-color: #2c3e50;
         }
 
-        /* Report Modal / A4 Horizontal Styles */
+        /* Nuevos estilos del Modal de Informe y Formulario Docencia */
         #report-modal .modal-content {
-            width: 297mm;
-            max-width: 297mm;
-            padding: 10mm;
-            background: white;
-            color: black;
+            background-color: #fefefe;
+            margin: 2% auto;
+            padding: 0;
+            border: 1px solid #888;
+            width: 95%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .document-container {
+            width: 100%;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+
+        .document-container input[type="text"],
+        .document-container input[type="email"],
+        .document-container input[type="number"],
+        .document-container select,
+        .document-container textarea {
+            font-family: 'Dancing Script', cursive;
+            font-weight: 600;
+            color: #003399;
+            font-size: 16px;
+        }
+
+        .document-container ::placeholder {
             font-family: Arial, sans-serif;
-            font-size: 9pt;
+            color: #aaa;
+            font-weight: normal;
         }
 
-        .report-header-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid black;
-            padding-bottom: 10px;
-        }
-
-        .header-logo-text {
-            font-size: 7pt;
-            line-height: 1.1;
-        }
-
-        .report-title {
-            text-align: center;
-            font-weight: bold;
-            font-size: 11pt;
-            background: #eee;
-            border: 1px solid black;
-            padding: 5px;
-            margin-bottom: 15px;
-        }
-
-        .report-grid-info {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 10px;
-        }
-
-        .info-box {
-            border: 1px solid black;
-            padding: 5px;
-            min-height: 18px;
-        }
-
-        .report-section-title {
-            font-weight: bold;
-            font-size: 8pt;
-            margin-bottom: 3px;
-            display: block;
-        }
-
-        .quenda-box {
+        /* Cabecera */
+        .document-container .header {
             display: flex;
-            gap: 20px;
-            margin-bottom: 15px;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-size: 12px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 15px;
         }
 
-        .checkbox-container {
+        .document-container .header-col {
+            width: 32%;
+            line-height: 1.4;
+            color: #333;
+        }
+
+        .document-container .header-col.center {
+            text-align: center;
+        }
+
+        .document-container .header-col.right {
+            text-align: right;
+        }
+
+        /* Caja para agrupar secciones */
+        .document-container .section-box {
+            border: 2px solid #e0e0e0;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fafafa;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        .document-container .section-box .row:last-child {
+            margin-bottom: 0;
+        }
+
+        .document-container .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
+        .document-container .form-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .document-container .form-group label {
+            font-weight: bold;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        .document-container .form-group input[type="text"],
+        .document-container .form-group input[type="email"],
+        .document-container .form-group select {
+            flex: 1;
+            padding: 6px 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+
+        .document-container .checkbox-group {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 14px;
+        }
+
+        .document-container .options-vertical label {
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 5px;
+            font-size: 14px;
         }
 
-        .fake-checkbox {
-            width: 14px;
-            height: 14px;
-            border: 1px solid black;
-            display: inline-block;
-            text-align: center;
-            line-height: 14px;
+        .document-container .section-title {
             font-weight: bold;
+            font-size: 14px;
+            margin: 25px 0 10px 0;
+            text-transform: uppercase;
+        }
+
+        .document-container .table-responsive {
+            overflow-x: auto;
+        }
+
+        .document-container table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .document-container th,
+        .document-container td {
+            border: 1px solid #aaa;
+            padding: 4px;
+            text-align: center;
+        }
+
+        .document-container th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+
+        .document-container td input[type="text"],
+        .document-container td input[type="number"] {
+            width: 100%;
+            padding: 4px;
+            border: 1px solid transparent;
+            box-sizing: border-box;
+            background-color: #fdfdfd;
+            border-radius: 3px;
+        }
+
+        .document-container td input[type="text"]:focus,
+        .document-container td input[type="number"]:focus {
+            border: 1px solid #0056b3;
+            background-color: #fff;
+            outline: none;
+        }
+
+        .document-container textarea {
+            width: 100%;
+            height: 80px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            resize: vertical;
+            margin-top: 10px;
+        }
+
+        .document-container .btn-calendar {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .document-container .btn-calendar:hover {
+            background-color: #004494;
+        }
+
+        .document-container .selected-hours-display {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        /* Modal Overlay (Para el sub-modal del horario) */
+        .modal-overlay.schedule-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.schedule-modal .modal-content {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            width: 95%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            color: #333;
+            margin: 0;
+        }
+
+        .modal-overlay.schedule-modal h3 {
+            margin-top: 0;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .modal-warning {
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 13px;
+            min-height: 20px;
+            margin-bottom: 15px;
+        }
+
+        .timetable {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+
+        .timetable th,
+        .timetable td {
+            border: 1px solid #000000 !important;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .timetable th {
+            background-color: #e9ecef;
+        }
+
+        .timetable .time-col {
+            background-color: #f8f9fa;
+            font-weight: bold;
+            width: 100px;
+        }
+
+        .timetable .break-row td {
+            background-color: #dddddd;
+            font-size: 12px;
+            font-weight: bold;
+            color: #666;
+            padding: 4px;
+        }
+
+        .bg-blue {
+            background-color: #729fcf;
+        }
+
+        .bg-cream {
+            background-color: #fff5ce;
+        }
+
+        .bg-green {
+            background-color: #afd095;
+        }
+
+        .selectable-cell {
+            cursor: pointer;
+            transition: all 0.1s;
+            position: relative;
+            height: 30px;
+        }
+
+        .selectable-cell:hover {
+            background-color: #d1ecf1 !important;
+        }
+
+        .selectable-cell.selected {
+            background-color: #000000 !important;
+            color: white;
+            font-weight: bold;
+        }
+
+        .modal-actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+        }
+
+        .btn-cancel {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
             cursor: pointer;
         }
 
-        .report-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 15px;
-            font-size: 8.5pt;
+        .btn-accept {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
         }
 
-        .report-table th,
-        .report-table td {
-            border: 1px solid black;
-            padding: 4px;
-            text-align: left;
+        .legend-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            font-size: 13px;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
         }
 
-        .report-table th {
-            background-color: #f2f2f2;
-            text-align: center;
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #333;
         }
 
-        .center {
-            text-align: center;
+        .legend-box {
+            width: 16px;
+            height: 16px;
+            border: 1px solid #000000;
+            border-radius: 3px;
         }
 
         @media print {
             @page {
-                size: A4 landscape;
-                margin: 0;
+                size: A4 portrait;
+                margin: 12mm;
             }
 
             body {
+                background-color: white;
                 margin: 0;
                 padding: 0;
             }
@@ -340,29 +605,84 @@
             }
 
             #report-modal {
-                position: fixed;
+                position: absolute;
                 left: 0;
                 top: 0;
-                width: 297mm;
-                height: 210mm;
-                margin: 0;
-                padding: 0;
+                width: 100%;
+                display: block;
                 background: white;
                 z-index: 9999;
             }
 
             #report-modal .modal-content {
-                width: 297mm;
-                height: 210mm;
+                width: 100%;
                 border: none;
                 box-shadow: none;
+                padding: 0;
                 margin: 0;
-                padding: 10mm;
-                box-sizing: border-box;
-                overflow: hidden;
+                max-width: none;
             }
 
-            .no-print {
+            .document-container {
+                padding: 0;
+                border: none;
+                box-shadow: none;
+            }
+
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .document-container .header-col {
+                font-size: 11px !important;
+            }
+
+            .document-container .header-col[style*="font-size: 22px"] {
+                font-size: 16px !important;
+            }
+
+            .document-container .header-col strong[style*="font-size: 28px"] {
+                font-size: 20px !important;
+            }
+
+            #report-modal input,
+            #report-modal textarea,
+            #report-modal select {
+                font-size: 12px !important;
+            }
+
+            .document-container .section-box {
+                padding: 10px 15px !important;
+                margin-bottom: 15px !important;
+                page-break-inside: avoid;
+            }
+
+            .document-container .row {
+                margin-bottom: 5px !important;
+            }
+
+            .document-container input[type="text"],
+            .document-container input[type="email"],
+            .document-container input[type="number"],
+            .document-container select,
+            .document-container textarea {
+                border: 1px solid #ddd !important;
+                padding: 4px !important;
+            }
+
+            .document-container textarea {
+                height: 60px !important;
+            }
+
+            /* Ocultar elementos interactivos al imprimir */
+            .btn-calendar,
+            .no-print,
+            #close-report {
+                display: none !important;
+            }
+
+            .modal-overlay {
                 display: none !important;
             }
         }
@@ -525,142 +845,307 @@
 
     <!-- Modal de Informe (AL FINAL DEL BODY) -->
     <div id="report-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header no-print">
-                <h2 style="margin:0;">Generación de Informe Individual</h2>
-                <button onclick="window.print()"
-                    style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer;">🖨️
-                    Imprimir / Guardar PDF</button>
-                <span class="close-btn" id="close-report">&times;</span>
+        <div class="modal-content" style="background-color: transparent; border: none; box-shadow: none;">
+            <div class="modal-header no-print"
+                style="padding: 20px 30px; border-bottom: 1px solid #eee; background: #fafafa; border-radius: 8px 8px 0 0; display: flex; justify-content: space-between;">
+                <h2 style="margin:0; font-size: 20px;">Generación de Informe Individual</h2>
+                <div>
+                    <button onclick="window.print()"
+                        style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer; margin-right: 15px;">🖨️
+                        Imprimir / Guardar PDF</button>
+                    <span class="close-btn" id="close-report">&times;</span>
+                </div>
             </div>
 
-            <div id="report-body">
-                <!-- Cabecera Triple -->
-                <div class="report-header-grid">
-                    <div class="header-logo-text">
-                        <strong style="color: blue;">GOBIERNO</strong><br>XUNTA DE GALICIA<br>
-                        <span style="font-size: 6pt;">CONSELLERÍA DE CULTURA, EDUCACIÓN, FORMACIÓN PROFESIONAL E
-                            UNIVERSIDADES</span>
+            <div class="document-container">
+                <!-- Cabecera Institucional -->
+                <div class="header">
+                    <div class="header-col" style="font-size: 22px; line-height: 1.4;">
+                        <strong style="font-size: 28px;">Curso 2026/27</strong><br>
+                        Dpto de Matemáticas
                     </div>
-                    <div style="text-align: center;">
-                        <div style="font-weight: bold; border-bottom: 2px solid green;">IES DE TEIS</div>
-                        <div style="font-size: 7pt;">Avda. de Galicia, 101. 36216 - VIGO<br>CURSO 2026/2027</div>
+                    <div class="header-col center">
+                        <strong>XUNTA DE GALICIA</strong><br>
+                        CONSELLERÍA DE CULTURA,<br>
+                        EDUCACIÓN E UNIVERSIDADE
                     </div>
-                    <div style="text-align: right; font-size: 6pt;">
-                        <strong>FONDO SOCIAL EUROPEO</strong><br>
-                        Tlf: 886 120 464 | Fax: 886 120 488<br>
-                        ies.teis@edu.xunta.es | www.iesteis.gal
-                    </div>
-                </div>
-
-                <div class="report-title">ELECCIÓN DE HORARIO E REPARTO DE MATERIAS</div>
-
-                <div class="report-grid-info">
-                    <div>
-                        <span class="report-section-title">Profesor/a:</span>
-                        <div class="info-box" id="report-profesor-name" contenteditable="true"></div>
-                    </div>
-                    <div>
-                        <span class="report-section-title">Departamento:</span>
-                        <div class="info-box">MATEMÁTICAS</div>
+                    <div class="header-col right">
+                        <strong>IES de Teis</strong><br>
+                        Avda. de Galicia, 101. 36216-VIGO<br>
+                        Tfno: 886 12 04 64. Fax: 886 12 04 85<br>
+                        e-mail: ies.teis@edu.xunta.es<br>
+                        http://www.iesteis.es
                     </div>
                 </div>
 
-                <div class="report-grid-info">
-                    <div>
-                        <span class="report-section-title">Cargo ou tarefa:</span>
-                        <div class="info-box" contenteditable="true"></div>
-                    </div>
-                    <div>
-                        <span class="report-section-title">Correo-e:</span>
-                        <div class="info-box" contenteditable="true"></div>
-                    </div>
-                </div>
-
-                <div class="report-section-title">Marca cun X quenda</div>
-                <div class="quenda-box">
-                    <div class="checkbox-container"><span class="fake-checkbox"
-                            onclick="this.textContent = this.textContent === 'X' ? '' : 'X'">X</span> Diurno</div>
-                    <div class="checkbox-container"><span class="fake-checkbox"
-                            onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Vespertino</div>
-                    <div class="checkbox-container"><span class="fake-checkbox"
-                            onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Mixto</div>
-                </div>
-
-                <div style="display: grid; grid-template-columns: 200px 1fr; gap: 15px;">
-                    <div>
-                        <div class="report-section-title">Indica voluntario/a para:</div>
-                        <div style="border: 1px solid black; padding: 10px;">
-                            <div class="checkbox-container" style="margin-bottom: 10px;"><span class="fake-checkbox"
-                                    onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Gardas de
-                                biblioteca</div>
-                            <div class="checkbox-container" style="margin-bottom: 10px;"><span class="fake-checkbox"
-                                    onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Gardas de
-                                transporte</div>
-                            <div class="checkbox-container"><span class="fake-checkbox"
-                                    onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Gardas de
-                                recreo</div>
+                <!-- Datos del Profesorado y Quenda -->
+                <div class="section-box">
+                    <div class="row">
+                        <div class="form-group" style="flex: 0 0 60%;">
+                            <label for="profesor" style="width: 120px;">Profesor/a:</label>
+                            <input type="text" id="profesor" name="profesor" value="Provisional 1"
+                                placeholder="Nome do profesor/a">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label for="departamento" style="width: 110px;">Departamento:</label>
+                            <input type="text" id="departamento" name="departamento" value="Matemáticas"
+                                placeholder="Departamento">
                         </div>
                     </div>
-                    <div>
-                        <div class="report-section-title">Reparto de materias / grupos:</div>
-                        <table class="report-table" id="report-subjects-table">
+
+                    <div class="row">
+                        <div class="form-group" style="flex: 0 0 60%;">
+                            <label for="cargo" style="width: 120px;">Cargo ou tarefa:</label>
+                            <input type="text" id="cargo" name="cargo" placeholder="Especifique cargo">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label for="telefonos" style="width: 110px;">Teléfonos:</label>
+                            <input type="text" id="telefonos" name="telefonos" placeholder="Teléfonos de contacto">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group" style="flex: 0 0 60%;">
+                            <label for="correo" style="width: 120px;">Correo-e:</label>
+                            <input type="email" id="correo" name="correo" placeholder="correo@exemplo.com">
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label for="quenda" style="width: 110px;">Quenda:</label>
+                            <select id="quenda" name="quenda">
+                                <option value="diurno" selected>Diurno</option>
+                                <option value="vespertino">Vespertino</option>
+                                <option value="mixto">Mixto</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabla Principal de Materias -->
+                <div class="section-box">
+                    <div class="section-title" style="margin-top: 0;">Indica o/os grupo/s, materia/módulo a impartir (ou
+                        titoría en aula) e distribución horaria:</div>
+                    <div class="table-responsive">
+                        <table id="report-subjects-table">
                             <thead>
                                 <tr>
-                                    <th width="80">GRUPO</th>
-                                    <th>MATERIA / MÓDULO</th>
-                                    <th width="40">Nº Ses</th>
-                                    <th width="80">Distribución</th>
+                                    <th style="width: 15%;">Grupo</th>
+                                    <th style="width: 35%;">Materia/Módulo</th>
+                                    <th style="width: 10%;">Sesións</th>
+                                    <th style="width: 20%;">Distribucións<br><span
+                                            style="font-weight: normal; font-size: 12px;">(ex: 3+2+1)</span></th>
+                                    <th style="width: 20%;">Necesidade aula</th>
                                 </tr>
                             </thead>
-                            <tbody></tbody>
+                            <tbody>
+                                <!-- Rellenado dinámicamente -->
+                            </tbody>
                         </table>
                     </div>
                 </div>
 
-                <div class="report-section-title">Horario Semanal:</div>
-                <table class="report-table" id="report-horario" style="font-size: 7pt;">
-                    <thead>
-                        <tr>
-                            <th width="65">Hora</th>
-                            <th>Lunes</th>
-                            <th>Martes</th>
-                            <th>Mércores</th>
-                            <th>Xoves</th>
-                            <th>Venres</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                <!-- Observaciones, Calendario y Opciones Finales agrupadas -->
+                <div class="section-box" style="margin-bottom: 0;">
+                    <div style="display: flex; gap: 25px; flex-wrap: wrap;">
 
-                <div class="report-section-title">Outras observacións:</div>
-                <div contenteditable="true"
-                    style="border: 1px solid black; padding: 5px; min-height: 40px; font-size: 8pt;"></div>
+                        <!-- Columna Izquierda: Observaciones y Horario -->
+                        <div style="flex: 2; min-width: 350px;">
+                            <div class="section-title" style="margin-top: 0;">OUTRAS OBSERVACIÓNS:</div>
+                            <textarea name="observaciones"
+                                placeholder="Escribe aquí outras observacións, peticións ou aclaracións..."></textarea>
 
-                <div
-                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; font-size: 7.5pt;">
-                    <div style="border: 1px solid black; padding: 5px;">
-                        <strong>Solicitude de dúas horas para pechar no horario:</strong>
-                        <table width="100%" style="margin-top: 5px; border-collapse: collapse;">
-                            <tr>
-                                <td style="border: 1px solid black; height: 15px;">Hora</td>
-                                <td style="border: 1px solid black;">Día</td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1px solid black; height: 15px;"></td>
-                                <td style="border: 1px solid black;"></td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div style="border: 1px solid black; padding: 5px;">
-                        <div class="checkbox-container" style="margin-bottom: 5px;"><span class="fake-checkbox"
-                                onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Non desexo
-                            docencia de 14:30 a 15:20</div>
-                        <div class="checkbox-container"><span class="fake-checkbox"
-                                onclick="this.textContent = this.textContent === 'X' ? '' : 'X'"></span> Non desexo
-                            docencia o luns pola tarde</div>
+                            <div style="margin-top: 20px;">
+                                <label style="font-weight: bold; display: block; margin-bottom: 10px;">Solicitude de
+                                    dúas horas para pechar no horario:</label>
+                                <button type="button" class="btn-calendar" id="btn-open-modal">
+                                    📅 Seleccionar Horas no Calendario
+                                </button>
+
+                                <div class="selected-hours-display" id="selected-hours-container">
+                                    <div id="display-hora-1"><b>1ª Hora:</b> <span
+                                            style="color:#777; font-style:italic;">Sen seleccionar</span></div>
+                                    <div id="display-hora-2"><b>2ª Hora:</b> <span
+                                            style="color:#777; font-style:italic;">Sen seleccionar</span></div>
+                                    <input type="hidden" name="hora_cierre_1" id="hidden-hora-1">
+                                    <input type="hidden" name="hora_cierre_2" id="hidden-hora-2">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Columna Derecha: Voluntariado y Preferencias -->
+                        <div
+                            style="flex: 1; min-width: 250px; background-color: #f8f9fa; padding: 15px; border-radius: 6px; border: 1px solid #e9ecef;">
+                            <label style="font-weight: bold; display: block; margin-bottom: 10px;">Indica voluntario/a
+                                para:</label>
+                            <div class="options-vertical" style="margin-top: 0;">
+                                <label><input type="checkbox" name="vol_biblioteca"> Gardas de biblioteca</label>
+                                <label><input type="checkbox" name="vol_transporte"> Gardas de transporte</label>
+                                <label><input type="checkbox" name="vol_recreo"> Gardas de recreo</label>
+                                <label><input type="checkbox" name="vol_entrada_810"> Entrar ás 8:10</label>
+                            </div>
+
+                            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #ddd;">
+                                <div class="options-vertical" style="margin-top: 0;">
+                                    <label>
+                                        <input type="checkbox" name="no_docencia_luns">
+                                        Non desexo ter docencia o luns pola tarde
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DEL CALENDARIO -->
+    <div id="scheduleModal" class="modal-overlay schedule-modal">
+        <div class="modal-content">
+            <h3>Selecciona as túas dúas horas para pechar</h3>
+            <div id="modal-warning" class="modal-warning"></div>
+
+            <table class="timetable">
+                <thead>
+                    <tr>
+                        <th>Hora</th>
+                        <th>Luns</th>
+                        <th>Martes</th>
+                        <th>Mércores</th>
+                        <th>Xoves</th>
+                        <th>Venres</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Mañana -->
+                    <tr>
+                        <td class="time-col">8:10 – 9:00</td>
+                        <td class="selectable-cell" data-day="Luns" data-time="8:10 – 9:00"></td>
+                        <td class="selectable-cell bg-blue" data-day="Martes" data-time="8:10 – 9:00"></td>
+                        <td class="selectable-cell" data-day="Mércores" data-time="8:10 – 9:00"></td>
+                        <td class="selectable-cell bg-blue" data-day="Xoves" data-time="8:10 – 9:00"></td>
+                        <td class="selectable-cell" data-day="Venres" data-time="8:10 – 9:00"></td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">9:00 - 9:50</td>
+                        <td class="selectable-cell bg-cream" data-day="Luns" data-time="9:00 - 9:50"></td>
+                        <td class="selectable-cell bg-cream" data-day="Martes" data-time="9:00 - 9:50"></td>
+                        <td class="selectable-cell bg-cream" data-day="Mércores" data-time="9:00 - 9:50"></td>
+                        <td class="selectable-cell bg-cream" data-day="Xoves" data-time="9:00 - 9:50"></td>
+                        <td class="selectable-cell bg-cream" data-day="Venres" data-time="9:00 - 9:50"></td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">9:50 - 10:40</td>
+                        <td class="selectable-cell bg-cream" data-day="Luns" data-time="9:50 - 10:40"></td>
+                        <td class="selectable-cell bg-cream" data-day="Martes" data-time="9:50 - 10:40"></td>
+                        <td class="selectable-cell bg-cream" data-day="Mércores" data-time="9:50 - 10:40"></td>
+                        <td class="selectable-cell bg-cream" data-day="Xoves" data-time="9:50 - 10:40"></td>
+                        <td class="selectable-cell bg-cream" data-day="Venres" data-time="9:50 - 10:40"></td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">10:40 - 11:30</td>
+                        <td class="selectable-cell bg-cream" data-day="Luns" data-time="10:40 - 11:30"></td>
+                        <td class="selectable-cell bg-cream" data-day="Martes" data-time="10:40 - 11:30"></td>
+                        <td class="selectable-cell bg-cream" data-day="Mércores" data-time="10:40 - 11:30"></td>
+                        <td class="selectable-cell bg-cream" data-day="Xoves" data-time="10:40 - 11:30"></td>
+                        <td class="selectable-cell bg-cream" data-day="Venres" data-time="10:40 - 11:30"></td>
+                    </tr>
+                    <tr class="break-row">
+                        <td colspan="6">RECREO</td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">12:00 - 12:50</td>
+                        <td class="selectable-cell bg-cream" data-day="Luns" data-time="12:00 - 12:50"></td>
+                        <td class="selectable-cell bg-cream" data-day="Martes" data-time="12:00 - 12:50"></td>
+                        <td class="selectable-cell bg-cream" data-day="Mércores" data-time="12:00 - 12:50"></td>
+                        <td class="selectable-cell bg-cream" data-day="Xoves" data-time="12:00 - 12:50"></td>
+                        <td class="selectable-cell bg-cream" data-day="Venres" data-time="12:00 - 12:50"></td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">12:50 - 13:40</td>
+                        <td class="selectable-cell bg-cream" data-day="Luns" data-time="12:50 - 13:40"></td>
+                        <td class="selectable-cell bg-cream" data-day="Martes" data-time="12:50 - 13:40"></td>
+                        <td class="selectable-cell bg-cream" data-day="Mércores" data-time="12:50 - 13:40"></td>
+                        <td class="selectable-cell bg-cream" data-day="Xoves" data-time="12:50 - 13:40"></td>
+                        <td class="selectable-cell bg-cream" data-day="Venres" data-time="12:50 - 13:40"></td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">13:40 - 14:30</td>
+                        <td class="selectable-cell bg-cream" data-day="Luns" data-time="13:40 - 14:30"></td>
+                        <td class="selectable-cell bg-cream" data-day="Martes" data-time="13:40 - 14:30"></td>
+                        <td class="selectable-cell bg-cream" data-day="Mércores" data-time="13:40 - 14:30"></td>
+                        <td class="selectable-cell bg-cream" data-day="Xoves" data-time="13:40 - 14:30"></td>
+                        <td class="selectable-cell bg-cream" data-day="Venres" data-time="13:40 - 14:30"></td>
+                    </tr>
+                    <tr class="break-row">
+                        <td colspan="6">COMIDA</td>
+                    </tr>
+                    <!-- Tarde -->
+                    <tr>
+                        <td class="time-col">16:00 - 16:50</td>
+                        <td class="selectable-cell bg-cream" data-day="Luns" data-time="16:00 - 16:50"></td>
+                        <td class="selectable-cell bg-green" data-day="Martes" data-time="16:00 - 16:50"></td>
+                        <td class="selectable-cell bg-green" data-day="Mércores" data-time="16:00 - 16:50"></td>
+                        <td class="selectable-cell bg-green" data-day="Xoves" data-time="16:00 - 16:50"></td>
+                        <td class="selectable-cell bg-green" data-day="Venres" data-time="16:00 - 16:50"></td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">16:50 – 17:40</td>
+                        <td class="selectable-cell bg-cream" data-day="Luns" data-time="16:50 – 17:40"></td>
+                        <td class="selectable-cell bg-green" data-day="Martes" data-time="16:50 – 17:40"></td>
+                        <td class="selectable-cell bg-green" data-day="Mércores" data-time="16:50 – 17:40"></td>
+                        <td class="selectable-cell bg-green" data-day="Xoves" data-time="16:50 – 17:40"></td>
+                        <td class="selectable-cell bg-green" data-day="Venres" data-time="16:50 – 17:40"></td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">17:40 – 18:30</td>
+                        <td class="selectable-cell bg-green" data-day="Luns" data-time="17:40 – 18:30"></td>
+                        <td class="selectable-cell bg-green" data-day="Martes" data-time="17:40 – 18:30"></td>
+                        <td class="selectable-cell bg-green" data-day="Mércores" data-time="17:40 – 18:30"></td>
+                        <td class="selectable-cell bg-green" data-day="Xoves" data-time="17:40 – 18:30"></td>
+                        <td class="selectable-cell bg-green" data-day="Venres" data-time="17:40 – 18:30"></td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">18:30 – 19:20</td>
+                        <td class="selectable-cell bg-green" data-day="Luns" data-time="18:30 – 19:20"></td>
+                        <td class="selectable-cell bg-green" data-day="Martes" data-time="18:30 – 19:20"></td>
+                        <td class="selectable-cell bg-green" data-day="Mércores" data-time="18:30 – 19:20"></td>
+                        <td class="selectable-cell bg-green" data-day="Xoves" data-time="18:30 – 19:20"></td>
+                        <td class="selectable-cell bg-green" data-day="Venres" data-time="18:30 – 19:20"></td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">19:20 – 20:10</td>
+                        <td class="selectable-cell bg-green" data-day="Luns" data-time="19:20 – 20:10"></td>
+                        <td class="selectable-cell bg-green" data-day="Martes" data-time="19:20 – 20:10"></td>
+                        <td class="selectable-cell bg-green" data-day="Mércores" data-time="19:20 – 20:10"></td>
+                        <td class="selectable-cell bg-green" data-day="Xoves" data-time="19:20 – 20:10"></td>
+                        <td class="selectable-cell bg-green" data-day="Venres" data-time="19:20 – 20:10"></td>
+                    </tr>
+                    <tr>
+                        <td class="time-col">20:10 – 21:00</td>
+                        <td class="selectable-cell" data-day="Luns" data-time="20:10 – 21:00"></td>
+                        <td class="selectable-cell bg-green" data-day="Martes" data-time="20:10 – 21:00"></td>
+                        <td class="selectable-cell" data-day="Mércores" data-time="20:10 – 21:00"></td>
+                        <td class="selectable-cell" data-day="Xoves" data-time="20:10 – 21:00"></td>
+                        <td class="selectable-cell" data-day="Venres" data-time="20:10 – 21:00"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="legend-container">
+                <div class="legend-item">
+                    <div class="legend-box bg-cream"></div>ESO / FPB
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box bg-green"></div>ESA
+                </div>
+                <div class="legend-item">
+                    <div class="legend-box bg-blue"></div>Bacharelato
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn-cancel" id="btn-cancel-modal">Cancelar</button>
+                <button type="button" class="btn-accept" id="btn-accept-modal">Aceptar e Gardar</button>
             </div>
         </div>
     </div>
@@ -823,7 +1308,7 @@
         }
 
         function openReport(profName) {
-            document.getElementById('report-profesor-name').textContent = profName.toUpperCase();
+            document.getElementById('profesor').value = profName.toUpperCase();
             const slot = [...slots].find(s => s.dataset.name === profName);
             const body = document.querySelector('#report-subjects-table tbody');
             body.innerHTML = '';
@@ -831,47 +1316,101 @@
             const unique = [];
             items.forEach(it => {
                 const txt = it.textContent.trim();
-                const ses = it.dataset.value || 0;
+                const isG = txt.includes("Gardas");
+                const ses = isG ? (it.querySelector('.garda-input') ? it.querySelector('.garda-input').value : 0) : (it.dataset.value || 0);
                 const m = txt.match(/^([0-9º]+\s+[A-Z]+\s+[A-Z]+|[0-9º]+[A-Z\s]+)/);
                 const g = m ? m[0].trim() : "-";
                 const mat = SUBJECT_NAMES[txt] || txt;
-                unique.push({ g, mat, ses, orig: txt });
-                if (txt !== "Gardas") {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `<td class="center">${g}</td><td style="color:blue;">${mat}</td><td class="center">${ses}</td><td contenteditable="true"></td>`;
-                    body.appendChild(tr);
-                }
+                if (!isG) unique.push({ g, mat, ses, orig: txt });
             });
-            for (let i = unique.length; i < 6; i++) {
-                body.innerHTML += '<tr><td>&nbsp;</td><td></td><td></td><td></td></tr>';
-            }
-            const sticks = unique.map(u => u.orig);
-            const hbody = document.querySelector('#report-horario tbody');
-            hbody.innerHTML = '';
-            const horas = ["8:10 - 9:00", "9:00 - 9:50", "9:50 - 10:40", "10:40 - 11:30", "RECREO", "12:00 - 12:50", "12:50 - 13:40", "13:40 - 14:30", "16:00 - 16:50", "16:50 - 17:40"];
-            horas.forEach(h => {
+
+            unique.forEach(u => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `<td><strong>${h}</strong></td>`;
-                if (h === "RECREO") { tr.innerHTML += '<td colspan="5" style="background:#eee"></td>'; }
-                else {
-                    for (let i = 0; i < 5; i++) {
-                        const td = document.createElement('td');
-                        td.style.height = "18px"; td.style.cursor = "pointer";
-                        td.onclick = () => {
-                            if (td.style.backgroundColor === "rgb(85, 85, 85)") {
-                                td.style.backgroundColor = "transparent";
-                            } else {
-                                td.style.backgroundColor = "#555";
-                            }
-                            td.textContent = "";
-                        };
-                        tr.appendChild(td);
-                    }
-                }
-                hbody.appendChild(tr);
+                tr.innerHTML = `<td><input type="text" value="${u.g}"></td>
+                                <td><input type="text" value="${u.mat}"></td>
+                                <td><input type="number" value="${u.ses}" min="0"></td>
+                                <td><input type="text" placeholder="..."></td>
+                                <td><input type="text"></td>`;
+                body.appendChild(tr);
             });
+
+            for (let i = unique.length; i < 6; i++) {
+                body.innerHTML += `<tr>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="number" min="0"></td>
+                                    <td><input type="text"></td>
+                                    <td><input type="text"></td>
+                                   </tr>`;
+            }
+
             document.getElementById('report-modal').style.display = "block";
         }
+
+        // Lógica modal horario
+        const schedModal = document.getElementById('scheduleModal');
+        const btnOpenSched = document.getElementById('btn-open-modal');
+        const btnCancelSched = document.getElementById('btn-cancel-modal');
+        const btnAcceptSched = document.getElementById('btn-accept-modal');
+        const schedCells = document.querySelectorAll('.selectable-cell');
+        const warningBox = document.getElementById('modal-warning');
+
+        let selectedSlots = [];
+
+        btnOpenSched.addEventListener('click', () => {
+            schedModal.style.display = 'flex';
+            warningBox.textContent = '';
+        });
+
+        const closeSchedModal = () => { schedModal.style.display = 'none'; };
+        btnCancelSched.addEventListener('click', closeSchedModal);
+
+        schedCells.forEach(cell => {
+            cell.addEventListener('click', function () {
+                const day = this.getAttribute('data-day');
+                const time = this.getAttribute('data-time');
+                const id = day + '-' + time;
+
+                if (this.classList.contains('selected')) {
+                    this.classList.remove('selected');
+                    this.innerHTML = '';
+                    selectedSlots = selectedSlots.filter(s => s.id !== id);
+                    warningBox.textContent = '';
+                } else {
+                    if (selectedSlots.length >= 2) {
+                        warningBox.textContent = '⚠ Xa seleccionaches o límite máximo (dúas horas). Deselecciona unha antes de engadir outra.';
+                        return;
+                    }
+                    this.classList.add('selected');
+                    this.innerHTML = '✔ Pechar';
+                    selectedSlots.push({ id, day, time });
+                }
+            });
+        });
+
+        btnAcceptSched.addEventListener('click', () => {
+            const display1 = document.getElementById('display-hora-1');
+            const display2 = document.getElementById('display-hora-2');
+            const input1 = document.getElementById('hidden-hora-1');
+            const input2 = document.getElementById('hidden-hora-2');
+
+            if (selectedSlots.length > 0) {
+                display1.innerHTML = `<b>1ª Hora:</b> ${selectedSlots[0].day} de ${selectedSlots[0].time}`;
+                input1.value = `${selectedSlots[0].day} - ${selectedSlots[0].time}`;
+            } else {
+                display1.innerHTML = `<b>1ª Hora:</b> <span style="color:#777; font-style:italic;">Sen seleccionar</span>`;
+                input1.value = '';
+            }
+
+            if (selectedSlots.length > 1) {
+                display2.innerHTML = `<b>2ª Hora:</b> ${selectedSlots[1].day} de ${selectedSlots[1].time}`;
+                input2.value = `${selectedSlots[1].day} - ${selectedSlots[1].time}`;
+            } else {
+                display2.innerHTML = `<b>2ª Hora:</b> <span style="color:#777; font-style:italic;">Sen seleccionar</span>`;
+                input2.value = '';
+            }
+            closeSchedModal();
+        });
 
         initItems(); initReportButtons(); updateAllCounts();
 
@@ -885,8 +1424,8 @@
         document.getElementById('help-btn').onclick = () => helpM.style.display = "block";
         document.getElementById('guide-btn').onclick = () => guideM.style.display = "block";
 
-        document.querySelectorAll('.close-btn').forEach(b => b.onclick = () => { helpM.style.display = "none"; guideM.style.display = "none"; reportM.style.display = "none"; });
-        window.onclick = e => { if (e.target === helpM || e.target === guideM || e.target === reportM) { helpM.style.display = "none"; guideM.style.display = "none"; reportM.style.display = "none"; } };
+        document.querySelectorAll('.close-btn').forEach(b => b.onclick = () => { helpM.style.display = "none"; guideM.style.display = "none"; reportM.style.display = "none"; schedModal.style.display = "none"; });
+        window.onclick = e => { if (e.target === helpM || e.target === guideM || e.target === reportM || e.target === schedModal) { helpM.style.display = "none"; guideM.style.display = "none"; reportM.style.display = "none"; schedModal.style.display = "none"; } };
 
         document.getElementById('export-btn').onclick = () => {
             const config = [];
