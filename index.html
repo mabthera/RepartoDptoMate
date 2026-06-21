@@ -1373,12 +1373,17 @@
                 }
             });
 
-            // Ordenar: primero normales, luego CP. Dentro de CP, Tutorías primero. Y agrupar por materia.
+            // Ordenar: primero normales, luego CP. Dentro de CP, Tutorías primero y Gardas/Atención al final.
             unique.sort((a, b) => {
                 if (a.vis === 'normal' && b.vis !== 'normal') return -1;
                 if (a.vis !== 'normal' && b.vis === 'normal') return 1;
 
                 if (a.vis === 'CP' && b.vis === 'CP') {
+                    const isEndA = a.mat.includes("Atención País Naís") || a.mat.includes("Gardas");
+                    const isEndB = b.mat.includes("Atención País Naís") || b.mat.includes("Gardas");
+                    if (isEndA && !isEndB) return 1;
+                    if (!isEndA && isEndB) return -1;
+
                     const aTut = a.mat.includes("Titoría") || a.mat.includes("Tutoría");
                     const bTut = b.mat.includes("Titoría") || b.mat.includes("Tutoría");
                     if (aTut && !bTut) return -1;
