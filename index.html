@@ -150,53 +150,26 @@
         }
 
         mark.yellow {
-            background-color: rgba(255, 255, 0, 0.3);
-            padding: 2px 5px;
-            border-radius: 3px;
+            background: #fff3cd;
+            color: #856404;
+            padding: 0 4px;
         }
 
         mark.green {
-            background-color: rgba(144, 238, 144, 0.3);
-            padding: 2px 5px;
-            border-radius: 3px;
+            background: #d4edda;
+            color: #155724;
+            padding: 0 4px;
         }
 
         mark.red {
-            background-color: rgba(255, 0, 0, 0.1);
-            padding: 2px 5px;
-            border-radius: 3px;
+            background: #f8d7da;
+            color: #721c24;
+            padding: 0 4px;
         }
 
-        #help-btn,
-        #guide-btn {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            transition: background 0.3s;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
-        #help-btn:hover,
-        #guide-btn:hover {
-            background-color: #2980b9;
-        }
-
-        #guide-btn {
-            background-color: #2ecc71;
-        }
-
-        #guide-btn:hover {
-            background-color: #27ae60;
-        }
-
-        .item.selected {
-            outline: 4px solid #3498db;
-            outline-offset: 2px;
-            transform: scale(1.02);
+        .selected {
+            outline: 3px solid #3498db;
             box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
-            z-index: 10;
         }
 
         .slot.ready-to-receive {
@@ -250,64 +223,36 @@
             text-align: center;
             font-weight: bold;
             font-size: 11pt;
-            margin: 10px 0;
-            background-color: #eee;
-            padding: 5px;
+            background: #eee;
             border: 1px solid black;
-        }
-
-        .report-section-title {
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-top: 15px;
-            margin-bottom: 5px;
-            font-size: 9pt;
+            padding: 5px;
+            margin-bottom: 15px;
         }
 
         .report-grid-info {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 15px;
             margin-bottom: 10px;
         }
 
         .info-box {
             border: 1px solid black;
             padding: 5px;
-            min-height: 25px;
-            display: flex;
-            align-items: center;
+            min-height: 18px;
         }
 
-        .report-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 10px;
-        }
-
-        .report-table th,
-        .report-table td {
-            border: 1px solid black !important;
-            padding: 3px 5px;
-            text-align: left;
-        }
-
-        .report-table th {
-            background-color: #eee;
-            text-align: center;
+        .report-section-title {
             font-weight: bold;
-        }
-
-        .report-table td.center {
-            text-align: center;
+            font-size: 8pt;
+            margin-bottom: 3px;
+            display: block;
         }
 
         .quenda-box {
             display: flex;
             gap: 20px;
-            border: 1px solid black;
-            padding: 5px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         .checkbox-container {
@@ -317,37 +262,62 @@
         }
 
         .fake-checkbox {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border: 1px solid black;
             display: inline-block;
             text-align: center;
-            line-height: 10px;
-            font-size: 10pt;
-            font-family: monospace;
+            line-height: 14px;
+            font-weight: bold;
             cursor: pointer;
         }
 
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 8.5pt;
+        }
+
+        .report-table th,
+        .report-table td {
+            border: 1px solid black;
+            padding: 4px;
+            text-align: left;
+        }
+
+        .report-table th {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+
+        .center {
+            text-align: center;
+        }
+
         @media print {
-            body>*:not(#report-modal) {
-                display: none !important;
+            body * {
+                visibility: hidden;
+            }
+
+            #report-modal,
+            #report-modal * {
+                visibility: visible;
             }
 
             #report-modal {
                 position: absolute;
                 left: 0;
                 top: 0;
-                width: 210mm;
-                height: 297mm;
-                background: white !important;
-                display: block !important;
+                width: 100%;
                 margin: 0;
                 padding: 0;
+                background: white;
             }
 
             #report-modal .modal-content {
-                box-shadow: none;
                 border: none;
+                box-shadow: none;
                 margin: 0;
                 padding: 15mm;
             }
@@ -381,44 +351,19 @@
                 <span class="close-btn">&times;</span>
             </div>
             <div class="help-section">
+                <!-- Contenido ayuda -->
                 <h4>📌 Cómo usar la aplicación</h4>
                 <ul class="help-list">
                     <li><strong>Asignación:</strong> Pulsa un bloque para seleccionarlo y luego pulsa en el recuadro del
-                        destino. También puedes <strong>arrastrar y soltar</strong> si usas ordenador.</li>
+                        destino.</li>
                     <li><strong>Devolución:</strong> Selecciona el bloque en el profesor y pulsa de nuevo en el bloque
-                        superior de "Horas sin asignar" (o arrástralo de vuelta).</li>
-                    <li><strong>Gardas:</strong> En el bloque de "Gardas" de cada profesor, puedes escribir directamente
-                        el número de horas para ajustarlas.</li>
-                </ul>
-
-                <h4>⚖️ Reglas de Reparto (Resolución)</h4>
-                <ul class="help-list">
-                    <li><strong>Horas Lectivas (L):</strong> El objetivo son estrictamente <strong>18 horas</strong> por
-                        profesor/a.
-                        <br><small><i>Ejemplos: ESO, Bachillerato, PDC, ESA, FPB.</i></small>
-                    </li>
-                    <li><strong>Permanencia Total:</strong> Al final del reparto, el cómputo total debe alcanzar las
-                        <strong>23 horas</strong> de permanencia en el centro.
-                        <br><small><i>Incluye L + Complementarias (Guardias, Tutoría, Jefatura Dpto, Reuniones,
-                                etc.)</i></small>
-                    </li>
-                    <li><strong>Déficit de Horas:</strong> En caso de no llegar a las 18 horas lectivas o a las 23 horas
-                        de permanencia total, se debe rellenar <strong>aumentando las horas de guardias</strong>.</li>
-                </ul>
-
-                <h4>🎨 Indicadores Visuales</h4>
-                <ul class="help-list">
-                    <li><mark class="yellow">Fondo Amarillo:</mark> El profesor ha alcanzado el objetivo de <strong>18h
-                            lectivas</strong> o las <strong>23h de permanencia</strong>.</li>
-                    <li><mark class="green">Fondo Verde:</mark> El reparto está en curso y dentro de los límites
-                        normales.</li>
-                    <li><mark class="red">Fondo Rojo:</mark> Se han superado las 18h lectivas o las 23h totales.</li>
+                        superior.</li>
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- Modal de Guía de Dinamizaciones -->
+    <!-- Modal de Guía -->
     <div id="guide-modal" class="modal">
         <div class="modal-content" style="border-left: 8px solid #2ecc71;">
             <div class="modal-header">
@@ -426,41 +371,14 @@
                 <span class="close-btn" id="close-guide">&times;</span>
             </div>
             <div class="help-section">
-                <h4>🚀 Funciones y Dinamizaciones <small>(Aconsejable/Variable)</small></h4>
+                <h4>🚀 Funciones y Dinamizaciones</h4>
                 <ul class="help-list">
-                    <li><strong>Dinamización Lingüística (EDLG):</strong> <strong>2 horas</strong> (1L + 1C). <span
-                            style="color: #555; font-size: 0.85em;">(Aconsejable)</span></li>
-                    <li><strong>Coordinación TIC / E-Dixgal:</strong> <strong>3 horas</strong> (1L + 2C). <span
-                            style="color: #555; font-size: 0.85em;">(Variable según centro)</span></li>
-                    <li><strong>Biblioteca:</strong> <strong>2 horas</strong> (1L + 1C). <span
-                            style="color: #555; font-size: 0.85em;">(Recomendado)</span></li>
-                    <li><strong>Erasmus+ / Internacionalización:</strong> <strong>2 horas</strong> (1L + 1C). <span
-                            style="color: #555; font-size: 0.85em;">(Variable)</span></li>
-                    <li><strong>Convivencia e Benestar:</strong> <strong>3 horas</strong> (1L + 2C). <span
-                            style="color: #555; font-size: 0.85em;">(Aconsejable)</span></li>
-                </ul>
-
-                <h4>💼 Cargos Organizativos <small>(Por Normativa)</small></h4>
-                <ul class="help-list">
-                    <li><strong>Xefatura de Departamento:</strong> <strong>3 horas</strong> (1L + 2C). <span
-                            style="color: #27ae60; font-size: 0.85em; font-weight: bold;">✔ Por Instrucción</span></li>
-                    <li><strong>Titoría:</strong> <strong>2 horas</strong> (1L + 1C). <span
-                            style="color: #27ae60; font-size: 0.85em; font-weight: bold;">✔ Por Instrucción</span></li>
-                    <li><strong>Calidade / Proxectos:</strong> <strong>1 a 2 horas</strong> (C). <span
-                            style="color: #555; font-size: 0.85em;">(Variable)</span></li>
-                </ul>
-
-                <h4>📅 Distribución Semanal Estándar</h4>
-                <ul class="help-list">
-                    <li><strong>18 Sesións Lectivas:</strong> Docencia directa y cargos con reducción horaria.</li>
-                    <li><strong>Complementarias Fixas (5h):</strong> 1h de atención a familias y 4h de
-                        guardias/reuniones de departamento.</li>
-                    <li><strong>Permanencia Non Fixa:</strong> Hasta completar las 30 horas de permanencia en el centro
-                        (clausura de actas, CCP, formación, etc.).</li>
+                    <li><strong>Titoría:</strong> 2 horas (1L + 1C).</li>
                 </ul>
             </div>
         </div>
     </div>
+
     <!-- Bloque Sin asignar -->
     <div class="slot" id="unassigned-slot" data-name="Horas sin asignar">
         <h3 style="margin-bottom: 5px;">Horas sin asignar</h3>
@@ -483,6 +401,7 @@
             </div>
         </div>
     </div>
+
     <!-- Bloques de asignación -->
     <div id="all-slots">
         <div class="slot" data-name="Jaime">
@@ -511,586 +430,7 @@
         </div>
     </div>
 
-    <script>
-        // Diccionario de nombres reales de materias
-        const SUBJECT_NAMES = {
-            "1º A ESO (4h)": "Matemáticas 1º ESO A",
-            "1º B ESO (4h)": "Matemáticas 1º ESO B",
-            "Ex. Francés 1ºA (1h)": "Expatriado Francés 1º ESO A",
-            "Ex. Francés 1ºB (1h)": "Expatriado Francés 1º ESO B",
-            "2º A ESO (5h)": "Matemáticas 2º ESO A",
-            "2º B ESO (5h)": "Matemáticas 2º ESO B",
-            "Ex. Francés 2ºA (1h)": "Expatriado Francés 2º ESO A",
-            "Ex. Francés 2ºB (1h)": "Expatriado Francés 2º ESO B",
-            "3º A ESO (4h)": "Matemáticas 3º ESO A",
-            "3º B ESO (4h)": "Matemáticas 3º ESO B",
-            "4º ESO M.A. (4h)": "Matemáticas Académicas 4º ESO A",
-            "4º ESO M.B. (4h)": "Matemáticas Académicas 4º ESO B",
-            "3º PDC (8h)": "Ámbito Científico-Tecnolóxico 3º PDC",
-            "1°Bach. CC.SS. (4h)": "Matemáticas Aplicadas CCSS I - 1º Bach",
-            "2°Bach. CC.SS. (4h)": "Matemáticas Aplicadas CCSS II - 2º Bach",
-            "1°Bach. C.T. (4h)": "Matemáticas I - 1º Bach CT",
-            "2°Bach. C.T. (4h)": "Matemáticas II - 2º Bach CT",
-            "2º FPB E.P. (7h)": "Ciencias Aplicadas II - 2º FPB (Electr. e Pantocas)",
-            "2º FPB I.O. (7h)": "Ciencias Aplicadas II - 2º FPB (Instal. e Ofic. B)",
-            "E.S.A. (8h)": "Matemáticas - Educación Secundaria de Adultos",
-            "Xefat. Estudos (14h)": "Xefatura de Estudos",
-            "Xefat. Estudos (16h)": "Xefatura de Estudos",
-            "Xefat. dpto (1+2h)": "Xefatura de Departamento",
-            "Consello Esc. (1h)": "Representante Consello Escolar",
-            "Convivencia (3h)": "Dinamización Convivencia e Benestar",
-            "Dpto. Orientación (1h)": "Apoyo Departamento Orientación",
-            "Tutoría (??) (1+1h)": "Titoría de Grupo",
-            "Gardas": "Garda de Recreo / Pasillo",
-            "Atención P/N (1h)": "Atención Educativa / Reforzo"
-        };
-
-        // Datos de los rectángulos
-        const data = [
-            ["1º A ESO (4h)", 4, 'L'],
-            ["1º B ESO (4h)", 4, 'L'],
-            ["Ex. Francés 1ºA (1h)", 1, 'L'],
-            ["Ex. Francés 1ºB (1h)", 1, 'L'],
-            ["2º A ESO (5h)", 5, 'L'],
-            ["2º B ESO (5h)", 5, 'L'],
-            ["Ex. Francés 2ºA (1h)", 1, 'L'],
-            ["Ex. Francés 2ºB (1h)", 1, 'L'],
-            ["3º A ESO (4h)", 4, 'L'],
-            ["3º B ESO (4h)", 4, 'L'],
-            ["4º ESO M.A. (4h)", 4, 'L'],
-            ["4º ESO M.B. (4h)", 4, 'L'],
-            ["3º PDC (8h)", 8, 'L'],
-            ["1°Bach. CC.SS. (4h)", 4, 'L'],
-            ["1°Bach. C.T. (4h)", 4, 'L'],
-            ["2°Bach. CC.SS. (4h)", 4, 'L'],
-            ["2°Bach. C.T. (4h)", 4, 'L'],
-            ["2º FPB E.P. (7h)", 7, 'L'],
-            ["2º FPB I.O. (7h)", 7, 'L'],
-            ["E.S.A. (8h)", 8, 'L'],
-            ["Xefat. Estudos (14h)", 14, 'L'],
-            ["Xefat. dpto (1+2h)", 3, 'C', 1, 2],
-            ["Consello Esc. (1h)", 1, 'C'],
-            ["Convivencia (3h)", 3, 'C'],
-            ["Tutoría (??) (1+1h)", 2, 'C', 1, 1],
-            ["Tutoría (??) (1+1h)", 2, 'C', 1, 1],
-            ["Tutoría (??) (1+1h)", 2, 'C', 1, 1],
-            ["Tutoría (??) (1+1h)", 2, 'C', 1, 1],
-            ["Tutoría (??) (1+1h)", 2, 'C', 1, 1],
-            ["Dpto. Orientación (1h)", 1, 'C'],
-            ["Atención P/N (1h)", 1, 'C', 0, 1, "Jaime"],
-            ["Atención P/N (1h)", 1, 'C', 0, 1, "David"],
-            ["Atención P/N (1h)", 1, 'C', 0, 1, "Almudena"],
-            ["Atención P/N (1h)", 1, 'C', 0, 1, "Pablo"],
-            ["Atención P/N (1h)", 1, 'C', 0, 1, "Manu"],
-            ["Atención P/N (1h)", 1, 'C', 0, 1, "Prov."],
-            ["Gardas", 0, 'C', 0, 0, "Jaime"],
-            ["Gardas", 0, 'C', 0, 0, "David"],
-            ["Gardas", 0, 'C', 0, 0, "Almudena"],
-            ["Gardas", 0, 'C', 0, 0, "Pablo"],
-            ["Gardas", 0, 'C', 0, 0, "Manu"],
-            ["Gardas", 0, 'C', 0, 0, "Prov."]
-        ];
-
-        const slots = document.querySelectorAll('.slot');
-        const itemsContainerL = document.getElementById('items-container-L');
-        const itemsContainerC = document.getElementById('items-container-C');
-        let selectedItem = null;
-
-        // Inyectar botón de informe en slots (excepto unassigned)
-        function initReportButtons() {
-            slots.forEach(slot => {
-                if (slot.id !== 'unassigned-slot' && !slot.querySelector('.report-btn')) {
-                    const btn = document.createElement('button');
-                    btn.className = 'report-btn';
-                    btn.textContent = '📄 Generar Informe';
-                    btn.onclick = () => openReport(slot.dataset.name);
-                    slot.appendChild(btn);
-                }
-            });
-        }
-
-        initItems();
-        initReportButtons();
-        updateAllCounts();
-
-        function selectItem(item) {
-            // Limpiar selección previa
-            if (selectedItem) {
-                selectedItem.classList.remove('selected');
-                slots.forEach(s => s.classList.remove('ready-to-receive'));
-            }
-
-            if (selectedItem === item) {
-                selectedItem = null;
-            } else {
-                selectedItem = item;
-                selectedItem.classList.add('selected');
-                slots.forEach(s => s.classList.add('ready-to-receive'));
-            }
-        }
-
-        function moveItemToSlot(item, slot) {
-            let targetContainer;
-            if (slot.id === 'unassigned-slot') {
-                targetContainer = document.getElementById(`items-container-${item.dataset.type}`);
-            } else {
-                targetContainer = slot.querySelector('.slot-content');
-            }
-
-            if (targetContainer) {
-                targetContainer.appendChild(item);
-                updateAllCounts();
-            }
-
-            // Limpiar estado
-            if (selectedItem) {
-                selectedItem.classList.remove('selected');
-                selectedItem = null;
-            }
-            slots.forEach(s => s.classList.remove('ready-to-receive'));
-        }
-
-        function initItems() {
-            data.forEach(([text, value, type, valL, valC, initialOwner], idx) => {
-                const item = document.createElement('div');
-                item.className = 'item';
-                item.id = `item-${idx}`;
-                item.dataset.value = value;
-                item.dataset.type = type;
-                if (valL !== undefined) item.dataset.valL = valL;
-                if (valC !== undefined) item.dataset.valC = valC;
-                item.draggable = true;
-
-                if (text === "Gardas") {
-                    item.innerHTML = `<span style="margin-right:5px;">Gardas:</span><input type="number" value="${valC || value}" style="width: 35px; padding: 2px;" class="garda-input">h`;
-                    const input = item.querySelector('.garda-input');
-                    input.addEventListener('change', (e) => {
-                        const newVal = parseInt(e.target.value, 10) || 0;
-                        item.dataset.value = newVal;
-                        item.dataset.valC = newVal;
-                        updateAllCounts();
-                    });
-                    input.addEventListener('mousedown', e => e.stopPropagation()); // Evitar inicio de drag al clicar input
-                } else {
-                    item.textContent = text;
-                }
-
-                // Asignar color según categoría
-                const textLC = text.toLowerCase();
-                let bgColor;
-                if (textLC.includes('eso') || textLC.includes('franc')) {
-                    bgColor = 'hsl(120, 70%, 90%)'; // verde pastel
-                } else if (textLC.includes('bach')) {
-                    bgColor = 'hsl(210, 70%, 90%)'; // azul pastel
-                } else if (
-                    textLC.includes('fpb') ||
-                    textLC.includes('e.s.a.') ||
-                    textLC.includes('esa') ||
-                    textLC.includes('pdc')
-                ) {
-                    bgColor = 'hsl(30, 70%, 90%)'; // naranja pastel
-                } else if (
-                    textLC.includes('tutor') ||
-                    textLC.includes('dpto') ||
-                    textLC.includes('consello') ||
-                    textLC.includes('Dpto') ||
-                    textLC.includes('Ref') ||
-                    textLC.includes('convivencia') ||
-                    textLC.includes('xefat') ||
-                    textLC.includes('gardas') ||
-                    textLC.includes('atención')
-                ) {
-                    bgColor = 'hsl(0, 0%, 85%)'; // gris pastel
-                } else {
-                    const hue = Math.random() * 360;
-                    bgColor = `hsl(${hue},70%,90%)`;
-                }
-                item.style.backgroundColor = bgColor;
-
-                if (initialOwner) {
-                    const slot = Array.from(slots).find(s => s.dataset.name === initialOwner);
-                    if (slot) {
-                        slot.querySelector('.slot-content').appendChild(item);
-                    } else {
-                        if (type === 'L') itemsContainerL.appendChild(item);
-                        else itemsContainerC.appendChild(item);
-                    }
-                } else {
-                    if (type === 'L') itemsContainerL.appendChild(item);
-                    else itemsContainerC.appendChild(item);
-                }
-
-                item.addEventListener('dragstart', e => {
-                    e.dataTransfer.setData('text/plain', e.target.id);
-                });
-
-                item.addEventListener('click', e => {
-                    e.stopPropagation();
-                    selectItem(item);
-                });
-            });
-        }
-
-        slots.forEach(slot => {
-            slot.addEventListener('dragover', e => e.preventDefault());
-            slot.addEventListener('drop', e => {
-                e.preventDefault();
-                const id = e.dataTransfer.getData('text/plain');
-                const dragged = document.getElementById(id);
-                if (dragged) moveItemToSlot(dragged, slot);
-            });
-
-            slot.addEventListener('click', () => {
-                if (selectedItem) {
-                    moveItemToSlot(selectedItem, slot);
-                }
-            });
-        });
-
-        // Click en el fondo para deseleccionar
-        document.body.addEventListener('click', (e) => {
-            if (selectedItem && !e.target.closest('.item') && !e.target.closest('.slot')) {
-                selectedItem.classList.remove('selected');
-                selectedItem = null;
-                slots.forEach(s => s.classList.remove('ready-to-receive'));
-            }
-        });
-
-        function updateCount(slot) {
-            const span = slot.querySelector('span.count');
-            const items = slot.querySelectorAll('.slot-content .item');
-
-            let sumL = 0;
-            let sumC = 0;
-
-            items.forEach(it => {
-                if (it.dataset.valL !== undefined || it.dataset.valC !== undefined) {
-                    sumL += parseInt(it.dataset.valL || 0, 10);
-                    sumC += parseInt(it.dataset.valC || 0, 10);
-                } else {
-                    const val = parseInt(it.dataset.value, 10);
-                    if (it.dataset.type === 'L') sumL += val;
-                    else sumC += val;
-                }
-            });
-
-            const total = sumL + sumC;
-
-            if (slot.id === 'unassigned-slot') {
-                const spanL = document.getElementById('count-L');
-                const spanC = document.getElementById('count-C');
-                spanL.textContent = sumL;
-                spanC.textContent = sumC;
-                spanL.style.color = sumL > 0 ? '#8B0000' : '#333';
-                spanC.style.color = sumC > 0 ? '#8B0000' : '#333';
-                slot.style.backgroundColor = 'transparent';
-            } else {
-                if (span) span.innerHTML = `${sumL}L + ${sumC}C = <strong>${total}</strong>`;
-
-                // Lógica de colores según el total de horas (usando sumL para el criterio principal)
-                if (total === 0) {
-                    slot.style.backgroundColor = 'transparent';
-                    if (span) span.style.color = '#333';
-                } else if (sumL > 18 || total > 23) {
-                    slot.style.backgroundColor = 'rgba(255, 0, 0, 0.1)'; // Rojo suave (exceso)
-                    if (span) span.style.color = '#8B0000';
-                } else if (sumL === 18 || total === 23) {
-                    slot.style.backgroundColor = 'rgba(255, 255, 0, 0.15)'; // Amarillo suave (objetivo cumplido)
-                    if (span) span.style.color = (sumL === 18) ? '#8B8000' : '#8B0000';
-                } else {
-                    slot.style.backgroundColor = 'rgba(144, 238, 144, 0.2)'; // Verde suave (asignación normal)
-                    if (span) span.style.color = '#004d00';
-                }
-            }
-            return { L: sumL, C: sumC };
-        }
-
-        function updateAllCounts() {
-            let globalL = 0;
-            let globalC = 0;
-
-            slots.forEach(slot => {
-                const result = updateCount(slot);
-                if (slot.id !== 'unassigned-slot' && result) {
-                    globalL += result.L;
-                    globalC += result.C;
-                }
-            });
-
-            document.getElementById('global-count-L').textContent = globalL;
-            document.getElementById('global-count-C').textContent = globalC;
-
-            const totalAssigned = globalL + globalC;
-            document.getElementById('global-total').textContent = totalAssigned;
-            document.getElementById('global-remaining').textContent = 138 - totalAssigned;
-        }
-
-        // Exportar a JSON
-        document.getElementById('export-btn').addEventListener('click', async () => {
-            const config = [];
-            slots.forEach(slot => {
-                const slotContent = [];
-                slot.querySelectorAll('.item').forEach(item => {
-                    let finalValue = item.dataset.value;
-                    const isGarda = item.textContent.includes("Gardas");
-                    if (isGarda) {
-                        const input = item.querySelector('.garda-input');
-                        if (input) finalValue = input.value;
-                    }
-                    slotContent.push({
-                        id: item.id,
-                        text: isGarda ? "Gardas" : item.textContent,
-                        valL: item.dataset.valL,
-                        valC: isGarda ? finalValue : item.dataset.valC,
-                        value: finalValue,
-                        type: item.dataset.type
-                    });
-                });
-                config.push({
-                    name: slot.dataset.name,
-                    id: slot.id,
-                    items: slotContent
-                });
-            });
-
-            const jsonString = JSON.stringify(config, null, 2);
-
-            // Intentar usar la API de File System Access para elegir dónde guardar
-            if ('showSaveFilePicker' in window) {
-                try {
-                    const handle = await window.showSaveFilePicker({
-                        suggestedName: 'configuracion_reparto.json',
-                        types: [{
-                            description: 'JSON File',
-                            accept: { 'application/json': ['.json'] },
-                        }],
-                    });
-                    const writable = await handle.createWritable();
-                    await writable.write(jsonString);
-                    await writable.close();
-                } catch (err) {
-                    if (err.name !== 'AbortError') {
-                        console.error(err);
-                        alert('Error al guardar el archivo.');
-                    }
-                }
-            } else {
-                // Fallback para navegadores antiguos
-                const blob = new Blob([jsonString], { type: 'application/json' });
-                const url = URL.createObjectURL(blob);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'configuracion_reparto.json';
-                a.click();
-                URL.revokeObjectURL(url);
-            }
-        });
-
-        // Importar desde JSON
-        document.getElementById('import-btn').addEventListener('click', () => {
-            document.getElementById('import-file').click();
-        });
-
-        document.getElementById('import-file').addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (event) => {
-                const config = JSON.parse(event.target.result);
-                config.forEach(slotData => {
-                    const slot = document.getElementById(slotData.id) || Array.from(slots).find(s => s.dataset.name === slotData.name);
-                    if (!slot) return;
-                    const container = slot.querySelector('.slot-content') || slot; // handles unassigned with subcontainers if needed
-
-                    slotData.items.forEach(itemData => {
-                        const item = document.getElementById(itemData.id);
-                        if (item) {
-                            // Si el ítem es una guardia, actualizar su input si existe
-                            if (itemData.text === "Gardas") {
-                                const input = item.querySelector('.garda-input');
-                                if (input) input.value = itemData.valC || itemData.value;
-                                item.dataset.value = itemData.value;
-                                item.dataset.valC = itemData.valC;
-                            }
-
-                            // Mover ítem al contenedor correcto
-                            let target = container;
-                            if (slot.id === 'unassigned-slot') {
-                                target = document.getElementById(`items-container-${itemData.type}`);
-                            }
-                            target.appendChild(item);
-                        }
-                    });
-                });
-                updateAllCounts();
-            };
-            reader.readAsText(file);
-        });
-
-        // Cargar situación inicial desde data/base_reparte.json
-        document.getElementById('load-base-btn').addEventListener('click', async () => {
-            const confirmLoad = confirm('¿Cargar la situación inicial? Se perderá el reparto actual.');
-            if (!confirmLoad) return;
-            try {
-                const response = await fetch('data/base_reparte.json');
-                if (!response.ok) throw new Error('No se pudo cargar el archivo base.');
-                const config = await response.json();
-                // Mover todos los items de vuelta al pool sin asignar
-                itemsContainerL.innerHTML = '';
-                itemsContainerC.innerHTML = '';
-                document.querySelectorAll('.slot-content').forEach(sc => sc.innerHTML = '');
-
-                // Reinicializar cards al pool
-                initItems();
-                // Aplicar configuración del JSON
-                config.forEach(slotData => {
-                    const slot = [...slots].find(s => s.dataset.name === slotData.name);
-                    if (!slot) return;
-                    slotData.items.forEach(itemData => {
-                        // Intentar buscar por ID primero (más fiable), si no por texto
-                        let item = document.getElementById(itemData.id);
-                        if (!item || (item.textContent.trim() !== itemData.text && itemData.text !== "Gardas")) {
-                            item = [...document.querySelectorAll('.item')]
-                                .find(el => el.textContent.trim() === itemData.text && !el.closest('.slot:not(#unassigned-slot)'));
-                        }
-
-                        if (item) {
-                            if (itemData.text === "Gardas") {
-                                const gardaInput = slot.querySelector('.garda-input');
-                                if (gardaInput) {
-                                    gardaInput.value = itemData.valC || itemData.value || 0;
-                                    gardaInput.dispatchEvent(new Event('change'));
-                                }
-                            } else {
-                                moveItemToSlot(item, slot);
-                            }
-                        }
-                    });
-                });
-                updateAllCounts();
-                alert('Situación inicial cargada correctamente.');
-            } catch (err) {
-                alert('Error al cargar la situación inicial: ' + err.message);
-            }
-        });
-
-        // Lógica de los Modales
-        const helpModal = document.getElementById("help-modal");
-        const guideModal = document.getElementById("guide-modal");
-        const reportModal = document.getElementById("report-modal");
-
-        const helpBtn = document.getElementById("help-btn");
-        const guideBtn = document.getElementById("guide-btn");
-
-        const closeHelp = helpModal.querySelector(".close-btn");
-        const closeGuide = document.getElementById("close-guide");
-        const closeReport = document.getElementById("close-report");
-
-        // Funciones de Informe
-        function openReport(profesorName) {
-            const modal = document.getElementById("report-modal");
-            if (!modal) return;
-
-            document.getElementById('report-profesor-name').textContent = profesorName.toUpperCase();
-            const slot = [...slots].find(s => s.dataset.name === profesorName);
-            const subjectsTableBody = document.querySelector('#report-subjects-table tbody');
-            subjectsTableBody.innerHTML = '';
-
-            const items = slot.querySelectorAll('.item');
-            const uniqueSubjects = [];
-
-            items.forEach(it => {
-                const fullText = it.textContent.trim();
-                const sessions = it.dataset.value || 0;
-                // Intentar extraer el grupo del texto (ej: "1º A ESO")
-                const groupMatch = fullText.match(/^([0-9º]+\s+[A-Z]+\s+[A-Z]+|[0-9º]+[A-Z\s]+)/);
-                const group = groupMatch ? groupMatch[0].trim() : "-";
-                const materia = SUBJECT_NAMES[fullText] || fullText;
-
-                uniqueSubjects.push({ group, materia, sessions, original: fullText });
-
-                // Añadir fila a la tabla de materias
-                if (fullText !== "Gardas") {
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td class="center">${group}</td>
-                        <td style="color: blue;">${materia}</td>
-                        <td class="center">${sessions}</td>
-                        <td contenteditable="true"></td>
-                    `;
-                    subjectsTableBody.appendChild(tr);
-                }
-            });
-
-            // Si no hay suficientes filas, añadir vacías para estética
-            for (let i = uniqueSubjects.length; i < 6; i++) {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `<td>&nbsp;</td><td></td><td></td><td></td>`;
-                subjectsTableBody.appendChild(tr);
-            }
-
-            const subjectStickers = uniqueSubjects.map(s => s.original);
-
-            // Generar tabla de horario vacía
-            const tbody = document.querySelector('#report-horario tbody');
-            tbody.innerHTML = '';
-            const horas = [
-                "8:10 – 9:00", "9:00 - 9:50", "9:50 - 10:40", "10:40 - 11:30",
-                "RECREO",
-                "12:00 - 12:50", "12:50 - 13:40", "13:40 - 14:30",
-                "16:00 - 16:50", "16:50 – 17:40", "17:40 – 18:30", "18:30 – 19:20", "19:20 – 20:10", "20:10 – 21:00"
-            ];
-
-            horas.forEach(h => {
-                const tr = document.createElement('tr');
-                const tdHora = document.createElement('td');
-                tdHora.innerHTML = `<strong>${h}</strong>`;
-                if (h === "RECREO") {
-                    tdHora.style.backgroundColor = "#eee";
-                    tr.appendChild(tdHora);
-                    const tdRest = document.createElement('td');
-                    tdRest.colSpan = 5;
-                    tdRest.style.backgroundColor = "#eee";
-                    tr.appendChild(tdRest);
-                } else {
-                    tr.appendChild(tdHora);
-                    for (let i = 0; i < 5; i++) {
-                        const td = document.createElement('td');
-                        td.style.height = "18px";
-                        td.style.cursor = "pointer";
-                        td.onclick = () => {
-                            const current = td.textContent;
-                            const options = ["", ...subjectStickers];
-                            let nextIdx = (options.indexOf(current) + 1) % options.length;
-                            td.textContent = options[nextIdx];
-                            td.style.color = td.textContent ? "blue" : "black";
-                        };
-                        tr.appendChild(td);
-                    }
-                }
-                tbody.appendChild(tr);
-            });
-
-            modal.style.display = "block";
-        }
-
-        const closeReportBtn = document.getElementById("close-report");
-
-        if (helpBtn) helpBtn.onclick = () => helpModal.style.display = "block";
-        if (guideBtn) guideBtn.onclick = () => guideModal.style.display = "block";
-
-        if (closeHelp) closeHelp.onclick = () => helpModal.style.display = "none";
-        if (closeGuide) closeGuide.onclick = () => guideModal.style.display = "none";
-        if (closeReportBtn) closeReportBtn.onclick = () => reportModal.style.display = "none";
-
-        window.onclick = (event) => {
-            if (event.target == helpModal) helpModal.style.display = "none";
-            if (event.target == guideModal) guideModal.style.display = "none";
-            if (event.target == reportModal) reportModal.style.display = "none";
-        };
-
-        // No llamar a updateAllCounts aquí porque ya se llamó arriba.
-    </script>
+    <!-- Modal de Informe (AL FINAL DEL BODY) -->
     <div id="report-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header no-print">
@@ -1110,9 +450,7 @@
                             UNIVERSIDADES</span>
                     </div>
                     <div style="text-align: center;">
-                        <div
-                            style="font-weight: bold; border-bottom: 2px solid green; padding-bottom: 2px; margin-bottom: 2px;">
-                            IES DE TEIS</div>
+                        <div style="font-weight: bold; border-bottom: 2px solid green;">IES DE TEIS</div>
                         <div style="font-size: 7pt;">Avda. de Galicia, 101. 36216 - VIGO<br>CURSO 2026/2027</div>
                     </div>
                     <div style="text-align: right; font-size: 6pt;">
@@ -1182,14 +520,12 @@
                                     <th width="80">Distribución</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <!-- Rellenado por JS -->
-                            </tbody>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </div>
 
-                <div class="report-section-title">Horario Semanal (Pintar mediante clics):</div>
+                <div class="report-section-title">Horario Semanal:</div>
                 <table class="report-table" id="report-horario" style="font-size: 7pt;">
                     <thead>
                         <tr>
@@ -1232,10 +568,303 @@
                             docencia o luns pola tarde</div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+
+    <script>
+        const SUBJECT_NAMES = {
+            "1º A ESO (4h)": "Matemáticas 1º ESO A", "1º B ESO (4h)": "Matemáticas 1º ESO B",
+            "Ex. Francés 1ºA (1h)": "Expatriado Francés 1º ESO A", "Ex. Francés 1ºB (1h)": "Expatriado Francés 1º ESO B",
+            "2º A ESO (5h)": "Matemáticas 2º ESO A", "2º B ESO (5h)": "Matemáticas 2º ESO B",
+            "Ex. Francés 2ºA (1h)": "Expatriado Francés 2º ESO A", "Ex. Francés 2ºB (1h)": "Expatriado Francés 2º ESO B",
+            "3º A ESO (4h)": "Matemáticas 3º ESO A", "3º B ESO (4h)": "Matemáticas 3º ESO B",
+            "4º ESO M.A. (4h)": "Matemáticas Académicas 4º ESO A", "4º ESO M.B. (4h)": "Matemáticas Académicas 4º ESO B",
+            "3º PDC (8h)": "Ámbito Científico-Tecnolóxico 3º PDC",
+            "1°Bach. CC.SS. (4h)": "Matemáticas Aplicadas CCSS I - 1º Bach", "2°Bach. CC.SS. (4h)": "Matemáticas Aplicadas CCSS II - 2º Bach",
+            "1°Bach. C.T. (4h)": "Matemáticas I - 1º Bach CT", "2°Bach. C.T. (4h)": "Matemáticas II - 2º Bach CT",
+            "2º FPB E.P. (7h)": "Ciencias Aplicadas II - 2º FPB (Electr. e Pantocas)",
+            "2º FPB I.O. (7h)": "Ciencias Aplicadas II - 2º FPB (Instal. e Ofic. B)",
+            "E.S.A. (8h)": "Matemáticas - Educación Secundaria de Adultos",
+            "Xefat. Estudos (14h)": "Xefatura de Estudos", "Xefat. Estudos (16h)": "Xefatura de Estudos",
+            "Xefat. dpto (1+2h)": "Xefatura de Departamento", "Consello Esc. (1h)": "Representante Consello Escolar",
+            "Convivencia (3h)": "Dinamización Convivencia e Benestar", "Dpto. Orientación (1h)": "Apoyo Departamento Orientación",
+            "Tutoría (??) (1+1h)": "Titoría de Grupo", "Gardas": "Garda de Recreo / Pasillo",
+            "Atención P/N (1h)": "Atención Educativa / Reforzo"
+        };
+
+        const data = [
+            ["1º A ESO (4h)", 4, 'L'], ["1º B ESO (4h)", 4, 'L'], ["Ex. Francés 1ºA (1h)", 1, 'L'],
+            ["Ex. Francés 1ºB (1h)", 1, 'L'], ["2º A ESO (5h)", 5, 'L'], ["2º B ESO (5h)", 5, 'L'],
+            ["Ex. Francés 2ºA (1h)", 1, 'L'], ["Ex. Francés 2ºB (1h)", 1, 'L'], ["3º A ESO (4h)", 4, 'L'],
+            ["3º B ESO (4h)", 4, 'L'], ["4º ESO M.A. (4h)", 4, 'L'], ["4º ESO M.B. (4h)", 4, 'L'],
+            ["3º PDC (8h)", 8, 'L'], ["1°Bach. CC.SS. (4h)", 4, 'L'], ["1°Bach. C.T. (4h)", 4, 'L'],
+            ["2°Bach. CC.SS. (4h)", 4, 'L'], ["2°Bach. C.T. (4h)", 4, 'L'], ["2º FPB E.P. (7h)", 7, 'L'],
+            ["2º FPB I.O. (7h)", 7, 'L'], ["E.S.A. (8h)", 8, 'L'], ["Xefat. Estudos (14h)", 14, 'L'],
+            ["Xefat. dpto (1+2h)", 3, 'C', 1, 2], ["Consello Esc. (1h)", 1, 'C'], ["Convivencia (3h)", 3, 'C'],
+            ["Tutoría (??) (1+1h)", 2, 'C', 1, 1], ["Tutoría (??) (1+1h)", 2, 'C', 1, 1],
+            ["Tutoría (??) (1+1h)", 2, 'C', 1, 1], ["Tutoría (??) (1+1h)", 2, 'C', 1, 1],
+            ["Tutoría (??) (1+1h)", 2, 'C', 1, 1], ["Dpto. Orientación (1h)", 1, 'C'],
+            ["Atención P/N (1h)", 1, 'C', 0, 1, "Jaime"], ["Atención P/N (1h)", 1, 'C', 0, 1, "David"],
+            ["Atención P/N (1h)", 1, 'C', 0, 1, "Almudena"], ["Atención P/N (1h)", 1, 'C', 0, 1, "Pablo"],
+            ["Atención P/N (1h)", 1, 'C', 0, 1, "Manu"], ["Atención P/N (1h)", 1, 'C', 0, 1, "Prov."],
+            ["Gardas", 0, 'C', 0, 0, "Jaime"], ["Gardas", 0, 'C', 0, 0, "David"],
+            ["Gardas", 0, 'C', 0, 0, "Almudena"], ["Gardas", 0, 'C', 0, 0, "Pablo"],
+            ["Gardas", 0, 'C', 0, 0, "Manu"], ["Gardas", 0, 'C', 0, 0, "Prov."]
+        ];
+
+        const slots = document.querySelectorAll('.slot');
+        const itemsContainerL = document.getElementById('items-container-L');
+        const itemsContainerC = document.getElementById('items-container-C');
+        let selectedItem = null;
+
+        function initReportButtons() {
+            slots.forEach(slot => {
+                if (slot.id !== 'unassigned-slot' && !slot.querySelector('.report-btn')) {
+                    const btn = document.createElement('button');
+                    btn.className = 'report-btn';
+                    btn.textContent = '📄 Generar Informe';
+                    btn.onclick = (e) => { e.stopPropagation(); openReport(slot.dataset.name); };
+                    slot.appendChild(btn);
+                }
+            });
+        }
+
+        function initItems() {
+            data.forEach(([text, value, type, valL, valC, initialOwner], idx) => {
+                const item = document.createElement('div');
+                item.className = 'item';
+                item.id = `item-${idx}`;
+                item.dataset.value = value;
+                item.dataset.type = type;
+                if (valL !== undefined) item.dataset.valL = valL;
+                if (valC !== undefined) item.dataset.valC = valC;
+                item.draggable = true;
+
+                if (text === "Gardas") {
+                    item.innerHTML = `<span style="margin-right:5px;">Gardas:</span><input type="number" value="${valC || value}" style="width: 35px;" class="garda-input">h`;
+                    item.querySelector('.garda-input').onchange = (e) => {
+                        const v = parseInt(e.target.value) || 0;
+                        item.dataset.value = v; item.dataset.valC = v; updateAllCounts();
+                    };
+                    item.querySelector('.garda-input').onmousedown = e => e.stopPropagation();
+                } else { item.textContent = text; }
+
+                const textLC = text.toLowerCase();
+                let bgColor = 'hsl(0, 0%, 85%)';
+                if (textLC.includes('eso') || textLC.includes('franc')) bgColor = 'hsl(120, 70%, 90%)';
+                else if (textLC.includes('bach')) bgColor = 'hsl(210, 70%, 90%)';
+                else if (textLC.includes('fpb') || textLC.includes('esa') || textLC.includes('pdc')) bgColor = 'hsl(30, 70%, 90%)';
+                item.style.backgroundColor = bgColor;
+
+                if (initialOwner) {
+                    const s = [...slots].find(sl => sl.dataset.name === initialOwner);
+                    if (s) s.querySelector('.slot-content').appendChild(item);
+                } else {
+                    (type === 'L' ? itemsContainerL : itemsContainerC).appendChild(item);
+                }
+
+                item.ondragstart = e => e.dataTransfer.setData('text/plain', e.target.id);
+                item.onclick = e => { e.stopPropagation(); selectItem(item); };
+            });
+        }
+
+        function selectItem(item) {
+            if (selectedItem) {
+                selectedItem.classList.remove('selected');
+                slots.forEach(s => s.classList.remove('ready-to-receive'));
+            }
+            if (selectedItem === item) { selectedItem = null; }
+            else {
+                selectedItem = item;
+                selectedItem.classList.add('selected');
+                slots.forEach(s => s.classList.add('ready-to-receive'));
+            }
+        }
+
+        function moveItemToSlot(item, slot) {
+            const container = (slot.id === 'unassigned-slot')
+                ? document.getElementById(`items-container-${item.dataset.type}`)
+                : slot.querySelector('.slot-content');
+            if (container) { container.appendChild(item); updateAllCounts(); }
+            if (selectedItem) { selectedItem.classList.remove('selected'); selectedItem = null; }
+            slots.forEach(s => s.classList.remove('ready-to-receive'));
+        }
+
+        function updateCount(slot) {
+            const span = slot.querySelector('span.count');
+            const items = slot.querySelectorAll('.slot-content .item');
+            let sumL = 0, sumC = 0;
+            items.forEach(it => {
+                if (it.dataset.valL !== undefined || it.dataset.valC !== undefined) {
+                    sumL += parseInt(it.dataset.valL || 0); sumC += parseInt(it.dataset.valC || 0);
+                } else {
+                    const v = parseInt(it.dataset.value);
+                    if (it.dataset.type === 'L') sumL += v; else sumC += v;
+                }
+            });
+            const total = sumL + sumC;
+            if (slot.id === 'unassigned-slot') {
+                document.getElementById('count-L').textContent = sumL;
+                document.getElementById('count-C').textContent = sumC;
+            } else {
+                if (span) span.innerHTML = `${sumL}L + ${sumC}C = <strong>${total}</strong>`;
+                if (total === 0) slot.style.backgroundColor = 'transparent';
+                else if (sumL > 18 || total > 23) slot.style.backgroundColor = 'rgba(255,0,0,0.1)';
+                else if (sumL === 18 || total === 23) slot.style.backgroundColor = 'rgba(255,255,0,0.15)';
+                else slot.style.backgroundColor = 'rgba(144,238,144,0.2)';
+            }
+            return { L: sumL, C: sumC };
+        }
+
+        function updateAllCounts() {
+            let gL = 0, gC = 0;
+            slots.forEach(s => {
+                const r = updateCount(s);
+                if (s.id !== 'unassigned-slot') { gL += r.L; gC += r.C; }
+            });
+            document.getElementById('global-count-L').textContent = gL;
+            document.getElementById('global-count-C').textContent = gC;
+            document.getElementById('global-total').textContent = gL + gC;
+            document.getElementById('global-remaining').textContent = 138 - (gL + gC);
+        }
+
+        function openReport(profName) {
+            document.getElementById('report-profesor-name').textContent = profName.toUpperCase();
+            const slot = [...slots].find(s => s.dataset.name === profName);
+            const body = document.querySelector('#report-subjects-table tbody');
+            body.innerHTML = '';
+            const items = slot.querySelectorAll('.item');
+            const unique = [];
+            items.forEach(it => {
+                const txt = it.textContent.trim();
+                const ses = it.dataset.value || 0;
+                const m = txt.match(/^([0-9º]+\s+[A-Z]+\s+[A-Z]+|[0-9º]+[A-Z\s]+)/);
+                const g = m ? m[0].trim() : "-";
+                const mat = SUBJECT_NAMES[txt] || txt;
+                unique.push({ g, mat, ses, orig: txt });
+                if (txt !== "Gardas") {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `<td class="center">${g}</td><td style="color:blue;">${mat}</td><td class="center">${ses}</td><td contenteditable="true"></td>`;
+                    body.appendChild(tr);
+                }
+            });
+            for (let i = unique.length; i < 6; i++) {
+                body.innerHTML += '<tr><td>&nbsp;</td><td></td><td></td><td></td></tr>';
+            }
+            const sticks = unique.map(u => u.orig);
+            const hbody = document.querySelector('#report-horario tbody');
+            hbody.innerHTML = '';
+            const horas = ["8:10 – 9:00", "9:00 - 9:50", "9:50 - 10:40", "10:40 - 11:30", "RECREO", "12:00 - 12:50", "12:50 - 13:40", "13:40 - 14:30", "16:00 - 16:50", "16:50 – 17:40", "17:40 – 18:30", "18:30 – 19:20", "19:20 – 20:10", "20:10 – 21:00"];
+            horas.forEach(h => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td><strong>${h}</strong></td>`;
+                if (h === "RECREO") { tr.innerHTML += '<td colspan="5" style="background:#eee"></td>'; }
+                else {
+                    for (let i = 0; i < 5; i++) {
+                        const td = document.createElement('td');
+                        td.style.height = "18px"; td.style.cursor = "pointer";
+                        td.onclick = () => {
+                            const cur = td.textContent;
+                            const opts = ["", ...sticks];
+                            td.textContent = opts[(opts.indexOf(cur) + 1) % opts.length];
+                            td.style.color = td.textContent ? "blue" : "black";
+                        };
+                        tr.appendChild(td);
+                    }
+                }
+                hbody.appendChild(tr);
+            });
+            document.getElementById('report-modal').style.display = "block";
+        }
+
+        initItems(); initReportButtons(); updateAllCounts();
+
+        slots.forEach(s => {
+            s.ondragover = e => e.preventDefault();
+            s.ondrop = e => { e.preventDefault(); const d = document.getElementById(e.dataTransfer.getData('text/plain')); if (d) moveItemToSlot(d, s); };
+            s.onclick = () => { if (selectedItem) moveItemToSlot(selectedItem, s); };
+        });
+
+        const helpM = document.getElementById('help-modal'), guideM = document.getElementById('guide-modal'), reportM = document.getElementById('report-modal');
+        document.getElementById('help-btn').onclick = () => helpM.style.display = "block";
+        document.getElementById('guide-btn').onclick = () => guideM.style.display = "block";
+
+        document.querySelectorAll('.close-btn').forEach(b => b.onclick = () => { helpM.style.display = "none"; guideM.style.display = "none"; reportM.style.display = "none"; });
+        window.onclick = e => { if (e.target === helpM || e.target === guideM || e.target === reportM) { helpM.style.display = "none"; guideM.style.display = "none"; reportM.style.display = "none"; } };
+
+        document.getElementById('export-btn').onclick = () => {
+            const config = [];
+            slots.forEach(s => {
+                const items = [];
+                s.querySelectorAll('.item').forEach(it => {
+                    const isG = it.textContent.includes("Gardas");
+                    const v = isG ? it.querySelector('.garda-input').value : it.dataset.value;
+                    items.push({ id: it.id, text: isG ? "Gardas" : it.textContent, valL: it.dataset.valL, valC: isG ? v : it.dataset.valC, value: v, type: it.dataset.type });
+                });
+                config.push({ name: s.dataset.name, id: s.id, items });
+            });
+            const b = new Blob([JSON.stringify(config, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'configuracion_reparto.json'; a.click();
+        };
+
+        const impFile = document.getElementById('import-file');
+        document.getElementById('import-btn').onclick = () => impFile.click();
+        impFile.onchange = e => {
+            const f = e.target.files[0]; if (!f) return;
+            const r = new FileReader();
+            r.onload = ev => {
+                const cfg = JSON.parse(ev.target.result);
+                cfg.forEach(sd => {
+                    const s = document.getElementById(sd.id) || [...slots].find(sl => sl.dataset.name === sd.name);
+                    if (!s) return;
+                    sd.items.forEach(idat => {
+                        const it = document.getElementById(idat.id);
+                        if (it) {
+                            if (idat.text === "Gardas") {
+                                const inp = it.querySelector('.garda-input');
+                                if (inp) inp.value = idat.valC || idat.value;
+                                it.dataset.value = idat.value; it.dataset.valC = idat.valC;
+                            }
+                            const target = (s.id === 'unassigned-slot') ? document.getElementById(`items-container-${idat.type}`) : s.querySelector('.slot-content');
+                            target.appendChild(it);
+                        }
+                    });
+                });
+                updateAllCounts();
+            };
+            r.readAsText(f);
+        };
+
+        document.getElementById('load-base-btn').onclick = async () => {
+            if (!confirm('¿Cargar situación inicial? Se perderá el reparto actual.')) return;
+            try {
+                const res = await fetch('data/base_reparte.json');
+                const cfg = await res.json();
+                itemsContainerL.innerHTML = ''; itemsContainerC.innerHTML = '';
+                document.querySelectorAll('.slot-content').forEach(sc => sc.innerHTML = '');
+                initItems();
+                cfg.forEach(sd => {
+                    const s = [...slots].find(sl => sl.dataset.name === sd.name);
+                    if (!s) return;
+                    sd.items.forEach(idat => {
+                        let it = document.getElementById(idat.id);
+                        if (!it || (it.textContent.trim() !== idat.text && idat.text !== "Gardas")) {
+                            it = [...document.querySelectorAll('.item')].find(el => el.textContent.trim() === idat.text && !el.closest('.slot:not(#unassigned-slot)'));
+                        }
+                        if (it) {
+                            if (idat.text === "Gardas") {
+                                const g = s.querySelector('.garda-input');
+                                if (g) { g.value = idat.valC || idat.value || 0; g.dispatchEvent(new Event('change')); }
+                            } else { moveItemToSlot(it, s); }
+                        }
+                    });
+                });
+                updateAllCounts();
+                alert('Cargado.');
+            } catch (e) { alert('Error: ' + e.message); }
+        };
+    </script>
 </body>
 
 </html>
