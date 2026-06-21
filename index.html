@@ -741,12 +741,16 @@
                     const slot = [...slots].find(s => s.dataset.name === slotData.name);
                     if (!slot) return;
                     slotData.items.forEach(itemData => {
-                        const item = [...document.querySelectorAll('#items-container-L .item, #items-container-C .item')]
-                            .find(el => el.textContent.trim() === itemData.label);
+                        const item = [...document.querySelectorAll('.item')]
+                            .find(el => el.textContent.trim() === itemData.text);
                         if (item) {
-                            if (itemData.isGarda) {
+                            if (itemData.text === "Gardas") {
                                 const gardaInput = slot.querySelector('.garda-input');
-                                if (gardaInput) gardaInput.value = itemData.gardaValue || 0;
+                                if (gardaInput) {
+                                    gardaInput.value = itemData.valC || 0;
+                                    // Disparar evento change para actualizar dataset y conteos
+                                    gardaInput.dispatchEvent(new Event('change'));
+                                }
                             } else {
                                 moveItemToSlot(item, slot);
                             }
