@@ -52,12 +52,6 @@
         "type": "L"
       },
       {
-        "id": "item-8",
-        "text": "3º A ESO (4h)",
-        "value": "4",
-        "type": "L"
-      },
-      {
         "id": "item-9",
         "text": "3º B ESO (4h)",
         "value": "4",
@@ -147,14 +141,20 @@
         "id": "item-36",
         "text": "Gardas",
         "valL": "0",
-        "valC": "8",
-        "value": "8",
+        "valC": "4",
+        "value": "4",
         "type": "C"
       },
       {
         "id": "item-20",
         "text": "Xefat. Estudos (14h)",
         "value": "14",
+        "type": "L"
+      },
+      {
+        "id": "item-8",
+        "text": "3º A ESO (4h)",
+        "value": "4",
         "type": "L"
       }
     ]
