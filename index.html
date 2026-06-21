@@ -233,9 +233,11 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
+            /* Reducido */
             border-bottom: 1px solid black;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
+            /* Reducido */
         }
 
         .header-logo-text {
@@ -249,8 +251,10 @@
             font-size: 11pt;
             background: #eee;
             border: 1px solid black;
-            padding: 5px;
-            margin-bottom: 15px;
+            padding: 4px;
+            /* Reducido */
+            margin-bottom: 10px;
+            /* Reducido */
         }
 
         .report-grid-info {
@@ -299,8 +303,10 @@
         .report-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 15px;
-            font-size: 8.5pt;
+            margin-bottom: 10px;
+            /* Reducido */
+            font-size: 8pt;
+            /* Un poco más pequeño */
         }
 
         .report-table th,
@@ -802,7 +808,7 @@
             const sticks = unique.map(u => u.orig);
             const hbody = document.querySelector('#report-horario tbody');
             hbody.innerHTML = '';
-            const horas = ["8:10 – 9:00", "9:00 - 9:50", "9:50 - 10:40", "10:40 - 11:30", "RECREO", "12:00 - 12:50", "12:50 - 13:40", "13:40 - 14:30", "16:00 - 16:50", "16:50 – 17:40", "17:40 – 18:30", "18:30 – 19:20", "19:20 – 20:10", "20:10 – 21:00"];
+            const horas = ["8:10 – 9:00", "9:00 - 9:50", "9:50 - 10:40", "10:40 - 11:30", "RECREO", "12:00 - 12:50", "12:50 - 13:40", "13:40 - 14:30", "16:00 - 16:50", "16:50 – 17:40"];
             horas.forEach(h => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `<td><strong>${h}</strong></td>`;
