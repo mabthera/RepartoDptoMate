@@ -204,6 +204,105 @@
             background-color: rgba(52, 152, 219, 0.05) !important;
             cursor: pointer;
         }
+
+        .report-btn {
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.2s;
+        }
+
+        .report-btn:hover {
+            background-color: #2c3e50;
+        }
+
+        /* Report Modal / A4 Styles */
+        #report-modal .modal-content {
+            width: 210mm;
+            max-width: 210mm;
+            padding: 10mm;
+            background: white;
+            color: black;
+            font-family: "Times New Roman", serif;
+        }
+
+        .report-container {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .report-header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid black;
+            padding-bottom: 10px;
+        }
+
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 10pt;
+        }
+
+        .report-table th,
+        .report-table td {
+            border: 1px solid black;
+            padding: 4px;
+            text-align: center;
+        }
+
+        .report-table td.editable:hover {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .subject-tag {
+            display: inline-block;
+            background: #eee;
+            border: 1px solid #ccc;
+            padding: 1px 4px;
+            margin: 1px;
+            border-radius: 3px;
+            font-size: 9pt;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+
+            #report-modal,
+            #report-modal .modal-content,
+            #report-modal .modal-content * {
+                visibility: visible;
+            }
+
+            #report-modal {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 210mm;
+                height: 297mm;
+                background: white !important;
+                display: block !important;
+            }
+
+            #report-modal .modal-content {
+                margin: 0;
+                padding: 10mm;
+                box-shadow: none;
+                border: none;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -360,6 +459,39 @@
     </div>
 
     <script>
+        // Diccionario de nombres reales de materias
+        const SUBJECT_NAMES = {
+            "1º A ESO (4h)": "Matemáticas 1º ESO A",
+            "1º B ESO (4h)": "Matemáticas 1º ESO B",
+            "Ex. Francés 1ºA (1h)": "Expatriado Francés 1º ESO A",
+            "Ex. Francés 1ºB (1h)": "Expatriado Francés 1º ESO B",
+            "2º A ESO (5h)": "Matemáticas 2º ESO A",
+            "2º B ESO (5h)": "Matemáticas 2º ESO B",
+            "Ex. Francés 2ºA (1h)": "Expatriado Francés 2º ESO A",
+            "Ex. Francés 2ºB (1h)": "Expatriado Francés 2º ESO B",
+            "3º A ESO (4h)": "Matemáticas 3º ESO A",
+            "3º B ESO (4h)": "Matemáticas 3º ESO B",
+            "4º ESO M.A. (4h)": "Matemáticas Académicas 4º ESO A",
+            "4º ESO M.B. (4h)": "Matemáticas Académicas 4º ESO B",
+            "3º PDC (8h)": "Ámbito Científico-Tecnolóxico 3º PDC",
+            "1°Bach. CC.SS. (4h)": "Matemáticas Aplicadas CCSS I - 1º Bach",
+            "2°Bach. CC.SS. (4h)": "Matemáticas Aplicadas CCSS II - 2º Bach",
+            "1°Bach. C.T. (4h)": "Matemáticas I - 1º Bach CT",
+            "2°Bach. C.T. (4h)": "Matemáticas II - 2º Bach CT",
+            "2º FPB E.P. (7h)": "Ciencias Aplicadas II - 2º FPB (Electr. e Pantocas)",
+            "2º FPB I.O. (7h)": "Ciencias Aplicadas II - 2º FPB (Instal. e Ofic. B)",
+            "E.S.A. (8h)": "Matemáticas - Educación Secundaria de Adultos",
+            "Xefat. Estudos (14h)": "Xefatura de Estudos",
+            "Xefat. Estudos (16h)": "Xefatura de Estudos",
+            "Xefat. dpto (1+2h)": "Xefatura de Departamento",
+            "Consello Esc. (1h)": "Representante Consello Escolar",
+            "Convivencia (3h)": "Dinamización Convivencia e Benestar",
+            "Dpto. Orientación (1h)": "Apoyo Departamento Orientación",
+            "Tutoría (??) (1+1h)": "Titoría de Grupo",
+            "Gardas": "Garda de Recreo / Pasillo",
+            "Atención P/N (1h)": "Atención Educativa / Reforzo"
+        };
+
         // Datos de los rectángulos
         const data = [
             ["1º A ESO (4h)", 4, 'L'],
@@ -410,6 +542,17 @@
         const itemsContainerL = document.getElementById('items-container-L');
         const itemsContainerC = document.getElementById('items-container-C');
         let selectedItem = null;
+
+        // Inyectar botón de informe en slots (excepto unassigned)
+        slots.forEach(slot => {
+            if (slot.id !== 'unassigned-slot') {
+                const btn = document.createElement('button');
+                btn.className = 'report-btn';
+                btn.textContent = '📄 Generar Informe';
+                btn.onclick = () => openReport(slot.dataset.name);
+                slot.appendChild(btn);
+            }
+        });
 
         function selectItem(item) {
             // Limpiar selección previa
@@ -777,26 +920,136 @@
         // Lógica de los Modales
         const helpModal = document.getElementById("help-modal");
         const guideModal = document.getElementById("guide-modal");
+        const reportModal = document.getElementById("report-modal");
 
         const helpBtn = document.getElementById("help-btn");
         const guideBtn = document.getElementById("guide-btn");
 
         const closeHelp = helpModal.querySelector(".close-btn");
         const closeGuide = document.getElementById("close-guide");
+        const closeReport = document.getElementById("close-report");
+
+        // Funciones de Informe
+        function openReport(profesorName) {
+            document.getElementById('report-profesor-name').textContent = profesorName.toUpperCase();
+            const slot = [...slots].find(s => s.dataset.name === profesorName);
+            const subjectsList = document.getElementById('report-subjects-list');
+            subjectsList.innerHTML = '';
+
+            const items = slot.querySelectorAll('.item');
+            const uniqueSubjects = new Set();
+            items.forEach(it => {
+                const name = SUBJECT_NAMES[it.textContent.trim()] || it.textContent.trim();
+                uniqueSubjects.add(name);
+            });
+
+            uniqueSubjects.forEach(s => {
+                const tag = document.createElement('span');
+                tag.className = 'subject-tag';
+                tag.textContent = s;
+                subjectsList.appendChild(tag);
+            });
+
+            // Generar tabla de horario vacía
+            const tbody = document.querySelector('#report-horario tbody');
+            tbody.innerHTML = '';
+            const horas = [
+                "8:10 – 9:00", "9:00 - 9:50", "9:50 - 10:40", "10:40 - 11:30",
+                "RECREO",
+                "12:00 - 12:50", "12:50 - 13:40", "13:40 - 14:30",
+                "COMIDA / TARDE",
+                "16:00 - 16:50", "16:50 – 17:40", "17:40 – 18:30", "18:30 – 19:20", "19:20 – 20:10", "20:10 – 21:00"
+            ];
+
+            horas.forEach(h => {
+                const tr = document.createElement('tr');
+                const tdHora = document.createElement('td');
+                tdHora.innerHTML = `<strong>${h}</strong>`;
+                if (h === "RECREO" || h === "COMIDA / TARDE") {
+                    tdHora.style.backgroundColor = "#eee";
+                    tr.appendChild(tdHora);
+                    const tdRest = document.createElement('td');
+                    tdRest.colSpan = 5;
+                    tdRest.style.backgroundColor = "#eee";
+                    tr.appendChild(tdRest);
+                } else {
+                    tr.appendChild(tdHora);
+                    for (let i = 0; i < 5; i++) {
+                        const td = document.createElement('td');
+                        td.className = 'editable';
+                        td.onclick = () => {
+                            const current = td.textContent;
+                            const options = ["", ...uniqueSubjects];
+                            let nextIdx = (options.indexOf(current) + 1) % options.length;
+                            td.textContent = options[nextIdx];
+                        };
+                        tr.appendChild(td);
+                    }
+                }
+                tbody.appendChild(tr);
+            });
+
+            reportModal.style.display = "block";
+        }
 
         helpBtn.onclick = () => helpModal.style.display = "block";
         guideBtn.onclick = () => guideModal.style.display = "block";
 
         closeHelp.onclick = () => helpModal.style.display = "none";
         closeGuide.onclick = () => guideModal.style.display = "none";
+        closeReport.onclick = () => reportModal.style.display = "none";
 
         window.onclick = (event) => {
             if (event.target == helpModal) helpModal.style.display = "none";
             if (event.target == guideModal) guideModal.style.display = "none";
+            if (event.target == reportModal) reportModal.style.display = "none";
         }
 
         updateAllCounts();
     </script>
+    <div id="report-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header no-print">
+                <h2 style="margin:0;">Generación de Informe Individual</h2>
+                <button onclick="window.print()"
+                    style="padding: 10px 20px; background: #2ecc71; color: white; border: none; border-radius: 5px; cursor: pointer;">🖨️
+                    Imprimir / Guardar PDF</button>
+                <span class="close-btn" id="close-report">&times;</span>
+            </div>
+            <div id="report-body">
+                <div class="report-header">
+                    <h3>XORNADA SEMANAL DE TRABALLO - CURSO 2026/2027</h3>
+                    <p><strong id="report-profesor-name">NOMBRE DEL PROFESOR</strong> - Departamento de Matemáticas</p>
+                </div>
+
+                <p><strong>Materias e cargos asignados:</strong></p>
+                <div id="report-subjects-list" style="margin-bottom: 20px;"></div>
+
+                <table class="report-table" id="report-horario">
+                    <thead>
+                        <tr>
+                            <th width="80">Hora</th>
+                            <th>Lunes</th>
+                            <th>Martes</th>
+                            <th>Mércores</th>
+                            <th>Xoves</th>
+                            <th>Venres</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Generado por JS -->
+                    </tbody>
+                </table>
+
+                <div style="margin-top: 20px;">
+                    <p><strong>Observacións / Outros cargos:</strong></p>
+                    <div contenteditable="true" style="border: 1px solid #ccc; padding: 10px; min-height: 60px;">
+                        Preme aquí para engadir observacións adicionais...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
