@@ -128,19 +128,11 @@
     "id": "",
     "items": [
       {
-        "id": "item-30",
-        "text": "Atención P/N (1h)",
-        "valL": "0",
-        "valC": "1",
-        "value": "1",
-        "type": "C"
-      },
-      {
         "id": "item-36",
         "text": "Gardas",
         "valL": "0",
-        "valC": "4",
-        "value": "4",
+        "valC": "0",
+        "value": "0",
         "type": "C"
       },
       {
@@ -161,14 +153,6 @@
     "name": "David",
     "id": "",
     "items": [
-      {
-        "id": "item-31",
-        "text": "Atención P/N (1h)",
-        "valL": "0",
-        "valC": "1",
-        "value": "1",
-        "type": "C"
-      },
       {
         "id": "item-37",
         "text": "Gardas",
@@ -216,14 +200,6 @@
     "id": "",
     "items": [
       {
-        "id": "item-32",
-        "text": "Atención P/N (1h)",
-        "valL": "0",
-        "valC": "1",
-        "value": "1",
-        "type": "C"
-      },
-      {
         "id": "item-38",
         "text": "Gardas",
         "valL": "0",
@@ -242,6 +218,14 @@
         "text": "1°Bach. C.T. (4h)",
         "value": "4",
         "type": "L"
+      },
+      {
+        "id": "item-30",
+        "text": "Atención P/N (1h)",
+        "valL": "0",
+        "valC": "1",
+        "value": "1",
+        "type": "C"
       }
     ]
   },
@@ -294,6 +278,14 @@
         "type": "C"
       },
       {
+        "id": "item-32",
+        "text": "Atención P/N (1h)",
+        "valL": "0",
+        "valC": "1",
+        "value": "1",
+        "type": "C"
+      },
+      {
         "id": "item-16",
         "text": "2°Bach. C.T. (4h)",
         "value": "4",
@@ -319,6 +311,14 @@
         "valL": "0",
         "valC": "0",
         "value": "0",
+        "type": "C"
+      },
+      {
+        "id": "item-31",
+        "text": "Atención P/N (1h)",
+        "valL": "0",
+        "valC": "1",
+        "value": "1",
         "type": "C"
       },
       {
