@@ -1003,7 +1003,7 @@
                 const fullText = it.textContent.trim();
                 const sessions = it.dataset.value || 0;
                 // Intentar extraer el grupo del texto (ej: "1º A ESO")
-                const groupMatch = fullText.match(/^([0º-9º]+\s+[A-Z]+\s+[A-Z]+|[0º-9º]+[A-Z\s]+)/);
+                const groupMatch = fullText.match(/^([0-9º]+\s+[A-Z]+\s+[A-Z]+|[0-9º]+[A-Z\s]+)/);
                 const group = groupMatch ? groupMatch[0].trim() : "-";
                 const materia = SUBJECT_NAMES[fullText] || fullText;
 
