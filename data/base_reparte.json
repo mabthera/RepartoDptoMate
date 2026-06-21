@@ -22,12 +22,6 @@
         "type": "L"
       },
       {
-        "id": "item-3",
-        "text": "Ex. Francés 1ºB (1h)",
-        "value": "1",
-        "type": "L"
-      },
-      {
         "id": "item-4",
         "text": "2º A ESO (5h)",
         "value": "5",
@@ -52,8 +46,8 @@
         "type": "L"
       },
       {
-        "id": "item-9",
-        "text": "3º B ESO (4h)",
+        "id": "item-8",
+        "text": "3º A ESO (4h)",
         "value": "4",
         "type": "L"
       },
@@ -73,6 +67,18 @@
         "id": "item-12",
         "text": "3º PDC (8h)",
         "value": "8",
+        "type": "L"
+      },
+      {
+        "id": "item-17",
+        "text": "2º FPB E.P. (7h)",
+        "value": "7",
+        "type": "L"
+      },
+      {
+        "id": "item-3",
+        "text": "Ex. Francés 1ºB (1h)",
+        "value": "1",
         "type": "L"
       },
       {
@@ -114,14 +120,6 @@
         "valC": "1",
         "value": "2",
         "type": "C"
-      },
-      {
-        "id": "item-31",
-        "text": "Atención P/N (1h)",
-        "valL": "0",
-        "valC": "1",
-        "value": "1",
-        "type": "C"
       }
     ]
   },
@@ -152,8 +150,8 @@
         "type": "L"
       },
       {
-        "id": "item-8",
-        "text": "3º A ESO (4h)",
+        "id": "item-9",
+        "text": "3º B ESO (4h)",
         "value": "4",
         "type": "L"
       }
@@ -163,6 +161,14 @@
     "name": "David",
     "id": "",
     "items": [
+      {
+        "id": "item-31",
+        "text": "Atención P/N (1h)",
+        "valL": "0",
+        "valC": "1",
+        "value": "1",
+        "type": "C"
+      },
       {
         "id": "item-37",
         "text": "Gardas",
@@ -180,27 +186,27 @@
         "type": "C"
       },
       {
-        "id": "item-23",
-        "text": "Convivencia (3h)",
-        "value": "3",
-        "type": "C"
-      },
-      {
         "id": "item-22",
         "text": "Consello Esc. (1h)",
         "value": "1",
         "type": "C"
       },
       {
-        "id": "item-13",
-        "text": "1°Bach. CC.SS. (4h)",
-        "value": "4",
-        "type": "L"
+        "id": "item-23",
+        "text": "Convivencia (3h)",
+        "value": "3",
+        "type": "C"
       },
       {
         "id": "item-18",
         "text": "2º FPB I.O. (7h)",
         "value": "7",
+        "type": "L"
+      },
+      {
+        "id": "item-13",
+        "text": "1°Bach. CC.SS. (4h)",
+        "value": "4",
         "type": "L"
       }
     ]
@@ -319,12 +325,6 @@
         "id": "item-19",
         "text": "E.S.A. (8h)",
         "value": "8",
-        "type": "L"
-      },
-      {
-        "id": "item-17",
-        "text": "2º FPB E.P. (7h)",
-        "value": "7",
         "type": "L"
       }
     ]

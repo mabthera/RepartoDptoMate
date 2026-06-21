@@ -215,6 +215,9 @@
         <button id="guide-btn" style="margin-right: 10px;">📚 Guía de Dinamizaciones / Cargos</button>
         <button id="export-btn" style="padding: 10px 20px; cursor: pointer;">Exportar Configuración (JSON)</button>
         <button id="import-btn" style="padding: 10px 20px; cursor: pointer;">Importar Configuración (JSON)</button>
+        <button id="load-base-btn"
+            style="padding: 10px 20px; cursor: pointer; background-color: #e67e22; color: white; border: none; border-radius: 5px;">🔄
+            Cargar situación inicial</button>
         <input type="file" id="import-file" style="display: none;" accept=".json">
     </div>
 
@@ -712,6 +715,45 @@
                 updateAllCounts();
             };
             reader.readAsText(file);
+        });
+
+        // Cargar situación inicial desde data/base_reparte.json
+        document.getElementById('load-base-btn').addEventListener('click', async () => {
+            const confirmLoad = confirm('¿Cargar la situación inicial? Se perderá el reparto actual.');
+            if (!confirmLoad) return;
+            try {
+                const response = await fetch('data/base_reparte.json');
+                if (!response.ok) throw new Error('No se pudo cargar el archivo base.');
+                const config = await response.json();
+                // Mover todos los items de vuelta al pool sin asignar
+                document.querySelectorAll('#items-container-L .item, #items-container-C .item').forEach(i => i.remove());
+                document.querySelectorAll('.slot-content .item, .garda-input').forEach(el => {
+                    if (el.classList.contains('item')) el.remove();
+                });
+                // Reinicializar cards al pool
+                initItems();
+                // Aplicar configuración del JSON
+                config.forEach(slotData => {
+                    const slot = [...slots].find(s => s.dataset.name === slotData.name);
+                    if (!slot) return;
+                    slotData.items.forEach(itemData => {
+                        const item = [...document.querySelectorAll('#items-container-L .item, #items-container-C .item')]
+                            .find(el => el.textContent.trim() === itemData.label);
+                        if (item) {
+                            if (itemData.isGarda) {
+                                const gardaInput = slot.querySelector('.garda-input');
+                                if (gardaInput) gardaInput.value = itemData.gardaValue || 0;
+                            } else {
+                                moveItemToSlot(item, slot);
+                            }
+                        }
+                    });
+                });
+                updateAllCounts();
+                alert('Situación inicial cargada correctamente.');
+            } catch (err) {
+                alert('Error al cargar la situación inicial: ' + err.message);
+            }
         });
 
         // Lógica de los Modales
