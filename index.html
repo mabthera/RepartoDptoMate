@@ -932,11 +932,12 @@
                             <thead>
                                 <tr>
                                     <th style="width: 15%;">Grupo</th>
-                                    <th style="width: 35%;">Materia/Módulo</th>
+                                    <th style="width: 30%;">Materia/Módulo</th>
+                                    <th style="width: 15%;">Tipo</th>
                                     <th style="width: 10%;">Sesións</th>
-                                    <th style="width: 20%;">Distribucións<br><span
+                                    <th style="width: 15%;">Distribucións<br><span
                                             style="font-weight: normal; font-size: 12px;">(ex: 3+2+1)</span></th>
-                                    <th style="width: 20%;">Necesidade aula</th>
+                                    <th style="width: 15%;">Necesidade aula</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1310,37 +1311,92 @@
             document.getElementById('global-remaining').textContent = 138 - (gL + gC);
         }
 
+        const CARD_INFO = {
+            "1º A ESO (4h)": { mat: "Matemáticas 1º ESO A", tipo: "Lectiva" },
+            "1º B ESO (4h)": { mat: "Matemáticas 1º ESO B", tipo: "Lectiva" },
+            "Ex. Francés 1ºA (1h)": { mat: "Expatriado Francés 1º ESO A", tipo: "Lectiva" },
+            "Ex. Francés 1ºB (1h)": { mat: "Expatriado Francés 1º ESO B", tipo: "Lectiva" },
+            "2º A ESO (5h)": { mat: "Matemáticas 2º ESO A", tipo: "Lectiva" },
+            "2º B ESO (5h)": { mat: "Matemáticas 2º ESO B", tipo: "Lectiva" },
+            "Ex. Francés 2ºA (1h)": { mat: "Expatriado Francés 2º ESO A", tipo: "Lectiva" },
+            "Ex. Francés 2ºB (1h)": { mat: "Expatriado Francés 2º ESO B", tipo: "Lectiva" },
+            "3º A ESO (4h)": { mat: "Matemáticas 3º ESO A", tipo: "Lectiva" },
+            "3º B ESO (4h)": { mat: "Matemáticas 3º ESO B", tipo: "Lectiva" },
+            "4º ESO M.A. (4h)": { mat: "Matemáticas Académicas 4º ESO A", tipo: "Lectiva" },
+            "4º ESO M.B. (4h)": { mat: "Matemáticas Académicas 4º ESO B", tipo: "Lectiva" },
+            "3º PDC (8h)": { mat: "Ámbito Científico-Tecnolóxico 3º PDC", tipo: "Lectiva" },
+            "1°Bach. CC.SS. (4h)": { mat: "Matemáticas Aplicadas CCSS I - 1º Bach", tipo: "Lectiva" },
+            "2°Bach. CC.SS. (4h)": { mat: "Matemáticas Aplicadas CCSS II - 2º Bach", tipo: "Lectiva" },
+            "1°Bach. C.T. (4h)": { mat: "Matemáticas I - 1º Bach CT", tipo: "Lectiva" },
+            "2°Bach. C.T. (4h)": { mat: "Matemáticas II - 2º Bach CT", tipo: "Lectiva" },
+            "2º FPB E.P. (7h)": { mat: "Ciencias Aplicadas II - 2º FPB (Electr. e Pantocas)", tipo: "Lectiva" },
+            "2º FPB I.O. (7h)": { mat: "Ciencias Aplicadas II - 2º FPB (Instal. e Ofic. B)", tipo: "Lectiva" },
+            "E.S.A. (8h)": { mat: "Matemáticas - Educación Secundaria de Adultos", tipo: "Lectiva" },
+            "Xefat. Estudos (14h)": { mat: "Xefatura de Estudos", tipo: "Lectiva" },
+            "Xefat. Estudos (16h)": { mat: "Xefatura de Estudos", tipo: "Lectiva" },
+            "Xefat. dpto (1+2h)": { mat: "Xefatura de Departamento", tipo: "Ambas", lectivas: 1, complementarias: 2 },
+            "Consello Esc. (1h)": { mat: "Representante Consello Escolar", tipo: "Complementaria" },
+            "Convivencia (3h)": { mat: "Dinamización Convivencia e Benestar", tipo: "Ambas", lectivas: 1, complementarias: 2 },
+            "Dpto. Orientación (1h)": { mat: "Apoyo Departamento Orientación", tipo: "Complementaria" },
+            "Tutoría (??) (1+1h)": { mat: "Titoría de Grupo", tipo: "Ambas", lectivas: 1, complementarias: 1 },
+            "Gardas": { mat: "Garda de Recreo / Pasillo", tipo: "Complementaria" },
+            "Atención P/N (1h)": { mat: "Atención Educativa / Reforzo", tipo: "Complementaria" }
+        };
+
         function openReport(profName) {
             document.getElementById('profesor').value = profName.toUpperCase();
             const slot = [...slots].find(s => s.dataset.name === profName);
             const body = document.querySelector('#report-subjects-table tbody');
             body.innerHTML = '';
+
             const items = slot.querySelectorAll('.item');
             const unique = [];
+
             items.forEach(it => {
-                const txt = it.textContent.trim();
+                let txt = it.textContent.trim();
                 const isG = txt.includes("Gardas");
-                const ses = isG ? (it.querySelector('.garda-input') ? it.querySelector('.garda-input').value : 0) : (it.dataset.value || 0);
+                if (isG) txt = "Gardas";
+
+                const sesTotal = isG ? (it.querySelector('.garda-input') ? parseInt(it.querySelector('.garda-input').value) || 0 : 0) : parseInt(it.dataset.value) || 0;
                 const m = txt.match(/^([0-9º]+\s+[A-Z]+\s+[A-Z]+|[0-9º]+[A-Z\s]+)/);
                 const g = m ? m[0].trim() : "-";
-                const mat = SUBJECT_NAMES[txt] || txt;
-                if (!isG) unique.push({ g, mat, ses, orig: txt });
+
+                const info = CARD_INFO[txt] || { mat: txt, tipo: 'Lectiva' };
+
+                if (info.tipo === 'Ambas') {
+                    unique.push({ g, mat: info.mat, ses: info.lectivas, tipo: 'Lectiva' });
+                    unique.push({ g, mat: info.mat, ses: info.complementarias, tipo: 'Complementaria' });
+                } else if (isG) {
+                    unique.push({ g: "-", mat: info.mat, ses: sesTotal, tipo: 'Complementaria' });
+                } else {
+                    unique.push({ g, mat: info.mat, ses: sesTotal, tipo: info.tipo });
+                }
+            });
+
+            // Ordenar: primero Lectivas, luego Complementarias
+            unique.sort((a, b) => {
+                if (a.tipo === 'Lectiva' && b.tipo !== 'Lectiva') return -1;
+                if (a.tipo !== 'Lectiva' && b.tipo === 'Lectiva') return 1;
+                return 0;
             });
 
             unique.forEach(u => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `<td><input type="text" value="${u.g}"></td>
                                 <td><input type="text" value="${u.mat}"></td>
+                                <td><input type="text" value="${u.tipo}" style="font-size: 13px; font-weight: bold; color: ${u.tipo === 'Lectiva' ? '#003399' : '#00796b'};" readonly></td>
                                 <td><input type="number" value="${u.ses}" min="0"></td>
                                 <td><input type="text" placeholder="..."></td>
                                 <td><input type="text"></td>`;
                 body.appendChild(tr);
             });
 
+            // Rellenar filas vacías para mantener una tabla de buen tamaño (mínimo 6)
             for (let i = unique.length; i < 6; i++) {
                 body.innerHTML += `<tr>
                                     <td><input type="text"></td>
                                     <td><input type="text"></td>
+                                    <td><input type="text" readonly></td>
                                     <td><input type="number" min="0"></td>
                                     <td><input type="text"></td>
                                     <td><input type="text"></td>
@@ -1349,6 +1405,7 @@
 
             document.getElementById('report-modal').style.display = "block";
         }
+
 
         // Lógica modal horario
         const schedModal = document.getElementById('scheduleModal');
