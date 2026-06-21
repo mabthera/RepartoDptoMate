@@ -233,11 +233,9 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 10px;
-            margin-bottom: 8px;
-            /* Reducido */
+            margin-bottom: 15px;
             border-bottom: 1px solid black;
-            padding-bottom: 8px;
-            /* Reducido */
+            padding-bottom: 10px;
         }
 
         .header-logo-text {
@@ -251,10 +249,8 @@
             font-size: 11pt;
             background: #eee;
             border: 1px solid black;
-            padding: 4px;
-            /* Reducido */
-            margin-bottom: 10px;
-            /* Reducido */
+            padding: 5px;
+            margin-bottom: 15px;
         }
 
         .report-grid-info {
@@ -303,10 +299,8 @@
         .report-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 10px;
-            /* Reducido */
-            font-size: 8pt;
-            /* Un poco más pequeño */
+            margin-bottom: 15px;
+            font-size: 8.5pt;
         }
 
         .report-table th,
@@ -314,13 +308,6 @@
             border: 1px solid black;
             padding: 4px;
             text-align: left;
-            width: auto;
-        }
-
-        #report-horario th:not(:first-child),
-        #report-horario td:not(:first-child) {
-            width: 18%;
-            /* Aproximadamente igual para 5 días */
         }
 
         .report-table th {
@@ -578,7 +565,7 @@
                     </div>
                 </div>
 
-                <div class="report-section-title">Solicitude de dúas horas para pechar no horario:</div>
+                <div class="report-section-title">Horario Semanal:</div>
                 <table class="report-table" id="report-horario" style="font-size: 7pt;">
                     <thead>
                         <tr>
@@ -818,12 +805,12 @@
                         const td = document.createElement('td');
                         td.style.height = "18px"; td.style.cursor = "pointer";
                         td.onclick = () => {
-                            if (td.style.backgroundColor === "rgb(85, 85, 85)") { // #555
+                            if (td.style.backgroundColor === "rgb(85, 85, 85)") {
                                 td.style.backgroundColor = "transparent";
                             } else {
                                 td.style.backgroundColor = "#555";
                             }
-                            td.textContent = ""; // No aparece nada
+                            td.textContent = "";
                         };
                         tr.appendChild(td);
                     }
