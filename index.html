@@ -218,11 +218,11 @@
             background-color: #2c3e50;
         }
 
-        /* Report Modal / A4 Styles */
+        /* Report Modal / A4 Horizontal Styles */
         #report-modal .modal-content {
-            width: 210mm;
-            max-width: 210mm;
-            padding: 15mm;
+            width: 297mm;
+            max-width: 297mm;
+            padding: 10mm;
             background: white;
             color: black;
             font-family: Arial, sans-serif;
@@ -308,6 +308,13 @@
             border: 1px solid black;
             padding: 4px;
             text-align: left;
+            width: auto;
+        }
+
+        #report-horario th:not(:first-child),
+        #report-horario td:not(:first-child) {
+            width: 18%;
+            /* Aproximadamente igual para 5 días */
         }
 
         .report-table th {
@@ -549,7 +556,7 @@
                     </div>
                 </div>
 
-                <div class="report-section-title">Horario Semanal:</div>
+                <div class="report-section-title">Solicitude de dúas horas para pechar no horario:</div>
                 <table class="report-table" id="report-horario" style="font-size: 7pt;">
                     <thead>
                         <tr>
@@ -789,10 +796,12 @@
                         const td = document.createElement('td');
                         td.style.height = "18px"; td.style.cursor = "pointer";
                         td.onclick = () => {
-                            const cur = td.textContent;
-                            const opts = ["", ...sticks];
-                            td.textContent = opts[(opts.indexOf(cur) + 1) % opts.length];
-                            td.style.color = td.textContent ? "blue" : "black";
+                            if (td.style.backgroundColor === "rgb(85, 85, 85)") { // #555
+                                td.style.backgroundColor = "transparent";
+                            } else {
+                                td.style.backgroundColor = "#555";
+                            }
+                            td.textContent = ""; // No aparece nada
                         };
                         tr.appendChild(td);
                     }
