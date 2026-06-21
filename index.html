@@ -544,15 +544,18 @@
         let selectedItem = null;
 
         // Inyectar botón de informe en slots (excepto unassigned)
-        slots.forEach(slot => {
-            if (slot.id !== 'unassigned-slot') {
-                const btn = document.createElement('button');
-                btn.className = 'report-btn';
-                btn.textContent = '📄 Generar Informe';
-                btn.onclick = () => openReport(slot.dataset.name);
-                slot.appendChild(btn);
-            }
-        });
+        function initReportButtons() {
+            slots.forEach(slot => {
+                if (slot.id !== 'unassigned-slot' && !slot.querySelector('.report-btn')) {
+                    const btn = document.createElement('button');
+                    btn.className = 'report-btn';
+                    btn.textContent = '📄 Generar Informe';
+                    btn.onclick = () => openReport(slot.dataset.name);
+                    slot.appendChild(btn);
+                }
+            });
+        }
+        initReportButtons();
 
         function selectItem(item) {
             // Limpiar selección previa
@@ -931,6 +934,11 @@
 
         // Funciones de Informe
         function openReport(profesorName) {
+            const modal = document.getElementById("report-modal");
+            if (!modal) {
+                console.error("Modal de informe no encontrado");
+                return;
+            }
             document.getElementById('report-profesor-name').textContent = profesorName.toUpperCase();
             const slot = [...slots].find(s => s.dataset.name === profesorName);
             const subjectsList = document.getElementById('report-subjects-list');
@@ -989,21 +997,21 @@
                 tbody.appendChild(tr);
             });
 
-            reportModal.style.display = "block";
+            modal.style.display = "block";
         }
 
-        helpBtn.onclick = () => helpModal.style.display = "block";
-        guideBtn.onclick = () => guideModal.style.display = "block";
+        if (helpBtn) helpBtn.onclick = () => helpModal.style.display = "block";
+        if (guideBtn) guideBtn.onclick = () => guideModal.style.display = "block";
 
-        closeHelp.onclick = () => helpModal.style.display = "none";
-        closeGuide.onclick = () => guideModal.style.display = "none";
-        closeReport.onclick = () => reportModal.style.display = "none";
+        if (closeHelp) closeHelp.onclick = () => helpModal.style.display = "none";
+        if (closeGuide) closeGuide.onclick = () => guideModal.style.display = "none";
+        if (closeReport) closeReport.onclick = () => reportModal.style.display = "none";
 
         window.onclick = (event) => {
             if (event.target == helpModal) helpModal.style.display = "none";
             if (event.target == guideModal) guideModal.style.display = "none";
             if (event.target == reportModal) reportModal.style.display = "none";
-        }
+        };
 
         updateAllCounts();
     </script>
