@@ -1252,7 +1252,7 @@
             "Xefat. Estudos (14h)": "Xefatura de Estudos", "Xefat. Estudos (16h)": "Xefatura de Estudos",
             "Xefat. dpto (1+2h)": "Xefatura de Departamento", "Consello Esc. (1h)": "Representante Consello Escolar",
             "Convivencia (3h)": "Dinamización Convivencia e Benestar", "Dpto. Orientación (1h)": "Apoyo Departamento Orientación",
-            "Tutoría (??) (1+1h)": "Titoría de Grupo", "Gardas": "Garda de Recreo / Pasillo",
+            "Tutoría (??) (1+1h)": "Titoría de Grupo", "Gardas": "Garda de Recreo / Pasillo", "Refuerzo": "Refuerzo",
             "Atención P/N (1h)": "Atención Educativa / Reforzo"
         };
 
@@ -1271,6 +1271,7 @@
             ["Atención P/N (1h)", 1, 'C', 0, 1, "Jaime"], ["Atención P/N (1h)", 1, 'C', 0, 1, "David"],
             ["Atención P/N (1h)", 1, 'C', 0, 1, "Almudena"], ["Atención P/N (1h)", 1, 'C', 0, 1, "Pablo"],
             ["Atención P/N (1h)", 1, 'C', 0, 1, "Manu"], ["Atención P/N (1h)", 1, 'C', 0, 1, "Prov."],
+            ["Refuerzo", 0, 'L', 0, 0], ["Refuerzo", 0, 'L', 0, 0],
             ["Gardas", 0, 'C', 0, 0, "Jaime"], ["Gardas", 0, 'C', 0, 0, "David"],
             ["Gardas", 0, 'C', 0, 0, "Almudena"], ["Gardas", 0, 'C', 0, 0, "Pablo"],
             ["Gardas", 0, 'C', 0, 0, "Manu"], ["Gardas", 0, 'C', 0, 0, "Prov."]
@@ -1280,6 +1281,29 @@
         const itemsContainerL = document.getElementById('items-container-L');
         const itemsContainerC = document.getElementById('items-container-C');
         let selectedItem = null;
+
+        const CONFIGURABLE_CARDS = {
+            "Gardas": { type: "C" },
+            "Refuerzo": { type: "L" }
+        };
+
+        function getConfigurableCardName(itemOrText) {
+            const text = typeof itemOrText === 'string' ? itemOrText : itemOrText.textContent;
+            return Object.keys(CONFIGURABLE_CARDS).find(name => text.includes(name));
+        }
+
+        function getConfigurableHoursInput(item) {
+            return item.querySelector('.hours-input');
+        }
+
+        function setConfigurableCardHours(item, value) {
+            const cardName = getConfigurableCardName(item);
+            if (!cardName) return;
+            const v = parseInt(value) || 0;
+            item.dataset.value = v;
+            if (CONFIGURABLE_CARDS[cardName].type === 'L') item.dataset.valL = v;
+            else item.dataset.valC = v;
+        }
 
         function initReportButtons() {
             slots.forEach(slot => {
@@ -1304,13 +1328,14 @@
                 if (valC !== undefined) item.dataset.valC = valC;
                 item.draggable = true;
 
-                if (text === "Gardas") {
-                    item.innerHTML = `<span style="margin-right:5px;">Gardas:</span><input type="number" value="${valC || value}" style="width: 35px;" class="garda-input">h`;
-                    item.querySelector('.garda-input').onchange = (e) => {
-                        const v = parseInt(e.target.value) || 0;
-                        item.dataset.value = v; item.dataset.valC = v; updateAllCounts();
+                if (CONFIGURABLE_CARDS[text]) {
+                    const inputValue = CONFIGURABLE_CARDS[text].type === 'L' ? (valL || value) : (valC || value);
+                    item.innerHTML = `<span style="margin-right:5px;">${text}:</span><input type="number" value="${inputValue}" style="width: 35px;" class="hours-input">h`;
+                    getConfigurableHoursInput(item).onchange = (e) => {
+                        setConfigurableCardHours(item, e.target.value);
+                        updateAllCounts();
                     };
-                    item.querySelector('.garda-input').onmousedown = e => e.stopPropagation();
+                    getConfigurableHoursInput(item).onmousedown = e => e.stopPropagation();
                 } else { item.textContent = text; }
 
                 const textLC = text.toLowerCase();
@@ -1421,6 +1446,7 @@
             "Dpto. Orientación (1h)": { grupo: "Orient.", mat: "Dpto Orientación", visibilidad: "CP", tipo: "Complementaria" },
             "Tutoría (??) (1+1h)": { grupo: "-", mat: "Titoría de Grupo", visibilidad: "CP", tipo: "Ambas", lectivas: 1, complementarias: 1 },
             "Gardas": { grupo: "-", mat: "Gardas", visibilidad: "CP", tipo: "Complementaria" },
+            "Refuerzo": { grupo: "-", mat: "Refuerzo", visibilidad: "normal", tipo: "Lectiva" },
             "Atención P/N (1h)": { grupo: "-", mat: "Atención País Naís", visibilidad: "CP", tipo: "Complementaria" }
         };
 
@@ -1435,10 +1461,11 @@
 
             items.forEach(it => {
                 let txt = it.textContent.trim();
-                const isG = txt.includes("Gardas");
-                if (isG) txt = "Gardas";
+                const configurableCard = getConfigurableCardName(it);
+                if (configurableCard) txt = configurableCard;
 
-                const sesTotal = isG ? (it.querySelector('.garda-input') ? parseInt(it.querySelector('.garda-input').value) || 0 : 0) : parseInt(it.dataset.value) || 0;
+                const hoursInput = getConfigurableHoursInput(it);
+                const sesTotal = hoursInput ? (parseInt(hoursInput.value) || 0) : parseInt(it.dataset.value) || 0;
 
                 const info = CARD_INFO[txt] || { grupo: "-", mat: txt, visibilidad: "normal", tipo: 'Lectiva' };
                 let renderG = info.grupo;
@@ -1447,8 +1474,6 @@
                 if (info.tipo === 'Ambas') {
                     unique.push({ g: renderG, mat: info.mat, vis: info.visibilidad, ses: info.lectivas, tipo: 'Lectiva' });
                     unique.push({ g: renderG, mat: info.mat, vis: info.visibilidad, ses: info.complementarias, tipo: 'Complementaria' });
-                } else if (isG) {
-                    unique.push({ g: renderG, mat: info.mat, vis: info.visibilidad, ses: sesTotal, tipo: 'Complementaria' });
                 } else {
                     unique.push({ g: renderG, mat: info.mat, vis: info.visibilidad, ses: sesTotal, tipo: info.tipo });
                 }
@@ -1597,9 +1622,12 @@
             slots.forEach(s => {
                 const items = [];
                 s.querySelectorAll('.item').forEach(it => {
-                    const isG = it.textContent.includes("Gardas");
-                    const v = isG ? it.querySelector('.garda-input').value : it.dataset.value;
-                    items.push({ id: it.id, text: isG ? "Gardas" : it.textContent, valL: it.dataset.valL, valC: isG ? v : it.dataset.valC, value: v, type: it.dataset.type });
+                    const configurableCard = getConfigurableCardName(it);
+                    const hoursInput = getConfigurableHoursInput(it);
+                    const v = hoursInput ? hoursInput.value : it.dataset.value;
+                    const valL = configurableCard && CONFIGURABLE_CARDS[configurableCard].type === 'L' ? v : it.dataset.valL;
+                    const valC = configurableCard && CONFIGURABLE_CARDS[configurableCard].type === 'C' ? v : it.dataset.valC;
+                    items.push({ id: it.id, text: configurableCard || it.textContent, valL, valC, value: v, type: it.dataset.type });
                 });
                 config.push({ name: s.dataset.name, id: s.id, items });
             });
@@ -1620,10 +1648,12 @@
                     sd.items.forEach(idat => {
                         const it = document.getElementById(idat.id);
                         if (it) {
-                            if (idat.text === "Gardas") {
-                                const inp = it.querySelector('.garda-input');
-                                if (inp) inp.value = idat.valC || idat.value;
-                                it.dataset.value = idat.value; it.dataset.valC = idat.valC;
+                            const configurableCard = getConfigurableCardName(idat.text || '');
+                            if (configurableCard) {
+                                const v = idat.valL || idat.valC || idat.value || 0;
+                                const inp = getConfigurableHoursInput(it);
+                                if (inp) inp.value = v;
+                                setConfigurableCardHours(it, v);
                             }
                             const target = (s.id === 'unassigned-slot') ? document.getElementById(`items-container-${idat.type}`) : s.querySelector('.slot-content');
                             target.appendChild(it);
@@ -1648,14 +1678,18 @@
                     if (!s) return;
                     sd.items.forEach(idat => {
                         let it = document.getElementById(idat.id);
-                        if (!it || (it.textContent.trim() !== idat.text && idat.text !== "Gardas")) {
-                            it = [...document.querySelectorAll('.item')].find(el => el.textContent.trim() === idat.text && !el.closest('.slot:not(#unassigned-slot)'));
+                        if (!it || ((getConfigurableCardName(it) || it.textContent.trim()) !== idat.text)) {
+                            it = [...document.querySelectorAll('.item')].find(el => (getConfigurableCardName(el) || el.textContent.trim()) === idat.text && !el.closest('.slot:not(#unassigned-slot)'));
                         }
                         if (it) {
-                            if (idat.text === "Gardas") {
-                                const g = s.querySelector('.garda-input');
-                                if (g) { g.value = idat.valC || idat.value || 0; g.dispatchEvent(new Event('change')); }
-                            } else { moveItemToSlot(it, s); }
+                            const configurableCard = getConfigurableCardName(idat.text || '');
+                            if (configurableCard) {
+                                const v = idat.valL || idat.valC || idat.value || 0;
+                                const inp = getConfigurableHoursInput(it);
+                                if (inp) inp.value = v;
+                                setConfigurableCardHours(it, v);
+                            }
+                            moveItemToSlot(it, s);
                         }
                     });
                 });
