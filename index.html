@@ -1305,6 +1305,30 @@
             else item.dataset.valC = v;
         }
 
+        function getConfigurableStoredHours(cardName, itemData) {
+            if (!cardName) return itemData.value || 0;
+            const storedValue = CONFIGURABLE_CARDS[cardName].type === 'L' ? itemData.valL : itemData.valC;
+            return storedValue !== undefined && storedValue !== null && storedValue !== '' ? storedValue : (itemData.value || 0);
+        }
+
+        function getItemImportText(item) {
+            return getConfigurableCardName(item) || item.textContent.trim();
+        }
+
+        function findItemForImport(itemData, targetSlot) {
+            const expectedText = itemData.text;
+            const byId = document.getElementById(itemData.id);
+            if (byId && getItemImportText(byId) === expectedText) return byId;
+
+            const targetMatch = [...targetSlot.querySelectorAll('.item')].find(el => getItemImportText(el) === expectedText);
+            if (targetMatch) return targetMatch;
+
+            const unassignedMatch = [...document.querySelectorAll('#unassigned-slot .item')].find(el => getItemImportText(el) === expectedText);
+            if (unassignedMatch) return unassignedMatch;
+
+            return [...document.querySelectorAll('.item')].find(el => getItemImportText(el) === expectedText);
+        }
+
         function initReportButtons() {
             slots.forEach(slot => {
                 if (slot.id !== 'unassigned-slot' && !slot.querySelector('.report-btn')) {
@@ -1331,11 +1355,14 @@
                 if (CONFIGURABLE_CARDS[text]) {
                     const inputValue = CONFIGURABLE_CARDS[text].type === 'L' ? (valL || value) : (valC || value);
                     item.innerHTML = `<span style="margin-right:5px;">${text}:</span><input type="number" value="${inputValue}" style="width: 35px;" class="hours-input">h`;
-                    getConfigurableHoursInput(item).onchange = (e) => {
+                    const hoursInput = getConfigurableHoursInput(item);
+                    const syncHours = (e) => {
                         setConfigurableCardHours(item, e.target.value);
                         updateAllCounts();
                     };
-                    getConfigurableHoursInput(item).onmousedown = e => e.stopPropagation();
+                    hoursInput.oninput = syncHours;
+                    hoursInput.onchange = syncHours;
+                    hoursInput.onmousedown = e => e.stopPropagation();
                 } else { item.textContent = text; }
 
                 const textLC = text.toLowerCase();
@@ -1617,7 +1644,7 @@
         document.querySelectorAll('.close-btn').forEach(b => b.onclick = () => { helpM.style.display = "none"; guideM.style.display = "none"; reportM.style.display = "none"; schedModal.style.display = "none"; });
         window.onclick = e => { if (e.target === helpM || e.target === guideM || e.target === reportM || e.target === schedModal) { helpM.style.display = "none"; guideM.style.display = "none"; reportM.style.display = "none"; schedModal.style.display = "none"; } };
 
-        document.getElementById('export-btn').onclick = () => {
+        document.getElementById('export-btn').onclick = async () => {
             const config = [];
             slots.forEach(s => {
                 const items = [];
@@ -1627,12 +1654,39 @@
                     const v = hoursInput ? hoursInput.value : it.dataset.value;
                     const valL = configurableCard && CONFIGURABLE_CARDS[configurableCard].type === 'L' ? v : it.dataset.valL;
                     const valC = configurableCard && CONFIGURABLE_CARDS[configurableCard].type === 'C' ? v : it.dataset.valC;
-                    items.push({ id: it.id, text: configurableCard || it.textContent, valL, valC, value: v, type: it.dataset.type });
+                    items.push({ id: it.id, text: getItemImportText(it), valL, valC, value: v, type: it.dataset.type });
                 });
                 config.push({ name: s.dataset.name, id: s.id, items });
             });
-            const b = new Blob([JSON.stringify(config, null, 2)], { type: 'application/json' });
-            const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'configuracion_reparto.json'; a.click();
+
+            const json = JSON.stringify(config, null, 2);
+            const defaultName = 'configuracion_reparto.json';
+
+            if (window.showSaveFilePicker) {
+                try {
+                    const handle = await window.showSaveFilePicker({
+                        suggestedName: defaultName,
+                        types: [{
+                            description: 'Archivo JSON',
+                            accept: { 'application/json': ['.json'] }
+                        }]
+                    });
+                    const writable = await handle.createWritable();
+                    await writable.write(json);
+                    await writable.close();
+                    return;
+                } catch (err) {
+                    if (err && err.name === 'AbortError') return;
+                    console.warn('No se pudo abrir el selector de guardado. Se usará la descarga normal.', err);
+                }
+            }
+
+            const b = new Blob([json], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(b);
+            a.download = defaultName;
+            a.click();
+            URL.revokeObjectURL(a.href);
         };
 
         const impFile = document.getElementById('import-file');
@@ -1646,11 +1700,11 @@
                     const s = document.getElementById(sd.id) || [...slots].find(sl => sl.dataset.name === sd.name);
                     if (!s) return;
                     sd.items.forEach(idat => {
-                        const it = document.getElementById(idat.id);
+                        const it = findItemForImport(idat, s);
                         if (it) {
                             const configurableCard = getConfigurableCardName(idat.text || '');
                             if (configurableCard) {
-                                const v = idat.valL || idat.valC || idat.value || 0;
+                                const v = getConfigurableStoredHours(configurableCard, idat);
                                 const inp = getConfigurableHoursInput(it);
                                 if (inp) inp.value = v;
                                 setConfigurableCardHours(it, v);
@@ -1677,14 +1731,11 @@
                     const s = [...slots].find(sl => sl.dataset.name === sd.name);
                     if (!s) return;
                     sd.items.forEach(idat => {
-                        let it = document.getElementById(idat.id);
-                        if (!it || ((getConfigurableCardName(it) || it.textContent.trim()) !== idat.text)) {
-                            it = [...document.querySelectorAll('.item')].find(el => (getConfigurableCardName(el) || el.textContent.trim()) === idat.text && !el.closest('.slot:not(#unassigned-slot)'));
-                        }
+                        let it = findItemForImport(idat, s);
                         if (it) {
                             const configurableCard = getConfigurableCardName(idat.text || '');
                             if (configurableCard) {
-                                const v = idat.valL || idat.valC || idat.value || 0;
+                                const v = getConfigurableStoredHours(configurableCard, idat);
                                 const inp = getConfigurableHoursInput(it);
                                 if (inp) inp.value = v;
                                 setConfigurableCardHours(it, v);
