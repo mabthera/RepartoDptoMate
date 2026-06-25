@@ -1533,9 +1533,9 @@
             });
 
             unique.forEach(u => {
-                const isCP = u.vis === "CP";
-                const rowStyle = isCP ? "font-style: italic; font-size: 10px; font-weight: 400; color: #003399;" : "font-size: 16px; font-weight: 800; color: #003399;";
-                const tdStyle = isCP ? "" : "border: 2px solid #333;";
+                const isSmallCP = u.vis === "CP" && u.tipo !== 'Lectiva';
+                const rowStyle = isSmallCP ? "font-style: italic; font-size: 10px; font-weight: 400; color: #003399;" : "font-size: 16px; font-weight: 800; color: #003399;";
+                const tdStyle = isSmallCP ? "" : "border: 2px solid #333;";
                 const shortTipo = u.tipo === 'Lectiva' ? 'L' : 'C';
 
                 const tr = document.createElement('tr');
