@@ -5,27 +5,21 @@
     "items": [
       {
         "id": "item-24",
-        "text": "Tutoría (??) (1+1h)",
-        "valL": "1",
-        "valC": "1",
+        "text": "Tutoría (??) (2h)",
         "value": "2",
-        "type": "C"
+        "type": "L"
       },
       {
         "id": "item-25",
-        "text": "Tutoría (??) (1+1h)",
-        "valL": "1",
-        "valC": "1",
+        "text": "Tutoría (??) (2h)",
         "value": "2",
-        "type": "C"
+        "type": "L"
       },
       {
         "id": "item-28",
-        "text": "Tutoría (??) (1+1h)",
-        "valL": "1",
-        "valC": "1",
+        "text": "Tutoría (??) (2h)",
         "value": "2",
-        "type": "C"
+        "type": "L"
       },
       {
         "id": "item-31",
@@ -145,11 +139,9 @@
       },
       {
         "id": "item-27",
-        "text": "Tutoría (??) (1+1h)",
-        "valL": "1",
-        "valC": "1",
+        "text": "Tutoría (??) (2h)",
         "value": "2",
-        "type": "C"
+        "type": "L"
       },
       {
         "id": "item-29",
@@ -269,11 +261,9 @@
       },
       {
         "id": "item-26",
-        "text": "Tutoría (??) (1+1h)",
-        "valL": "1",
-        "valC": "1",
+        "text": "Tutoría (??) (2h)",
         "value": "2",
-        "type": "C"
+        "type": "L"
       },
       {
         "id": "item-1",
