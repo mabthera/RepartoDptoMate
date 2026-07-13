@@ -845,7 +845,7 @@
                 <ul class="help-list">
                     <li><strong>Xefatura de Departamento:</strong> <strong>3 horas</strong> (1L + 2C). <span
                             style="color: #27ae60; font-size: 0.85em; font-weight: bold;">✔ Por Instrucción</span></li>
-                    <li><strong>Titoría:</strong> <strong>2 horas</strong> (1L + 1C). <span
+                    <li><strong>Titoría:</strong> <strong>2 horas lectivas</strong> para 1ºA, 3ºA y 4ºA. <span
                             style="color: #27ae60; font-size: 0.85em; font-weight: bold;">✔ Por Instrucción</span></li>
                     <li><strong>Calidade / Proxectos:</strong> <strong>1 a 2 horas</strong> (C). <span
                             style="color: #555; font-size: 0.85em;">(Variable)</span></li>
@@ -1247,13 +1247,15 @@
             "4º PDC (10h)": "Ámbito Científico-Tecnolóxico 4º PDC",
             "1°Bach. CC.SS. (4h)": "Matemáticas Aplicadas CCSS I - 1º Bach", "2°Bach. CC.SS. (4h)": "Matemáticas Aplicadas CCSS II - 2º Bach",
             "1°Bach. C.T. (4h)": "Matemáticas I - 1º Bach CT", "2°Bach. C.T. (4h)": "Matemáticas II - 2º Bach CT",
-            "2º FPB E.P. (7h)": "Ciencias Aplicadas II - 2º FPB (Electr. e Pantocas)",
             "2º FPB I.O. (7h)": "Ciencias Aplicadas II - 2º FPB (Instal. e Ofic. B)",
+            "Inglés 2ºFPB PE (2h)": "Inglés - 2º FPB PE",
+            "Inglés 2ºFPB IO (2h)": "Inglés - 2º FPB IO",
             "E.S.A. (8h)": "Matemáticas - Educación Secundaria de Adultos",
             "Xefat. Estudos (14h)": "Xefatura de Estudos", "Xefat. Estudos (16h)": "Xefatura de Estudos",
             "Xefat. dpto (1+2h)": "Xefatura de Departamento", "Consello Esc. (1h)": "Representante Consello Escolar",
             "Convivencia (3h)": "Dinamización Convivencia e Benestar", "Dpto. Orientación (1h)": "Apoyo Departamento Orientación",
-            "Tutoría (??) (2h)": "Titoría de Grupo", "Gardas": "Garda de Recreo / Pasillo", "Refuerzo": "Refuerzo",
+            "Tutoría 1ºA (2h)": "Titoría de Grupo 1ºA", "Tutoría 3ºA (2h)": "Titoría de Grupo 3ºA",
+            "Tutoría 4ºA (2h)": "Titoría de Grupo 4ºA", "Gardas": "Garda de Recreo / Pasillo", "Refuerzo": "Refuerzo",
             "Atención P/N (1h)": "Atención Educativa / Reforzo"
         };
 
@@ -1263,12 +1265,12 @@
             ["Ex. Francés 2ºA (1h)", 1, 'L'], ["Ex. Francés 2ºB (1h)", 1, 'L'], ["3º A ESO (4h)", 4, 'L'],
             ["3º B ESO (4h)", 4, 'L'], ["4º ESO M.A. (4h)", 4, 'L'], ["4º ESO M.B. (4h)", 4, 'L'],
             ["3º PDC (8h)", 8, 'L'], ["1°Bach. CC.SS. (4h)", 4, 'L'], ["1°Bach. C.T. (4h)", 4, 'L'],
-            ["2°Bach. CC.SS. (4h)", 4, 'L'], ["2°Bach. C.T. (4h)", 4, 'L'], ["2º FPB E.P. (7h)", 7, 'L'],
+            ["2°Bach. CC.SS. (4h)", 4, 'L'], ["2°Bach. C.T. (4h)", 4, 'L'], ["__removed_item_17__", 0, 'L', undefined, undefined, undefined, true],
             ["2º FPB I.O. (7h)", 7, 'L'], ["E.S.A. (8h)", 8, 'L'], ["Xefat. Estudos (14h)", 14, 'L'],
             ["Xefat. dpto (1+2h)", 3, 'C', 1, 2], ["Consello Esc. (1h)", 1, 'C'], ["Convivencia (3h)", 3, 'C'],
-            ["Tutoría (??) (2h)", 2, 'L'], ["Tutoría (??) (2h)", 2, 'L'],
-            ["Tutoría (??) (2h)", 2, 'L'], ["Tutoría (??) (2h)", 2, 'L'],
-            ["Tutoría (??) (2h)", 2, 'L'], ["Dpto. Orientación (1h)", 1, 'C'],
+            ["Tutoría 1ºA (2h)", 2, 'L'], ["Tutoría 3ºA (2h)", 2, 'L'],
+            ["Tutoría 4ºA (2h)", 2, 'L'], ["__removed_tutoria_27__", 0, 'L', undefined, undefined, undefined, true],
+            ["__removed_tutoria_28__", 0, 'L', undefined, undefined, undefined, true], ["Dpto. Orientación (1h)", 1, 'C'],
             ["Atención P/N (1h)", 1, 'C', 0, 1, "Jaime"], ["Atención P/N (1h)", 1, 'C', 0, 1, "David"],
             ["Atención P/N (1h)", 1, 'C', 0, 1, "Almudena"], ["Atención P/N (1h)", 1, 'C', 0, 1, "Pablo"],
             ["Atención P/N (1h)", 1, 'C', 0, 1, "Manu"], ["Atención P/N (1h)", 1, 'C', 0, 1, "Prov."],
@@ -1276,11 +1278,13 @@
             ["Gardas", 0, 'C', 0, 0, "Jaime"], ["Gardas", 0, 'C', 0, 0, "David"],
             ["Gardas", 0, 'C', 0, 0, "Almudena"], ["Gardas", 0, 'C', 0, 0, "Pablo"],
             ["Gardas", 0, 'C', 0, 0, "Manu"], ["Gardas", 0, 'C', 0, 0, "Prov."],
-            ["4º PDC (10h)", 10, 'L']
+            ["4º PDC (10h)", 10, 'L'], ["Inglés 2ºFPB PE (2h)", 2, 'L'],
+            ["Inglés 2ºFPB IO (2h)", 2, 'L']
         ];
 
         const CARD_TEXT_ALIASES = {
-            "Tutoría (??) (1+1h)": "Tutoría (??) (2h)"
+            "Tutoría (??) (1+1h)": "Tutoría 1ºA (2h)",
+            "Tutoría (??) (2h)": "Tutoría 1ºA (2h)"
         };
 
         function normalizeCardText(text) {
@@ -1327,9 +1331,11 @@
         }
 
         function findItemForImport(itemData, targetSlot) {
-            const expectedText = normalizeCardText(itemData.text);
+            const originalText = (itemData.text || '').trim();
+            const expectedText = normalizeCardText(originalText);
             const byId = document.getElementById(itemData.id);
             if (byId && normalizeCardText(getItemImportText(byId)) === expectedText) return byId;
+            if (byId && CARD_TEXT_ALIASES[originalText] && getItemImportText(byId).includes('Tutoría')) return byId;
 
             const targetMatch = [...targetSlot.querySelectorAll('.item')].find(el => normalizeCardText(getItemImportText(el)) === expectedText);
             if (targetMatch) return targetMatch;
@@ -1353,7 +1359,8 @@
         }
 
         function initItems() {
-            data.forEach(([text, value, type, valL, valC, initialOwner], idx) => {
+            data.forEach(([text, value, type, valL, valC, initialOwner, hidden], idx) => {
+                if (hidden) return;
                 const item = document.createElement('div');
                 item.className = 'item';
                 item.id = `item-${idx}`;
@@ -1474,8 +1481,9 @@
             "2°Bach. CC.SS. (4h)": { grupo: "2ºA Bach", mat: "Matemáticas Aplicadas CCSS II", visibilidad: "normal", tipo: "Lectiva" },
             "1°Bach. C.T. (4h)": { grupo: "1ºB Bach", mat: "Matemáticas I", visibilidad: "normal", tipo: "Lectiva" },
             "2°Bach. C.T. (4h)": { grupo: "2ºB Bach", mat: "Matemáticas II", visibilidad: "normal", tipo: "Lectiva" },
-            "2º FPB E.P. (7h)": { grupo: "2º FPB EP", mat: "Ciencias Aplicadas II", visibilidad: "normal", tipo: "Lectiva" },
             "2º FPB I.O. (7h)": { grupo: "2º FPB IO", mat: "Ciencias Aplicadas II", visibilidad: "normal", tipo: "Lectiva" },
+            "Inglés 2ºFPB PE (2h)": { grupo: "2º FPB PE", mat: "Inglés", visibilidad: "normal", tipo: "Lectiva" },
+            "Inglés 2ºFPB IO (2h)": { grupo: "2º FPB IO", mat: "Inglés", visibilidad: "normal", tipo: "Lectiva" },
             "E.S.A. (8h)": { grupo: "E.S.P.A.", mat: "E. Secundaria de Adultos", visibilidad: "normal", tipo: "Lectiva" },
             "Xefat. Estudos (14h)": { grupo: "X.E.", mat: "Xefatura de Estudos", visibilidad: "CP", tipo: "Lectiva" },
             "Xefat. Estudos (16h)": { grupo: "X.E.", mat: "Xefatura de Estudos", visibilidad: "CP", tipo: "Lectiva" },
@@ -1483,7 +1491,9 @@
             "Consello Esc. (1h)": { grupo: "C.E.", mat: "Representante C.E.", visibilidad: "CP", tipo: "Complementaria" },
             "Convivencia (3h)": { grupo: "Convi.", mat: "Dinamización Convivencia", visibilidad: "CP", tipo: "Ambas", lectivas: 1, complementarias: 2 },
             "Dpto. Orientación (1h)": { grupo: "Orient.", mat: "Dpto Orientación", visibilidad: "CP", tipo: "Complementaria" },
-            "Tutoría (??) (2h)": { grupo: "-", mat: "Titoría de Grupo", visibilidad: "CP", tipo: "Lectiva" },
+            "Tutoría 1ºA (2h)": { grupo: "1ºA", mat: "Titoría de Grupo", visibilidad: "CP", tipo: "Lectiva" },
+            "Tutoría 3ºA (2h)": { grupo: "3ºA", mat: "Titoría de Grupo", visibilidad: "CP", tipo: "Lectiva" },
+            "Tutoría 4ºA (2h)": { grupo: "4ºA", mat: "Titoría de Grupo", visibilidad: "CP", tipo: "Lectiva" },
             "Gardas": { grupo: "-", mat: "Gardas", visibilidad: "CP", tipo: "Complementaria" },
             "Refuerzo": { grupo: "-", mat: "Refuerzo", visibilidad: "normal", tipo: "Lectiva" },
             "Atención P/N (1h)": { grupo: "-", mat: "Atención País Naís", visibilidad: "CP", tipo: "Complementaria" }

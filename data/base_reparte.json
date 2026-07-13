@@ -76,38 +76,20 @@
         "type": "L"
       },
       {
-        "id": "item-17",
-        "text": "2º FPB E.P. (7h)",
-        "value": "7",
-        "type": "L"
-      },
-      {
         "id": "item-24",
-        "text": "Tutoría (??) (2h)",
+        "text": "Tutoría 1ºA (2h)",
         "value": "2",
         "type": "L"
       },
       {
         "id": "item-25",
-        "text": "Tutoría (??) (2h)",
+        "text": "Tutoría 3ºA (2h)",
         "value": "2",
         "type": "L"
       },
       {
         "id": "item-26",
-        "text": "Tutoría (??) (2h)",
-        "value": "2",
-        "type": "L"
-      },
-      {
-        "id": "item-27",
-        "text": "Tutoría (??) (2h)",
-        "value": "2",
-        "type": "L"
-      },
-      {
-        "id": "item-28",
-        "text": "Tutoría (??) (2h)",
+        "text": "Tutoría 4ºA (2h)",
         "value": "2",
         "type": "L"
       }
