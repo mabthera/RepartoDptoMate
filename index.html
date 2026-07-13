@@ -770,7 +770,7 @@
         <button id="import-btn" style="padding: 10px 20px; cursor: pointer;">Importar Configuración (JSON)</button>
         <button id="load-base-btn"
             style="padding: 10px 20px; cursor: pointer; background-color: #e67e22; color: white; border: none; border-radius: 5px;">🔄
-            Cargar situación inicial</button>
+            Opción viable 1</button>
         <input type="file" id="import-file" style="display: none;" accept=".json">
     </div>
 
@@ -1742,9 +1742,9 @@
         };
 
         document.getElementById('load-base-btn').onclick = async () => {
-            if (!confirm('¿Cargar situación inicial? Se perderá el reparto actual.')) return;
+            if (!confirm('¿Cargar opción viable 1? Se perderá el reparto actual.')) return;
             try {
-                const res = await fetch('data/base_reparte.json');
+                const res = await fetch('data/opviable.json');
                 const cfg = await res.json();
                 itemsContainerL.innerHTML = ''; itemsContainerC.innerHTML = '';
                 document.querySelectorAll('.slot-content').forEach(sc => sc.innerHTML = '');
@@ -1767,7 +1767,7 @@
                     });
                 });
                 updateAllCounts();
-                alert('Cargado.');
+                alert('Opción viable 1 cargada.');
             } catch (e) { alert('Error: ' + e.message); }
         };
     </script>
