@@ -165,8 +165,10 @@
       },
       {
         "id": "item-23",
-        "text": "Convivencia (3h)",
-        "value": "3",
+        "text": "Convivencia (2h)",
+        "valL": "1",
+        "valC": "1",
+        "value": "2",
         "type": "C"
       },
       {
