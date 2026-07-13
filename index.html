@@ -1256,7 +1256,7 @@
             "Xefat. dpto (1+2h)": "Xefatura de Departamento", "Consello Esc. (1h)": "Representante Consello Escolar",
             "Convivencia (3h)": "Dinamización Convivencia e Benestar", "Dpto. Orientación (1h)": "Apoyo Departamento Orientación",
             "Tutoría 1ºA (2h)": "Titoría de Grupo 1ºA", "Tutoría 3ºA (2h)": "Titoría de Grupo 3ºA",
-            "Tutoría 4ºA (2h)": "Titoría de Grupo 4ºA", "Gardas": "Garda de Recreo / Pasillo", "Refuerzo": "Refuerzo",
+            "Tutoría 4ºA (2h)": "Titoría de Grupo 4ºA", "Gardas": "Garda de Recreo / Pasillo",
             "Atención P/N (1h)": "Atención Educativa / Reforzo"
         };
 
@@ -1275,7 +1275,6 @@
             ["Atención P/N (1h)", 1, 'C', 0, 1, "Jaime"], ["Atención P/N (1h)", 1, 'C', 0, 1, "David"],
             ["Atención P/N (1h)", 1, 'C', 0, 1, "Almudena"], ["Atención P/N (1h)", 1, 'C', 0, 1, "Pablo"],
             ["Atención P/N (1h)", 1, 'C', 0, 1, "Manu"], ["Atención P/N (1h)", 1, 'C', 0, 1, "Prov."],
-            ["Refuerzo", 0, 'L', 0, 0], ["Refuerzo", 0, 'L', 0, 0],
             ["Gardas", 0, 'C', 0, 0, "Jaime"], ["Gardas", 0, 'C', 0, 0, "David"],
             ["Gardas", 0, 'C', 0, 0, "Almudena"], ["Gardas", 0, 'C', 0, 0, "Pablo"],
             ["Gardas", 0, 'C', 0, 0, "Manu"], ["Gardas", 0, 'C', 0, 0, "Prov."],
@@ -1300,8 +1299,7 @@
         let selectedItem = null;
 
         const CONFIGURABLE_CARDS = {
-            "Gardas": { type: "C" },
-            "Refuerzo": { type: "L" }
+            "Gardas": { type: "C" }
         };
 
         function getConfigurableCardName(itemOrText) {
@@ -1499,7 +1497,6 @@
             "Tutoría 3ºA (2h)": { grupo: "3ºA", mat: "Titoría de Grupo", visibilidad: "CP", tipo: "Lectiva" },
             "Tutoría 4ºA (2h)": { grupo: "4ºA", mat: "Titoría de Grupo", visibilidad: "CP", tipo: "Lectiva" },
             "Gardas": { grupo: "-", mat: "Gardas", visibilidad: "CP", tipo: "Complementaria" },
-            "Refuerzo": { grupo: "-", mat: "Refuerzo", visibilidad: "normal", tipo: "Lectiva" },
             "Atención P/N (1h)": { grupo: "-", mat: "Atención País Naís", visibilidad: "CP", tipo: "Complementaria" }
         };
 
