@@ -166,8 +166,8 @@
       {
         "id": "item-23",
         "text": "Convivencia (2h)",
-        "valL": "1",
-        "valC": "1",
+        "valL": "0",
+        "valC": "2",
         "value": "2",
         "type": "C"
       },
