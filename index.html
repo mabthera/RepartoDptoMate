@@ -1247,7 +1247,8 @@
             "4º PDC (10h)": "Ámbito Científico-Tecnolóxico 4º PDC",
             "1°Bach. CC.SS. (4h)": "Matemáticas Aplicadas CCSS I - 1º Bach", "2°Bach. CC.SS. (4h)": "Matemáticas Aplicadas CCSS II - 2º Bach",
             "1°Bach. C.T. (4h)": "Matemáticas I - 1º Bach CT", "2°Bach. C.T. (4h)": "Matemáticas II - 2º Bach CT",
-            "1º PPB I.O. (5h)": "Ciencias Aplicadas I - 1º PPB IO",
+            "1º FPB PE (5h)": "Ciencias Aplicadas I - 1º FPB PE",
+            "2º FPB I.O. (7h)": "Ciencias Aplicadas II - 2º FPB IO",
             "Inglés 2ºFPB PE (2h)": "Inglés - 2º FPB PE",
             "Inglés 2ºFPB IO (2h)": "Inglés - 2º FPB IO",
             "E.S.A. (8h)": "Matemáticas - Educación Secundaria de Adultos",
@@ -1265,8 +1266,8 @@
             ["Ex. Francés 2ºA (1h)", 1, 'L'], ["Ex. Francés 2ºB (1h)", 1, 'L'], ["3º A ESO (4h)", 4, 'L'],
             ["3º B ESO (4h)", 4, 'L'], ["4º ESO M.A. (4h)", 4, 'L'], ["4º ESO M.B. (4h)", 4, 'L'],
             ["3º PDC (8h)", 8, 'L'], ["1°Bach. CC.SS. (4h)", 4, 'L'], ["1°Bach. C.T. (4h)", 4, 'L'],
-            ["2°Bach. CC.SS. (4h)", 4, 'L'], ["2°Bach. C.T. (4h)", 4, 'L'], ["__removed_item_17__", 0, 'L', undefined, undefined, undefined, true],
-            ["1º PPB I.O. (5h)", 5, 'L'], ["E.S.A. (8h)", 8, 'L'], ["Xefat. Estudos (14h)", 14, 'L'],
+            ["2°Bach. CC.SS. (4h)", 4, 'L'], ["2°Bach. C.T. (4h)", 4, 'L'], ["1º FPB PE (5h)", 5, 'L'],
+            ["2º FPB I.O. (7h)", 7, 'L'], ["E.S.A. (8h)", 8, 'L'], ["Xefat. Estudos (14h)", 14, 'L'],
             ["Xefat. dpto (1+2h)", 3, 'C', 1, 2], ["Consello Esc. (1h)", 1, 'C'], ["Convivencia (3h)", 3, 'C'],
             ["Tutoría 1ºA (2h)", 2, 'L'], ["Tutoría 3ºA (2h)", 2, 'L'],
             ["Tutoría 4ºA (2h)", 2, 'L'], ["__removed_tutoria_27__", 0, 'L', undefined, undefined, undefined, true],
@@ -1285,7 +1286,7 @@
         const CARD_TEXT_ALIASES = {
             "Tutoría (??) (1+1h)": "Tutoría 1ºA (2h)",
             "Tutoría (??) (2h)": "Tutoría 1ºA (2h)",
-            "2º FPB I.O. (7h)": "1º PPB I.O. (5h)"
+            "1º PPB I.O. (5h)": "2º FPB I.O. (7h)"
         };
 
         function normalizeCardText(text) {
@@ -1388,6 +1389,7 @@
                 let bgColor = 'hsl(0, 0%, 85%)';
                 if (textLC.includes('eso') || textLC.includes('franc')) bgColor = 'hsl(120, 70%, 90%)';
                 else if (textLC.includes('bach')) bgColor = 'hsl(210, 70%, 90%)';
+                else if (textLC.includes('1º fpb pe')) bgColor = 'hsl(335, 85%, 92%)';
                 else if (textLC.includes('fpb') || textLC.includes('esa') || textLC.includes('pdc')) bgColor = 'hsl(30, 70%, 90%)';
                 item.style.backgroundColor = bgColor;
 
@@ -1482,7 +1484,8 @@
             "2°Bach. CC.SS. (4h)": { grupo: "2ºA Bach", mat: "Matemáticas Aplicadas CCSS II", visibilidad: "normal", tipo: "Lectiva" },
             "1°Bach. C.T. (4h)": { grupo: "1ºB Bach", mat: "Matemáticas I", visibilidad: "normal", tipo: "Lectiva" },
             "2°Bach. C.T. (4h)": { grupo: "2ºB Bach", mat: "Matemáticas II", visibilidad: "normal", tipo: "Lectiva" },
-            "1º PPB I.O. (5h)": { grupo: "1º PPB IO", mat: "Ciencias Aplicadas I", visibilidad: "normal", tipo: "Lectiva" },
+            "1º FPB PE (5h)": { grupo: "1º FPB PE", mat: "Ciencias Aplicadas I", visibilidad: "normal", tipo: "Lectiva" },
+            "2º FPB I.O. (7h)": { grupo: "2º FPB IO", mat: "Ciencias Aplicadas II", visibilidad: "normal", tipo: "Lectiva" },
             "Inglés 2ºFPB PE (2h)": { grupo: "2º FPB PE", mat: "Inglés", visibilidad: "normal", tipo: "Lectiva" },
             "Inglés 2ºFPB IO (2h)": { grupo: "2º FPB IO", mat: "Inglés", visibilidad: "normal", tipo: "Lectiva" },
             "E.S.A. (8h)": { grupo: "E.S.P.A.", mat: "E. Secundaria de Adultos", visibilidad: "normal", tipo: "Lectiva" },
