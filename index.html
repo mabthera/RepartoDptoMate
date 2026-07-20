@@ -1385,11 +1385,12 @@
                 } else { item.textContent = text; }
 
                 const textLC = text.toLowerCase();
+                const textPlain = textLC.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
                 let bgColor = 'hsl(0, 0%, 85%)';
                 if (textLC.includes('eso') || textLC.includes('franc')) bgColor = 'hsl(120, 70%, 90%)';
                 else if (textLC.includes('bach')) bgColor = 'hsl(210, 70%, 90%)';
-                else if (textLC.includes('1º fpb pe')) bgColor = 'hsl(335, 85%, 92%)';
-                else if (textLC.includes('fpb') || textLC.includes('esa') || textLC.includes('pdc')) bgColor = 'hsl(30, 70%, 90%)';
+                else if ((textPlain.includes('fpb pe') && textPlain.includes('1')) || textPlain.includes('esa') || textPlain.includes('e.s.a')) bgColor = 'hsl(335, 85%, 92%)';
+                else if (textPlain.includes('fpb') || textPlain.includes('pdc') || textPlain.includes('fisica y quimica') || textPlain.includes('fyq')) bgColor = 'hsl(30, 70%, 90%)';
                 item.style.backgroundColor = bgColor;
 
                 if (initialOwner) {
