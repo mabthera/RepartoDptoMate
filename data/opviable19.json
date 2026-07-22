@@ -2,16 +2,7 @@
   {
     "name": "Horas sin asignar",
     "id": "unassigned-slot",
-    "items": [
-      {
-        "id": "item-37",
-        "text": "Gardas",
-        "valL": "0",
-        "valC": "1",
-        "value": "1",
-        "type": "C"
-      }
-    ]
+    "items": []
   },
   {
     "name": "Jaime",
@@ -98,6 +89,14 @@
         "text": "2º FPB I.O. (7h)",
         "value": "7",
         "type": "L"
+      },
+      {
+        "id": "item-37",
+        "text": "Gardas",
+        "valL": "0",
+        "valC": "0",
+        "value": "0",
+        "type": "C"
       }
     ]
   },
@@ -175,8 +174,8 @@
         "id": "item-41",
         "text": "Gardas",
         "valL": "0",
-        "valC": "1",
-        "value": "1",
+        "valC": "4",
+        "value": "4",
         "type": "C"
       },
       {
