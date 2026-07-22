@@ -1016,6 +1016,12 @@
                             </tbody>
                         </table>
                     </div>
+                    <div id="report-hours-summary" style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
+                        <input type="text" id="report-hours-total" readonly
+                            style="width: 180px; font-size: 16px; font-weight: 800; color: #003399; text-align: center; border: 2px solid #333; background: #fff;">
+                        <input type="text" id="report-hours-warning" readonly
+                            style="flex: 1; font-size: 15px; font-weight: 800; color: #b00020; text-align: left; border: none; background: transparent;">
+                    </div>
                 </div>
 
                 <!-- Observaciones, Calendario y Opciones Finales agrupadas -->
@@ -1613,6 +1619,15 @@
             });
 
             document.getElementById('cargo').value = cargos.join('; ');
+            const reportLectivas = unique.filter(u => u.tipo === 'Lectiva').reduce((sum, u) => sum + (parseInt(u.ses) || 0), 0);
+            const reportComplementarias = unique.filter(u => u.tipo !== 'Lectiva').reduce((sum, u) => sum + (parseInt(u.ses) || 0), 0);
+            const reportTotal = reportLectivas + reportComplementarias;
+            document.getElementById('report-hours-total').value = reportLectivas + 'L + ' + reportComplementarias + 'C = ' + reportTotal + 'T';
+            let compensationText = '';
+            if (reportLectivas === 19) compensationText = 'Compensación: 21 permanencia';
+            else if (reportLectivas === 20) compensationText = 'Compensación 20 permanencia';
+            document.getElementById('report-hours-warning').value = compensationText;
+
 
             unique.forEach(u => {
                 const isSmallCP = u.vis === "CP" && u.tipo !== 'Lectiva';
