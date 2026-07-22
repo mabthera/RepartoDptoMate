@@ -768,10 +768,6 @@
         <button id="guide-btn" style="margin-right: 10px;">📚 Guía de Dinamizaciones / Cargos</button>
         <button id="export-btn" style="padding: 10px 20px; cursor: pointer;">Exportar Configuración (JSON)</button>
         <button id="import-btn" style="padding: 10px 20px; cursor: pointer;">Importar Configuración (JSON)</button>
-        <!-- pages-refresh: opcion-viable-1 -->
-        <button id="load-base-btn"
-            style="padding: 10px 20px; cursor: pointer; background-color: #e67e22; color: white; border: none; border-radius: 5px;">🔄
-            Opción viable 1</button>
         <button id="load-viable20-btn"
             style="padding: 10px 20px; cursor: pointer; background-color: #c13c8a; color: white; border: none; border-radius: 5px; margin-left: 8px;">🔄
             Op viable 20</button>
@@ -1822,7 +1818,6 @@
             } catch (e) { alert('Error: ' + e.message); }
         }
 
-        document.getElementById('load-base-btn').onclick = () => loadPreloadedOption('opción viable 1', 'data/opviable.json');
         document.getElementById('load-viable20-btn').onclick = () => loadPreloadedOption('op viable 20', 'data/opviable20.json');
         document.getElementById('load-viable19-btn').onclick = () => loadPreloadedOption('op viable 19', 'data/opviable19.json');
     </script>
