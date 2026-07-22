@@ -4,14 +4,6 @@
     "id": "unassigned-slot",
     "items": [
       {
-        "id": "item-31",
-        "text": "Atención P/N (1h)",
-        "valL": "0",
-        "valC": "1",
-        "value": "1",
-        "type": "C"
-      },
-      {
         "id": "item-38",
         "text": "Gardas",
         "valL": "0",
@@ -114,6 +106,14 @@
         "text": "2º B ESO (5h)",
         "value": "5",
         "type": "L"
+      },
+      {
+        "id": "item-31",
+        "text": "Atención P/N (1h)",
+        "valL": "0",
+        "valC": "1",
+        "value": "1",
+        "type": "C"
       }
     ]
   },
