@@ -1240,7 +1240,7 @@
         const SUBJECT_NAMES = {
             "1º A ESO (4h)": "Matemáticas 1º ESO A", "1º B ESO (4h)": "Matemáticas 1º ESO B",
             "2º A ESO (5h)": "Matemáticas 2º ESO A", "2º B ESO (5h)": "Matemáticas 2º ESO B",
-            "Ex. Francés 2ºA (1h)": "Expatriado Francés 2º ESO A", "Ex. Francés 2ºB (1h)": "Expatriado Francés 2º ESO B",
+
             "3º A ESO (4h)": "Matemáticas 3º ESO A", "3º B ESO (4h)": "Matemáticas 3º ESO B",
             "4º ESO M.A. (4h)": "Matemáticas Académicas 4º ESO A", "4º ESO M.B. (4h)": "Matemáticas Académicas 4º ESO B",
             "3º PDC (8h)": "Ámbito Científico-Tecnolóxico 3º PDC",
@@ -1249,7 +1249,7 @@
             "1º FPB PE (5h)": "Ciencias Aplicadas I - 1º FPB PE",
             "2º FPB I.O. (7h)": "Ciencias Aplicadas II - 2º FPB IO",
             "Física y Química 3º (2h)": "Física y Química 3º",
-            "Inglés 2ºFPB IO (2h)": "Inglés - 2º FPB IO",
+            "2ºFPB P.E. (7h)": "2ºFPB P.E.",
             "E.S.A. (8h)": "Matemáticas - Educación Secundaria de Adultos",
             "Xefat. Estudos (14h)": "Xefatura de Estudos", "Xefat. Estudos (16h)": "Xefatura de Estudos",
             "Xefat. dpto (1+2h)": "Xefatura de Departamento", "Consello Esc. (1h)": "Representante Consello Escolar",
@@ -1262,7 +1262,7 @@
         const data = [
             ["1º A ESO (4h)", 4, 'L'], ["1º B ESO (4h)", 4, 'L'], ["__removed_ex_frances_1a__", 0, 'L', undefined, undefined, undefined, true],
             ["__removed_ex_frances_1b__", 0, 'L', undefined, undefined, undefined, true], ["2º A ESO (5h)", 5, 'L'], ["2º B ESO (5h)", 5, 'L'],
-            ["Ex. Francés 2ºA (1h)", 1, 'L'], ["Ex. Francés 2ºB (1h)", 1, 'L'], ["3º A ESO (4h)", 4, 'L'],
+            ["__removed_ex_frances_2a__", 0, 'L', undefined, undefined, undefined, true], ["__removed_ex_frances_2b__", 0, 'L', undefined, undefined, undefined, true], ["3º A ESO (4h)", 4, 'L'],
             ["3º B ESO (4h)", 4, 'L'], ["4º ESO M.A. (4h)", 4, 'L'], ["4º ESO M.B. (4h)", 4, 'L'],
             ["3º PDC (8h)", 8, 'L'], ["1°Bach. CC.SS. (4h)", 4, 'L'], ["1°Bach. C.T. (4h)", 4, 'L'],
             ["2°Bach. CC.SS. (4h)", 4, 'L'], ["2°Bach. C.T. (4h)", 4, 'L'], ["1º FPB PE (5h)", 5, 'L'],
@@ -1278,7 +1278,7 @@
             ["Gardas", 0, 'C', 0, 0, "Almudena"], ["Gardas", 0, 'C', 0, 0, "Pablo"],
             ["Gardas", 0, 'C', 0, 0, "Manu"], ["Gardas", 0, 'C', 0, 0, "Prov."],
             ["__removed_pdc_4__", 0, 'L', undefined, undefined, undefined, true], ["Física y Química 3º (2h)", 2, 'L'],
-            ["Inglés 2ºFPB IO (2h)", 2, 'L']
+            ["2ºFPB P.E. (7h)", 7, 'L']
         ];
 
         const CARD_TEXT_ALIASES = {
@@ -1286,7 +1286,8 @@
             "Tutoría (??) (2h)": "Tutoría 1ºA (2h)",
             "1º PPB I.O. (5h)": "2º FPB I.O. (7h)",
             "Convivencia (3h)": "Convivencia (2h)",
-            "Inglés 2ºFPB PE (2h)": "Física y Química 3º (2h)"
+            "Inglés 2ºFPB PE (2h)": "Física y Química 3º (2h)",
+            "Inglés 2ºFPB IO (2h)": "2ºFPB P.E. (7h)"
         };
 
         function normalizeCardText(text) {
@@ -1470,8 +1471,6 @@
             "1º B ESO (4h)": { grupo: "1ºB ESO", mat: "Matemáticas 1º", visibilidad: "normal", tipo: "Lectiva" },
             "2º A ESO (5h)": { grupo: "2ºA ESO", mat: "Matemáticas 2º", visibilidad: "normal", tipo: "Lectiva" },
             "2º B ESO (5h)": { grupo: "2ºB ESO", mat: "Matemáticas 2º", visibilidad: "normal", tipo: "Lectiva" },
-            "Ex. Francés 2ºA (1h)": { grupo: "2ºA ESO", mat: "Exención Francés", visibilidad: "normal", tipo: "Lectiva" },
-            "Ex. Francés 2ºB (1h)": { grupo: "2ºB ESO", mat: "Exención Francés", visibilidad: "normal", tipo: "Lectiva" },
             "3º A ESO (4h)": { grupo: "3ºA ESO", mat: "Matemáticas 3º", visibilidad: "normal", tipo: "Lectiva" },
             "3º B ESO (4h)": { grupo: "3ºB ESO", mat: "Matemáticas 3º", visibilidad: "normal", tipo: "Lectiva" },
             "4º ESO M.A. (4h)": { grupo: "4ºAB ESO", mat: "Matemáticas A 4º", visibilidad: "normal", tipo: "Lectiva" },
@@ -1484,7 +1483,7 @@
             "1º FPB PE (5h)": { grupo: "1º FPB PE", mat: "Ciencias Aplicadas I", visibilidad: "normal", tipo: "Lectiva" },
             "2º FPB I.O. (7h)": { grupo: "2º FPB IO", mat: "Ciencias Aplicadas II", visibilidad: "normal", tipo: "Lectiva" },
             "Física y Química 3º (2h)": { grupo: "3º", mat: "FYQ", visibilidad: "normal", tipo: "Lectiva" },
-            "Inglés 2ºFPB IO (2h)": { grupo: "2º FPB IO", mat: "Inglés", visibilidad: "normal", tipo: "Lectiva" },
+            "2ºFPB P.E. (7h)": { grupo: "2º FPB P.E.", mat: "2ºFPB P.E.", visibilidad: "normal", tipo: "Lectiva" },
             "E.S.A. (8h)": { grupo: "E.S.P.A.", mat: "E. Secundaria de Adultos", visibilidad: "normal", tipo: "Lectiva" },
             "Xefat. Estudos (14h)": { grupo: "X.E.", mat: "Xefatura de Estudos", visibilidad: "CP", tipo: "Lectiva" },
             "Xefat. Estudos (16h)": { grupo: "X.E.", mat: "Xefatura de Estudos", visibilidad: "CP", tipo: "Lectiva" },

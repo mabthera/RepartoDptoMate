@@ -152,12 +152,6 @@
         "type": "L"
       },
       {
-        "id": "item-6",
-        "text": "Ex. Francés 2ºA (1h)",
-        "value": "1",
-        "type": "L"
-      },
-      {
         "id": "item-10",
         "text": "4º ESO M.A. (4h)",
         "value": "4",
@@ -207,12 +201,6 @@
         "id": "item-8",
         "text": "3º A ESO (4h)",
         "value": "4",
-        "type": "L"
-      },
-      {
-        "id": "item-7",
-        "text": "Ex. Francés 2ºB (1h)",
-        "value": "1",
         "type": "L"
       }
     ]
