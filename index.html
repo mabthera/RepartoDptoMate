@@ -1529,7 +1529,7 @@
             "2°Bach. C.T. (4h)": { grupo: "2ºB Bach", mat: "Matemáticas II", visibilidad: "normal", tipo: "Lectiva" },
             "1º FPB PE (5h)": { grupo: "1º FPB PE", mat: "Ciencias Aplicadas I", visibilidad: "normal", tipo: "Lectiva" },
             "2º FPB I.O. (7h)": { grupo: "2º FPB IO", mat: "Ciencias Aplicadas II", visibilidad: "normal", tipo: "Lectiva" },
-            "Física y Química 3º (2h)": { grupo: "3º", mat: "FYQ", visibilidad: "normal", tipo: "Lectiva" },
+            "Física y Química 3º (2h)": { grupo: "3ºB", mat: "Física y Química", visibilidad: "normal", tipo: "Lectiva" },
             "2ºFPB P.E. (7h)": { grupo: "2º FPB P.E.", mat: "2ºFPB P.E.", visibilidad: "normal", tipo: "Lectiva" },
             "E.S.A. (8h)": { grupo: "E.S.P.A.", mat: "E. Secundaria de Adultos", visibilidad: "normal", tipo: "Lectiva" },
             "Xefat. Estudos (14h)": { grupo: "X.E.", mat: "Xefatura de Estudos", visibilidad: "CP", tipo: "Lectiva" },
@@ -1545,6 +1545,14 @@
             "Atención P/N (1h)": { grupo: "-", mat: "Atención País Naís", visibilidad: "CP", tipo: "Complementaria" }
         };
 
+        function getReportCargo(cardName) {
+            const tutoriaMatch = cardName.match(/^Tutoría\s+(.+?)\s+\(2h\)$/);
+            if (tutoriaMatch) return `Titor/a ${tutoriaMatch[1]} ESO`;
+            if (/^Xef(?:at)?\. dpto/.test(cardName)) return 'Xefatura de departamento';
+            if (/^Xef(?:at)?\. Estud(?:os|ios)/.test(cardName)) return 'Xefatura de Estudos';
+            return null;
+        }
+
         function openReport(profName) {
             document.getElementById('profesor').value = profName.toUpperCase();
             const slot = [...slots].find(s => s.dataset.name === profName);
@@ -1553,11 +1561,15 @@
 
             const items = slot.querySelectorAll('.item');
             const unique = [];
+            const cargos = [];
 
             items.forEach(it => {
                 let txt = normalizeCardText(it.textContent.trim());
                 const configurableCard = getConfigurableCardName(it);
                 if (configurableCard) txt = configurableCard;
+
+                const reportCargo = getReportCargo(txt);
+                if (reportCargo && !cargos.includes(reportCargo)) cargos.push(reportCargo);
 
                 const hoursInput = getConfigurableHoursInput(it);
                 const sesTotal = hoursInput ? (parseInt(hoursInput.value) || 0) : parseInt(it.dataset.value) || 0;
@@ -1599,6 +1611,8 @@
                 if (a.tipo !== 'Lectiva' && b.tipo === 'Lectiva') return 1;
                 return 0;
             });
+
+            document.getElementById('cargo').value = cargos.join('; ');
 
             unique.forEach(u => {
                 const isSmallCP = u.vis === "CP" && u.tipo !== 'Lectiva';
