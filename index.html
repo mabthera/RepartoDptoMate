@@ -772,6 +772,9 @@
         <button id="load-base-btn"
             style="padding: 10px 20px; cursor: pointer; background-color: #e67e22; color: white; border: none; border-radius: 5px;">🔄
             Opción viable 1</button>
+        <button id="load-viable20-btn"
+            style="padding: 10px 20px; cursor: pointer; background-color: #c13c8a; color: white; border: none; border-radius: 5px; margin-left: 8px;">🔄
+            Op viable 20</button>
         <input type="file" id="import-file" style="display: none;" accept=".json">
     </div>
 
@@ -1740,10 +1743,10 @@
             r.readAsText(f);
         };
 
-        document.getElementById('load-base-btn').onclick = async () => {
-            if (!confirm('¿Cargar opción viable 1? Se perderá el reparto actual.')) return;
+        async function loadPreloadedOption(label, url) {
+            if (!confirm(`¿Cargar ${label}? Se perderá el reparto actual.`)) return;
             try {
-                const res = await fetch('data/opviable.json');
+                const res = await fetch(url);
                 const cfg = await res.json();
                 itemsContainerL.innerHTML = ''; itemsContainerC.innerHTML = '';
                 document.querySelectorAll('.slot-content').forEach(sc => sc.innerHTML = '');
@@ -1766,9 +1769,12 @@
                     });
                 });
                 updateAllCounts();
-                alert('Opción viable 1 cargada.');
+                alert(`${label} cargada.`);
             } catch (e) { alert('Error: ' + e.message); }
-        };
+        }
+
+        document.getElementById('load-base-btn').onclick = () => loadPreloadedOption('opción viable 1', 'data/opviable.json');
+        document.getElementById('load-viable20-btn').onclick = () => loadPreloadedOption('op viable 20', 'data/opviable20.json');
     </script>
 </body>
 

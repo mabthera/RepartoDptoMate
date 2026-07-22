@@ -1,0 +1,300 @@
+[
+  {
+    "name": "Horas sin asignar",
+    "id": "unassigned-slot",
+    "items": [
+      {
+        "id": "item-31",
+        "text": "Atención P/N (1h)",
+        "valL": "0",
+        "valC": "1",
+        "value": "1",
+        "type": "C"
+      },
+      {
+        "id": "item-38",
+        "text": "Gardas",
+        "valL": "0",
+        "valC": "3",
+        "value": "3",
+        "type": "C"
+      },
+      {
+        "id": "item-35",
+        "text": "Atención P/N (1h)",
+        "valL": "0",
+        "valC": "1",
+        "value": "1",
+        "type": "C"
+      }
+    ]
+  },
+  {
+    "name": "Jaime",
+    "id": "",
+    "items": [
+      {
+        "id": "item-30",
+        "text": "Atención P/N (1h)",
+        "valL": "0",
+        "valC": "1",
+        "value": "1",
+        "type": "C"
+      },
+      {
+        "id": "item-20",
+        "text": "Xefat. Estudos (14h)",
+        "value": "14",
+        "type": "L"
+      },
+      {
+        "id": "item-39",
+        "text": "Gardas",
+        "valL": "0",
+        "valC": "4",
+        "value": "4",
+        "type": "C"
+      },
+      {
+        "id": "item-9",
+        "text": "3º B ESO (4h)",
+        "value": "4",
+        "type": "L"
+      }
+    ]
+  },
+  {
+    "name": "David",
+    "id": "",
+    "items": [
+      {
+        "id": "item-37",
+        "text": "Gardas",
+        "valL": "0",
+        "valC": "0",
+        "value": "0",
+        "type": "C"
+      },
+      {
+        "id": "item-13",
+        "text": "1°Bach. CC.SS. (4h)",
+        "value": "4",
+        "type": "L"
+      },
+      {
+        "id": "item-22",
+        "text": "Consello Esc. (1h)",
+        "value": "1",
+        "type": "C"
+      },
+      {
+        "id": "item-23",
+        "text": "Convivencia (2h)",
+        "valL": "0",
+        "valC": "2",
+        "value": "2",
+        "type": "C"
+      },
+      {
+        "id": "item-21",
+        "text": "Xefat. dpto (1+2h)",
+        "valL": "1",
+        "valC": "2",
+        "value": "3",
+        "type": "C"
+      },
+      {
+        "id": "item-18",
+        "text": "2º FPB I.O. (7h)",
+        "value": "7",
+        "type": "L"
+      },
+      {
+        "id": "item-5",
+        "text": "2º B ESO (5h)",
+        "value": "5",
+        "type": "L"
+      }
+    ]
+  },
+  {
+    "name": "Almudena",
+    "id": "",
+    "items": [
+      {
+        "id": "item-32",
+        "text": "Atención P/N (1h)",
+        "valL": "0",
+        "valC": "1",
+        "value": "1",
+        "type": "C"
+      },
+      {
+        "id": "item-40",
+        "text": "Gardas",
+        "valL": "0",
+        "valC": "3",
+        "value": "3",
+        "type": "C"
+      },
+      {
+        "id": "item-14",
+        "text": "1°Bach. C.T. (4h)",
+        "value": "4",
+        "type": "L"
+      },
+      {
+        "id": "item-29",
+        "text": "Dpto. Orientación (1h)",
+        "value": "1",
+        "type": "C"
+      },
+      {
+        "id": "item-25",
+        "text": "Tutoría 3ºA (2h)",
+        "value": "2",
+        "type": "L"
+      },
+      {
+        "id": "item-8",
+        "text": "3º A ESO (4h)",
+        "value": "4",
+        "type": "L"
+      },
+      {
+        "id": "item-1",
+        "text": "1º B ESO (4h)",
+        "value": "4",
+        "type": "L"
+      },
+      {
+        "id": "item-10",
+        "text": "4º ESO M.A. (4h)",
+        "value": "4",
+        "type": "L"
+      }
+    ]
+  },
+  {
+    "name": "Pablo",
+    "id": "",
+    "items": [
+      {
+        "id": "item-41",
+        "text": "Gardas",
+        "valL": "0",
+        "valC": "5",
+        "value": "5",
+        "type": "C"
+      },
+      {
+        "id": "item-15",
+        "text": "2°Bach. CC.SS. (4h)",
+        "value": "4",
+        "type": "L"
+      },
+      {
+        "id": "item-33",
+        "text": "Atención P/N (1h)",
+        "valL": "0",
+        "valC": "1",
+        "value": "1",
+        "type": "C"
+      },
+      {
+        "id": "item-0",
+        "text": "1º A ESO (4h)",
+        "value": "4",
+        "type": "L"
+      },
+      {
+        "id": "item-4",
+        "text": "2º A ESO (5h)",
+        "value": "5",
+        "type": "L"
+      },
+      {
+        "id": "item-24",
+        "text": "Tutoría 1ºA (2h)",
+        "value": "2",
+        "type": "L"
+      },
+      {
+        "id": "item-43",
+        "text": "Física y Química 3º (2h)",
+        "value": "2",
+        "type": "L"
+      }
+    ]
+  },
+  {
+    "name": "Manu",
+    "id": "",
+    "items": [
+      {
+        "id": "item-34",
+        "text": "Atención P/N (1h)",
+        "valL": "0",
+        "valC": "1",
+        "value": "1",
+        "type": "C"
+      },
+      {
+        "id": "item-36",
+        "text": "Gardas",
+        "valL": "0",
+        "valC": "4",
+        "value": "4",
+        "type": "C"
+      },
+      {
+        "id": "item-12",
+        "text": "3º PDC (8h)",
+        "value": "8",
+        "type": "L"
+      },
+      {
+        "id": "item-11",
+        "text": "4º ESO M.B. (4h)",
+        "value": "4",
+        "type": "L"
+      },
+      {
+        "id": "item-16",
+        "text": "2°Bach. C.T. (4h)",
+        "value": "4",
+        "type": "L"
+      },
+      {
+        "id": "item-26",
+        "text": "Tutoría 4ºA (2h)",
+        "value": "2",
+        "type": "L"
+      }
+    ]
+  },
+  {
+    "name": "Prov.",
+    "id": "",
+    "items": [
+      {
+        "id": "item-19",
+        "text": "E.S.A. (8h)",
+        "value": "8",
+        "type": "L"
+      },
+      {
+        "id": "item-17",
+        "text": "1º FPB PE (5h)",
+        "value": "5",
+        "type": "L"
+      },
+      {
+        "id": "item-44",
+        "text": "2ºFPB P.E. (7h)",
+        "value": "7",
+        "type": "L"
+      }
+    ]
+  }
+]
