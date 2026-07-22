@@ -440,7 +440,7 @@
 
         .report-bottom-grid {
             display: grid;
-            grid-template-columns: minmax(220px, 0.95fr) minmax(230px, 1fr) minmax(360px, 1.45fr);
+            grid-template-columns: minmax(170px, 0.85fr) minmax(210px, 1fr) minmax(330px, 1.45fr) minmax(220px, 1fr);
             gap: 16px;
             align-items: start;
         }
@@ -467,6 +467,15 @@
         .report-options-table td:first-child {
             width: 28px;
             text-align: center;
+        }
+
+
+        .report-observations-textarea {
+            height: 92px;
+            margin-top: 0;
+            padding: 6px;
+            font-size: 14px;
+            resize: none;
         }
 
         /* Modal Overlay (Para el sub-modal del horario) */
@@ -704,7 +713,7 @@
             }
 
             .report-bottom-grid {
-                grid-template-columns: 0.95fr 1fr 1.45fr !important;
+                grid-template-columns: 0.85fr 1fr 1.45fr 1fr !important;
                 gap: 10px !important;
             }
 
@@ -737,6 +746,14 @@
             .document-container textarea {
                 height: 50px !important;
                 /* Ligeramente más pequeño también */
+            }
+
+
+            .document-container .report-observations-textarea {
+                height: 72px !important;
+                margin-top: 0 !important;
+                padding: 4px !important;
+                font-size: 12px !important;
             }
 
             /* Ocultar elementos interactivos al imprimir */
@@ -1126,6 +1143,11 @@
                                     <tr><td><input type="checkbox" name="pref_non_luns_tarde"></td><td>Non ter docencia o luns pola tarde</td></tr>
                                 </tbody>
                             </table>
+                        </div>
+
+                        <div class="report-bottom-col">
+                            <div class="section-title">Outras observacións</div>
+                            <textarea class="report-observations-textarea" name="outras_observacions"></textarea>
                         </div>
                     </div>
                 </div>
