@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -438,6 +438,37 @@
             font-size: 14px;
         }
 
+        .report-bottom-grid {
+            display: grid;
+            grid-template-columns: minmax(220px, 0.95fr) minmax(230px, 1fr) minmax(360px, 1.45fr);
+            gap: 16px;
+            align-items: start;
+        }
+
+        .report-bottom-col .section-title {
+            margin: 0 0 8px 0;
+        }
+
+        .report-options-table {
+            font-size: 14px;
+        }
+
+        .report-options-table th {
+            background-color: #f8f9fa;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .report-options-table td {
+            text-align: left;
+            padding: 2px 6px;
+        }
+
+        .report-options-table td:first-child {
+            width: 28px;
+            text-align: center;
+        }
+
         /* Modal Overlay (Para el sub-modal del horario) */
         .modal-overlay.schedule-modal {
             display: none;
@@ -592,7 +623,7 @@
         @media print {
             @page {
                 size: A4 landscape;
-                margin: 12mm;
+                margin: 8mm;
             }
 
             body {
@@ -654,8 +685,8 @@
             }
 
             .document-container .section-box {
-                padding: 10px 15px !important;
-                margin-bottom: 15px !important;
+                padding: 8px 10px !important;
+                margin-bottom: 10px !important;
                 page-break-inside: avoid;
             }
 
@@ -670,6 +701,32 @@
             .document-container textarea {
                 border: 1px solid #ddd !important;
                 padding: 1px 2px !important;
+            }
+
+            .report-bottom-grid {
+                grid-template-columns: 0.95fr 1fr 1.45fr !important;
+                gap: 10px !important;
+            }
+
+            .document-container .selected-hours-display {
+                padding: 6px !important;
+                margin-top: 6px !important;
+                gap: 3px !important;
+            }
+
+            .report-options-table,
+            .report-options-table th {
+                font-size: 12px !important;
+            }
+
+            .report-bottom-section {
+                padding: 6px 8px !important;
+                margin-bottom: 0 !important;
+            }
+
+            .report-bottom-col .section-title {
+                font-size: 12px !important;
+                margin-bottom: 5px !important;
             }
 
             .document-container th,
@@ -1026,50 +1083,50 @@
                 </div>
 
                 <!-- Horario y opciones finales -->
-                <div class="section-box" style="margin-bottom: 0;">
-                    <div style="margin-bottom: 14px;">
-                        <label style="font-weight: bold; display: block; margin-bottom: 10px;">Solicitude de dúas horas para pechar no horario:</label>
-                        <button type="button" class="btn-calendar" id="btn-open-modal">
-                            📅 Seleccionar Horas no Calendario
-                        </button>
+                <div class="section-box report-bottom-section" style="margin-bottom: 0;">
+                    <div class="report-bottom-grid">
+                        <div class="report-bottom-col">
+                            <div class="section-title">Solicitude de horas</div>
+                            <button type="button" class="btn-calendar" id="btn-open-modal">
+                                📅 Seleccionar Horas no Calendario
+                            </button>
 
-                        <div class="selected-hours-display" id="selected-hours-container">
-                            <div id="display-hora-1"><b>1ª Hora:</b> <span style="color:#777; font-style:italic;">Sen seleccionar</span></div>
-                            <div id="display-hora-2"><b>2ª Hora:</b> <span style="color:#777; font-style:italic;">Sen seleccionar</span></div>
-                            <input type="hidden" name="hora_cierre_1" id="hidden-hora-1">
-                            <input type="hidden" name="hora_cierre_2" id="hidden-hora-2">
+                            <div class="selected-hours-display" id="selected-hours-container">
+                                <div id="display-hora-1"><b>1ª Hora:</b> <span style="color:#777; font-style:italic;">Sen seleccionar</span></div>
+                                <div id="display-hora-2"><b>2ª Hora:</b> <span style="color:#777; font-style:italic;">Sen seleccionar</span></div>
+                                <input type="hidden" name="hora_cierre_1" id="hidden-hora-1">
+                                <input type="hidden" name="hora_cierre_2" id="hidden-hora-2">
+                            </div>
                         </div>
-                    </div>
 
-                    <div style="display: grid; grid-template-columns: minmax(280px, 1fr) minmax(420px, 1.85fr); gap: 68px; align-items: start;">
-                        <table class="report-options-table" style="width: 100%; border-collapse: collapse; font-size: 16px;">
-                            <thead>
-                                <tr>
-                                    <th colspan="2" style="background: #d8e6c1; border: 1px solid #333; padding: 4px 8px; font-size: 18px; text-align: center;">Voluntaria/o para:</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td style="width: 32px; border: 1px solid #333; text-align: center;"><input type="checkbox" name="vol_biblioteca"></td><td style="border: 1px solid #333; padding: 2px 10px;">Gardas de biblioteca</td></tr>
-                                <tr><td style="width: 32px; border: 1px solid #333; text-align: center;"><input type="checkbox" name="vol_transporte"></td><td style="border: 1px solid #333; padding: 2px 10px;">Gardas de transporte</td></tr>
-                                <tr><td style="width: 32px; border: 1px solid #333; text-align: center;"><input type="checkbox" name="vol_recreo"></td><td style="border: 1px solid #333; padding: 2px 10px;">Gardas de recreo</td></tr>
-                                <tr><td style="width: 32px; border: 1px solid #333; text-align: center;"><input type="checkbox" name="vol_entrada_810_bac"></td><td style="border: 1px solid #333; padding: 2px 10px;">Entrar ás 8:10 en BAC</td></tr>
-                                <tr><td style="width: 32px; border: 1px solid #333; text-align: center;"><input type="checkbox" name="vol_luns_tarde"></td><td style="border: 1px solid #333; padding: 2px 10px;">Dar clase os luns pola tarde</td></tr>
-                            </tbody>
-                        </table>
+                        <div class="report-bottom-col">
+                            <table class="report-options-table">
+                                <thead>
+                                    <tr><th colspan="2">Voluntaria/o para:</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><input type="checkbox" name="vol_biblioteca"></td><td>Gardas de biblioteca</td></tr>
+                                    <tr><td><input type="checkbox" name="vol_transporte"></td><td>Gardas de transporte</td></tr>
+                                    <tr><td><input type="checkbox" name="vol_recreo"></td><td>Gardas de recreo</td></tr>
+                                    <tr><td><input type="checkbox" name="vol_entrada_810_bac"></td><td>Entrar ás 8:10 en BAC</td></tr>
+                                    <tr><td><input type="checkbox" name="vol_luns_tarde"></td><td>Dar clase os luns pola tarde</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                        <table class="report-options-table" style="width: 100%; border-collapse: collapse; font-size: 16px;">
-                            <thead>
-                                <tr>
-                                    <th colspan="2" style="background: #d8e6c1; border: 1px solid #333; padding: 4px 8px; font-size: 18px; text-align: center;">Se fose posible, desexaría...</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr><td style="width: 32px; border: 1px solid #333; text-align: center;"><input type="checkbox" name="pref_non_primeiras"></td><td style="border: 1px solid #333; padding: 2px 10px;">Non entrar a primeiras horas</td></tr>
-                                <tr><td style="width: 32px; border: 1px solid #333; text-align: center;"><input type="checkbox" name="pref_non_ultimas"></td><td style="border: 1px solid #333; padding: 2px 10px;">Non saír a últimas horas</td></tr>
-                                <tr><td style="width: 32px; border: 1px solid #333; text-align: center;"><input type="checkbox" name="pref_non_xoves_1430"></td><td style="border: 1px solid #333; padding: 2px 10px;">Non ter docencia os xoves na hora de 14:30 a 15:20</td></tr>
-                                <tr><td style="width: 32px; border: 1px solid #333; text-align: center;"><input type="checkbox" name="pref_non_luns_tarde"></td><td style="border: 1px solid #333; padding: 2px 10px;">Non ter docencia o luns pola tarde</td></tr>
-                            </tbody>
-                        </table>
+                        <div class="report-bottom-col">
+                            <table class="report-options-table">
+                                <thead>
+                                    <tr><th colspan="2">Se fose posible, desexaría...</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><input type="checkbox" name="pref_non_primeiras"></td><td>Non entrar a primeiras horas</td></tr>
+                                    <tr><td><input type="checkbox" name="pref_non_ultimas"></td><td>Non saír a últimas horas</td></tr>
+                                    <tr><td><input type="checkbox" name="pref_non_xoves_1430"></td><td>Non ter docencia os xoves na hora de 14:30 a 15:20</td></tr>
+                                    <tr><td><input type="checkbox" name="pref_non_luns_tarde"></td><td>Non ter docencia o luns pola tarde</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
