@@ -1891,6 +1891,12 @@
             if (repartoObservationsInput) repartoObservationsInput.value = value || '';
         }
 
+        const PRELOADED_OPTION_OBSERVATIONS = {
+            'op viable 19': 'Falta por confirmar si se puede obligar al provisional a coger las 19h, en el caso de que alguien tenga que ir a 19.',
+            'op viable 20': 'Falta por confirmar si se puede obligar al provisional a coger las 19h, en el caso de que alguien tenga que ir a 19.',
+            'op viable no auth': 'Falta confirmar si alguien a 19 horas puede mantener las 23 de permanencia en centro. Y luego cerrar con la posibilidad de reducir las dos horas complementarias de Xef. Dpto y sacando la de atención a P/N'
+        };
+
         setRepartoObservations('');
 
         document.getElementById('export-btn').onclick = async () => {
@@ -1983,11 +1989,11 @@
         async function loadPreloadedOption(label, url) {
             if (!confirm(`¿Cargar ${label}? Se perderá el reparto actual.`)) return;
             try {
-                const res = await fetch(url);
+                const res = await fetch(url + '?v=' + Date.now(), { cache: 'no-store' });
                 const cfg = await res.json();
                 itemsContainerL.innerHTML = ''; itemsContainerC.innerHTML = '';
                 document.querySelectorAll('.slot-content').forEach(sc => sc.innerHTML = '');
-                setRepartoObservations(getConfigObservations(cfg));
+                setRepartoObservations(getConfigObservations(cfg) || PRELOADED_OPTION_OBSERVATIONS[label] || '');
                 initItems();
                 getConfigSlots(cfg).forEach(sd => {
                     if (sd.id === REPARTO_OBSERVATIONS_CONFIG_ID) return;
