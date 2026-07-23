@@ -10,14 +10,6 @@
         "valC": "2",
         "value": "2",
         "type": "C"
-      },
-      {
-        "id": "item-35",
-        "text": "Atención P/N (1h)",
-        "valL": "0",
-        "valC": "1",
-        "value": "1",
-        "type": "C"
       }
     ]
   },
@@ -79,6 +71,14 @@
         "valL": "0",
         "valC": "0",
         "value": "0",
+        "type": "C"
+      },
+      {
+        "id": "item-35",
+        "text": "Atención P/N (1h)",
+        "valL": "0",
+        "valC": "1",
+        "value": "1",
         "type": "C"
       },
       {
