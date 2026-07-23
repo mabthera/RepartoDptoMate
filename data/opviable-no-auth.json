@@ -2,7 +2,24 @@
   {
     "name": "Horas sin asignar",
     "id": "unassigned-slot",
-    "items": []
+    "items": [
+      {
+        "id": "item-23",
+        "text": "Convivencia (2h)",
+        "valL": "0",
+        "valC": "2",
+        "value": "2",
+        "type": "C"
+      },
+      {
+        "id": "item-35",
+        "text": "Atención P/N (1h)",
+        "valL": "0",
+        "valC": "1",
+        "value": "1",
+        "type": "C"
+      }
+    ]
   },
   {
     "name": "Jaime",
@@ -49,27 +66,11 @@
         "type": "C"
       },
       {
-        "id": "item-23",
-        "text": "Convivencia (2h)",
-        "valL": "0",
-        "valC": "2",
-        "value": "2",
-        "type": "C"
-      },
-      {
         "id": "item-21",
         "text": "Xefat. dpto (1+2h)",
         "valL": "1",
         "valC": "2",
         "value": "3",
-        "type": "C"
-      },
-      {
-        "id": "item-35",
-        "text": "Atención P/N (1h)",
-        "valL": "0",
-        "valC": "1",
-        "value": "1",
         "type": "C"
       },
       {
