@@ -670,7 +670,7 @@
         @media print {
             @page {
                 size: A4 landscape;
-                margin: 5mm;
+                margin: 6.5mm;
             }
 
             body {
@@ -714,26 +714,26 @@
             }
 
             .document-container .header-col {
-                font-size: 8px !important;
+                font-size: 10px !important;
             }
             .document-container .header {
-                margin-bottom: 1px !important;
-                padding-bottom: 2px !important;
+                margin-bottom: 4px !important;
+                padding-bottom: 5px !important;
                 border-bottom-width: 1px !important;
-                line-height: 1.05 !important;
+                line-height: 1.2 !important;
             }
 
             .document-container .header-col {
-                line-height: 1.05 !important;
+                line-height: 1.2 !important;
             }
 
             .document-container .section-title {
-                font-size: 10px !important;
-                margin-bottom: 1px !important;
+                font-size: 11px !important;
+                margin-bottom: 4px !important;
             }
 
             #report-subjects-table {
-                line-height: 1 !important;
+                line-height: 1.1 !important;
             }
 
             #report-subjects-table th {
@@ -741,11 +741,11 @@
             }
 
             #report-hours-summary {
-                margin-top: 3px !important;
+                margin-top: 5px !important;
             }
 
             .document-container .row {
-                gap: 6px !important;
+                gap: 8px !important;
             }
 
             .document-container .form-group {
@@ -754,44 +754,44 @@
             }
 
             .document-container .form-group label {
-                font-size: 9px !important;
-                line-height: 1 !important;
+                font-size: 10px !important;
+                line-height: 1.1 !important;
                 margin: 0 !important;
             }
 
             .document-container .form-group input,
             .document-container .form-group select {
-                min-height: 14px !important;
-                line-height: 1 !important;
+                min-height: 18px !important;
+                line-height: 1.1 !important;
             }
 
             #report-subjects-table input {
-                line-height: 1 !important;
-                min-height: 13px !important;
+                line-height: 1.1 !important;
+                min-height: 16px !important;
             }
 
             .document-container .header-col[style*="font-size: 22px"] {
-                font-size: 12px !important;
+                font-size: 14px !important;
             }
 
             .document-container .header-col strong[style*="font-size: 28px"] {
-                font-size: 14px !important;
+                font-size: 18px !important;
             }
 
             #report-modal input,
             #report-modal textarea,
             #report-modal select {
-                font-size: 10px !important;
+                font-size: 11px !important;
             }
 
             .document-container .section-box {
-                padding: 3px 5px !important;
-                margin-bottom: 1px !important;
+                padding: 6px 8px !important;
+                margin-bottom: 4px !important;
                 page-break-inside: avoid;
             }
 
             .document-container .row {
-                margin-bottom: 1px !important;
+                margin-bottom: 4px !important;
             }
 
             .document-container input[type="text"],
@@ -800,27 +800,27 @@
             .document-container select,
             .document-container textarea {
                 border: 1px solid #ddd !important;
-                padding: 0 1px !important;
+                padding: 1px 2px !important;
             }
 
             .report-bottom-grid {
                 grid-template-columns: 0.85fr 1fr 1.45fr 1fr !important;
-                gap: 6px !important;
+                gap: 8px !important;
             }
 
             .document-container .selected-hours-display {
-                padding: 3px !important;
-                margin-top: 3px !important;
-                gap: 1px !important;
+                padding: 5px !important;
+                margin-top: 5px !important;
+                gap: 2px !important;
             }
 
             .report-options-table,
             .report-options-table th {
-                font-size: 10px !important;
+                font-size: 11px !important;
             }
 
             .report-bottom-section {
-                padding: 3px 5px !important;
+                padding: 6px 8px !important;
                 margin-bottom: 0 !important;
             }
 
@@ -829,13 +829,13 @@
             }
 
             .report-bottom-col .section-title {
-                font-size: 10px !important;
-                margin-bottom: 1px !important;
+                font-size: 11px !important;
+                margin-bottom: 4px !important;
             }
 
             .document-container th,
             .document-container td {
-                padding: 0 1px !important;
+                padding: 1px 2px !important;
             }
 
             .document-container textarea {
@@ -845,10 +845,10 @@
 
 
             .document-container .report-observations-textarea {
-                height: 34px !important;
+                height: 54px !important;
                 margin-top: 0 !important;
-                padding: 2px !important;
-                font-size: 10px !important;
+                padding: 3px !important;
+                font-size: 11px !important;
             }
 
             /* Ocultar elementos interactivos al imprimir */
@@ -1193,9 +1193,9 @@
                     </div>
                     <div id="report-hours-summary" style="margin-top: 4px; display: flex; justify-content: space-between; align-items: center; gap: 16px;">
                         <input type="text" id="report-hours-total" readonly
-                            style="width: 160px; font-size: 13px; font-weight: 800; color: #003399; text-align: center; border: 2px solid #333; background: #fff;">
+                            style="width: 170px; font-size: 14px; font-weight: 800; color: #003399; text-align: center; border: 2px solid #333; background: #fff;">
                         <input type="text" id="report-hours-warning" readonly
-                            style="flex: 1; font-size: 12px; font-weight: 800; color: #b00020; text-align: left; border: none; background: transparent;">
+                            style="flex: 1; font-size: 13px; font-weight: 800; color: #b00020; text-align: left; border: none; background: transparent;">
                     </div>
                 </div>
 
@@ -1810,7 +1810,7 @@
             unique.forEach(u => {
                 const isSmallCP = u.vis === "CP" && u.tipo !== 'Lectiva';
                 const rowStyle = isSmallCP ? "font-style: italic; font-size: 10px; font-weight: 400; color: #003399;" : "font-size: 16px; font-weight: 800; color: #003399;";
-                const notesStyle = isSmallCP ? "font-style: italic; font-size: 8px; font-weight: 400; color: #003399;" : "font-size: 14px; font-weight: 800; color: #003399;";
+                const notesStyle = isSmallCP ? "font-style: italic; font-size: 9px; font-weight: 400; color: #003399;" : "font-size: 14px; font-weight: 800; color: #003399;";
                 const tdStyle = isSmallCP ? "" : "border: 2px solid #333;";
                 const shortTipo = u.tipo === 'Lectiva' ? 'L' : 'C';
 
@@ -1826,7 +1826,7 @@
             });
 
             // Rellenar solo las filas vacías imprescindibles para reducir el alto del informe
-            for (let i = unique.length; i < 4; i++) {
+            for (let i = unique.length; i < 5; i++) {
                 body.innerHTML += `<tr>
                                     <td><input type="text"></td>
                                     <td><input type="text"></td>
