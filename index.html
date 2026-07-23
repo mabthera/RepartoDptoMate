@@ -1038,7 +1038,7 @@
 
     <div class="reparto-observations-card">
         <h3>Observaciones del reparto</h3>
-        <textarea id="reparto-observations" placeholder="Anota aquí cualquier observación general del reparto..."></textarea>
+        <textarea id="reparto-observations" autocomplete="off" placeholder="Anota aquí cualquier observación general del reparto..."></textarea>
     </div>
 
     <!-- Modal de Informe (AL FINAL DEL BODY) -->
@@ -1891,6 +1891,8 @@
             if (repartoObservationsInput) repartoObservationsInput.value = value || '';
         }
 
+        setRepartoObservations('');
+
         document.getElementById('export-btn').onclick = async () => {
             const config = [];
             slots.forEach(s => {
@@ -1905,13 +1907,15 @@
                 });
                 config.push({ name: s.dataset.name, id: s.id, items });
             });
-            config.push({
-                name: 'Observaciones del reparto',
-                id: REPARTO_OBSERVATIONS_CONFIG_ID,
-                items: [],
-                observations: repartoObservationsInput ? repartoObservationsInput.value : ''
-            });
-
+            const repartoObservations = repartoObservationsInput ? repartoObservationsInput.value.trim() : '';
+            if (repartoObservations) {
+                config.push({
+                    name: 'Observaciones del reparto',
+                    id: REPARTO_OBSERVATIONS_CONFIG_ID,
+                    items: [],
+                    observations: repartoObservations
+                });
+            }
 
             const json = JSON.stringify(config, null, 2);
             const defaultName = 'configuracion_reparto.json';
