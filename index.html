@@ -77,6 +77,33 @@
             justify-content: center;
         }
 
+        .reparto-observations-card {
+            border: 2px solid #d9d9d9;
+            border-radius: 6px;
+            padding: 12px;
+            margin: 0 0 24px 0;
+            background: #fafafa;
+        }
+
+        .reparto-observations-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.05em;
+            color: #333;
+        }
+
+        #reparto-observations {
+            width: 100%;
+            min-height: 90px;
+            box-sizing: border-box;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            resize: vertical;
+            background: #fff;
+        }
+
         /* Modal Styles */
         .modal {
             display: none;
@@ -1009,6 +1036,11 @@
         </div>
     </div>
 
+    <div class="reparto-observations-card">
+        <h3>Observaciones del reparto</h3>
+        <textarea id="reparto-observations" placeholder="Anota aquí cualquier observación general del reparto..."></textarea>
+    </div>
+
     <!-- Modal de Informe (AL FINAL DEL BODY) -->
     <div id="report-modal" class="modal">
         <div class="modal-content" style="background-color: transparent; border: none; box-shadow: none;">
@@ -1839,6 +1871,26 @@
         document.querySelectorAll('.close-btn').forEach(b => b.onclick = () => { helpM.style.display = "none"; guideM.style.display = "none"; reportM.style.display = "none"; schedModal.style.display = "none"; });
         window.onclick = e => { if (e.target === helpM || e.target === guideM || e.target === reportM || e.target === schedModal) { helpM.style.display = "none"; guideM.style.display = "none"; reportM.style.display = "none"; schedModal.style.display = "none"; } };
 
+        const REPARTO_OBSERVATIONS_CONFIG_ID = '__reparto_observations__';
+        const repartoObservationsInput = document.getElementById('reparto-observations');
+
+        function getConfigSlots(config) {
+            if (Array.isArray(config)) return config;
+            if (config && Array.isArray(config.slots)) return config.slots;
+            return [];
+        }
+
+        function getConfigObservations(config) {
+            if (config && !Array.isArray(config) && typeof config.observations === 'string') return config.observations;
+            const entries = getConfigSlots(config);
+            const entry = entries.find(sd => sd && sd.id === REPARTO_OBSERVATIONS_CONFIG_ID);
+            return entry && typeof entry.observations === 'string' ? entry.observations : '';
+        }
+
+        function setRepartoObservations(value) {
+            if (repartoObservationsInput) repartoObservationsInput.value = value || '';
+        }
+
         document.getElementById('export-btn').onclick = async () => {
             const config = [];
             slots.forEach(s => {
@@ -1853,6 +1905,13 @@
                 });
                 config.push({ name: s.dataset.name, id: s.id, items });
             });
+            config.push({
+                name: 'Observaciones del reparto',
+                id: REPARTO_OBSERVATIONS_CONFIG_ID,
+                items: [],
+                observations: repartoObservationsInput ? repartoObservationsInput.value : ''
+            });
+
 
             const json = JSON.stringify(config, null, 2);
             const defaultName = 'configuracion_reparto.json';
@@ -1891,9 +1950,11 @@
             const r = new FileReader();
             r.onload = ev => {
                 const cfg = JSON.parse(ev.target.result);
-                cfg.forEach(sd => {
+                setRepartoObservations(getConfigObservations(cfg));
+                getConfigSlots(cfg).forEach(sd => {
+                    if (sd.id === REPARTO_OBSERVATIONS_CONFIG_ID) return;
                     const s = document.getElementById(sd.id) || [...slots].find(sl => sl.dataset.name === sd.name);
-                    if (!s) return;
+                    if (!s || !Array.isArray(sd.items)) return;
                     sd.items.forEach(idat => {
                         const it = findItemForImport(idat, s);
                         if (it) {
@@ -1922,10 +1983,12 @@
                 const cfg = await res.json();
                 itemsContainerL.innerHTML = ''; itemsContainerC.innerHTML = '';
                 document.querySelectorAll('.slot-content').forEach(sc => sc.innerHTML = '');
+                setRepartoObservations(getConfigObservations(cfg));
                 initItems();
-                cfg.forEach(sd => {
+                getConfigSlots(cfg).forEach(sd => {
+                    if (sd.id === REPARTO_OBSERVATIONS_CONFIG_ID) return;
                     const s = [...slots].find(sl => sl.dataset.name === sd.name);
-                    if (!s) return;
+                    if (!s || !Array.isArray(sd.items)) return;
                     sd.items.forEach(idat => {
                         let it = findItemForImport(idat, s);
                         if (it) {
