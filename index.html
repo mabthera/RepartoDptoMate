@@ -937,7 +937,7 @@
                 <ul class="help-list">
                     <li><strong>Xefatura de Departamento:</strong> <strong>3 horas</strong> (1L + 2C). <span
                             style="color: #27ae60; font-size: 0.85em; font-weight: bold;">✔ Por Instrucción</span></li>
-                    <li><strong>Titoría:</strong> <strong>2 horas lectivas</strong> para 2ºA, 3ºA y 4ºA. <span
+                    <li><strong>Titoría:</strong> <strong>2 horas lectivas</strong> para 1º/2º, 3ºA y 4ºA. <span
                             style="color: #27ae60; font-size: 0.85em; font-weight: bold;">✔ Por Instrucción</span></li>
                     <li><strong>Calidade / Proxectos:</strong> <strong>1 a 2 horas</strong> (C). <span
                             style="color: #555; font-size: 0.85em;">(Variable)</span></li>
@@ -1353,7 +1353,7 @@
             "Xefat. Estudos (14h)": "Xefatura de Estudos", "Xefat. Estudos (16h)": "Xefatura de Estudos",
             "Xefat. dpto (1+2h)": "Xefatura de Departamento", "Consello Esc. (1h)": "Representante Consello Escolar",
             "Convivencia (2h)": "Dinamización Convivencia e Benestar", "Dpto. Orientación (1h)": "Apoyo Departamento Orientación",
-            "Tutoría 2ºA (2h)": "Titoría de Grupo 2ºA", "Tutoría 3ºA (2h)": "Titoría de Grupo 3ºA",
+            "Tutoría 1º/2º (2h)": "Titoría de Grupo 1º/2º", "Tutoría 3ºA (2h)": "Titoría de Grupo 3ºA",
             "Tutoría 4ºA (2h)": "Titoría de Grupo 4ºA", "Gardas": "Garda de Recreo / Pasillo",
             "Atención P/N (1h)": "Atención Educativa / Reforzo"
         };
@@ -1367,7 +1367,7 @@
             ["2°Bach. CC.SS. (4h)", 4, 'L'], ["2°Bach. C.T. (4h)", 4, 'L'], ["1º FPB PE (5h)", 5, 'L'],
             ["2º FPB I.O. (7h)", 7, 'L'], ["E.S.A. (8h)", 8, 'L'], ["Xefat. Estudos (14h)", 14, 'L'],
             ["Xefat. dpto (1+2h)", 3, 'C', 1, 2], ["Consello Esc. (1h)", 1, 'C'], ["Convivencia (2h)", 2, 'C', 0, 2],
-            ["Tutoría 2ºA (2h)", 2, 'L'], ["Tutoría 3ºA (2h)", 2, 'L'],
+            ["Tutoría 1º/2º (2h)", 2, 'L'], ["Tutoría 3ºA (2h)", 2, 'L'],
             ["Tutoría 4ºA (2h)", 2, 'L'], ["__removed_tutoria_27__", 0, 'L', undefined, undefined, undefined, true],
             ["__removed_tutoria_28__", 0, 'L', undefined, undefined, undefined, true], ["Dpto. Orientación (1h)", 1, 'C'],
             ["Atención P/N (1h)", 1, 'C', 0, 1, "Jaime"], ["Atención P/N (1h)", 1, 'C', 0, 1, "David"],
@@ -1381,9 +1381,10 @@
         ];
 
         const CARD_TEXT_ALIASES = {
-            "Tutoría 1ºA (2h)": "Tutoría 2ºA (2h)",
-            "Tutoría (??) (1+1h)": "Tutoría 2ºA (2h)",
-            "Tutoría (??) (2h)": "Tutoría 2ºA (2h)",
+            "Tutoría 1ºA (2h)": "Tutoría 1º/2º (2h)",
+            "Tutoría 2ºA (2h)": "Tutoría 1º/2º (2h)",
+            "Tutoría (??) (1+1h)": "Tutoría 1º/2º (2h)",
+            "Tutoría (??) (2h)": "Tutoría 1º/2º (2h)",
             "1º PPB I.O. (5h)": "2º FPB I.O. (7h)",
             "Convivencia (3h)": "Convivencia (2h)",
             "Inglés 2ºFPB PE (2h)": "Física y Química 3º (2h)",
@@ -1636,7 +1637,7 @@
             "Consello Esc. (1h)": { grupo: "C.E.", mat: "Representante C.E.", visibilidad: "CP", tipo: "Complementaria" },
             "Convivencia (2h)": { grupo: "Convi.", mat: "Dinamización Convivencia", visibilidad: "CP", tipo: "Complementaria" },
             "Dpto. Orientación (1h)": { grupo: "Orient.", mat: "Dpto Orientación", visibilidad: "CP", tipo: "Complementaria" },
-            "Tutoría 2ºA (2h)": { grupo: "2ºA", mat: "Titoría de Grupo", visibilidad: "CP", tipo: "Lectiva" },
+            "Tutoría 1º/2º (2h)": { grupo: "1º/2º", mat: "Titoría de Grupo", visibilidad: "CP", tipo: "Lectiva" },
             "Tutoría 3ºA (2h)": { grupo: "3ºA", mat: "Titoría de Grupo", visibilidad: "CP", tipo: "Lectiva" },
             "Tutoría 4ºA (2h)": { grupo: "4ºA", mat: "Titoría de Grupo", visibilidad: "CP", tipo: "Lectiva" },
             "Gardas": { grupo: "-", mat: "Gardas", visibilidad: "CP", tipo: "Complementaria" },
