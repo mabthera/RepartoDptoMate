@@ -296,5 +296,11 @@
         "type": "L"
       }
     ]
+  },
+  {
+    "name": "Observaciones del reparto",
+    "id": "__reparto_observations__",
+    "items": [],
+    "observations": "Falta por confirmar si se puede obligar al provisional a coger las 19h, en el caso de que alguien tenga que ir a 19."
   }
 ]

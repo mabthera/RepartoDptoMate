@@ -295,5 +295,11 @@
         "type": "L"
       }
     ]
+  },
+  {
+    "name": "Observaciones del reparto",
+    "id": "__reparto_observations__",
+    "items": [],
+    "observations": "Falta confirmar si alguien a 19 horas puede mantener las 23 de permanencia en centro"
   }
 ]
